@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "news-scrapper.api", "news-scrapper.api\news-scrapper.api.csproj", "{DB53D2AC-6143-40D4-92AA-F3F3CB0C155E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB53D2AC-6143-40D4-92AA-F3F3CB0C155E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB53D2AC-6143-40D4-92AA-F3F3CB0C155E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB53D2AC-6143-40D4-92AA-F3F3CB0C155E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB53D2AC-6143-40D4-92AA-F3F3CB0C155E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {719F4D4F-4B2B-48A2-8AC3-28A660D978CB}
+	EndGlobalSection
+EndGlobal
