@@ -13,4 +13,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\news-scrapper.application\news-scrapper.application.csproj" />
+    <ProjectReference Include="..\news-scrapper.infrastructure\news-scrapper.infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
