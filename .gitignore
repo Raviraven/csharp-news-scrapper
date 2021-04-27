@@ -6,3 +6,5 @@
 /news-scrapper/.vs
 /news-scrapper/news-scrapper.api/obj
 /news-scrapper/news-scrapper.api/news-scrapper.api.csproj.user
+/news-scrapper/news-scrapper.domain/obj
+/news-scrapper/news-scrapper.domain/bin
