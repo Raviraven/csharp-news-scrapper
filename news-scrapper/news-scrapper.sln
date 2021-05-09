@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "news-scrapper.api", "news-scrapper.api\news-scrapper.api.csproj", "{DB53D2AC-6143-40D4-92AA-F3F3CB0C155E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "news-scrapper.domain", "news-scrapper.domain\news-scrapper.domain.csproj", "{0078713C-4E4B-4DD7-9FD4-BCBCEE99F16C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "news-scrapper.domain", "news-scrapper.domain\news-scrapper.domain.csproj", "{0078713C-4E4B-4DD7-9FD4-BCBCEE99F16C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "news-scrapper.application", "news-scrapper.application\news-scrapper.application.csproj", "{15218C4D-ACEE-4516-866A-E7395EA81EB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "news-scrapper.application", "news-scrapper.application\news-scrapper.application.csproj", "{15218C4D-ACEE-4516-866A-E7395EA81EB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "news-scrapper.infrastructure", "news-scrapper.infrastructure\news-scrapper.infrastructure.csproj", "{6D1B2F3E-9813-4EDD-85CB-1F528F6719B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{15218C4D-ACEE-4516-866A-E7395EA81EB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15218C4D-ACEE-4516-866A-E7395EA81EB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15218C4D-ACEE-4516-866A-E7395EA81EB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D1B2F3E-9813-4EDD-85CB-1F528F6719B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D1B2F3E-9813-4EDD-85CB-1F528F6719B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D1B2F3E-9813-4EDD-85CB-1F528F6719B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D1B2F3E-9813-4EDD-85CB-1F528F6719B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

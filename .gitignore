@@ -10,3 +10,5 @@
 /news-scrapper/news-scrapper.domain/bin
 /news-scrapper/news-scrapper.application/obj
 /news-scrapper/news-scrapper.application/bin
+/news-scrapper/news-scrapper.infrastructure/obj
+/news-scrapper/news-scrapper.infrastructure/bin
