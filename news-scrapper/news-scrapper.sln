@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "news-scrapper.api", "news-s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "news-scrapper.domain", "news-scrapper.domain\news-scrapper.domain.csproj", "{0078713C-4E4B-4DD7-9FD4-BCBCEE99F16C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "news-scrapper.application", "news-scrapper.application\news-scrapper.application.csproj", "{15218C4D-ACEE-4516-866A-E7395EA81EB2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{0078713C-4E4B-4DD7-9FD4-BCBCEE99F16C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0078713C-4E4B-4DD7-9FD4-BCBCEE99F16C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0078713C-4E4B-4DD7-9FD4-BCBCEE99F16C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15218C4D-ACEE-4516-866A-E7395EA81EB2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15218C4D-ACEE-4516-866A-E7395EA81EB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15218C4D-ACEE-4516-866A-E7395EA81EB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15218C4D-ACEE-4516-866A-E7395EA81EB2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
