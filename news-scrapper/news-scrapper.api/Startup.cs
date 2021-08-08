@@ -35,12 +35,14 @@ namespace news_scrapper.api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "news_scrapper.api", Version = "v1" });
             });
 
-            services.AddHttpClient<IHtmlScrapper, HtmlScrapper>(
+            services.AddHttpClient<IWebsiteService, WebsiteService>(
                 opts => {
                     ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13;
                     opts.DefaultRequestHeaders.Accept.Clear();
                 });
 
+            services.AddTransient<IPagesScrapperService, PagesScrapperService>();
+            services.AddTransient<IHtmlScrapper, HtmlScrapper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -13,41 +13,48 @@ namespace news_scrapper.infrastructure
 {
     public class HtmlScrapper : IHtmlScrapper
     {
-        private HttpClient _httpclient { get; set; }
-
-        public HtmlScrapper(HttpClient httpClient)
-        {
-            _httpclient = httpClient;
-        }
-
-        public async Task<List<Article>> Scrap(string url, string xPathToNewsContainer, string mainNodeTag, string mainNodeClass, string titleNodeTag, string titleNodeClass,
-            string descriptionNodeTag, string descriptionNodeClass, string imgNodeClass)
+        public async Task<List<Article>> Scrap(WebsiteDetails website, string rawHtml)
         {
             List<Article> articles = new();
 
-            var htmlString = await callUrl(url);
-            var newsNodes = parseHtml(htmlString, xPathToNewsContainer, mainNodeTag, mainNodeClass);
+            var newsNodes = parseHtmlIntoNodes(rawHtml, website.XPathToNewsContainer, website.MainNodeTag, website.MainNodeClass);
 
             for (int i = 0; i < newsNodes.Count; i++)
             {
-                HtmlNode titleNode = getTitleNode(titleNodeTag, titleNodeClass, newsNodes[i]);
+                HtmlNode titleNode = getTitleNode(website.TitleNodeTag, website.TitleNodeClass, newsNodes[i]);
 
                 var title = titleNode.InnerText;
                 string directUrlToNews = getNewsUrl(titleNode);
-                string image = getImageUrl(imgNodeClass, newsNodes[i]);
-                string description = getDescription(descriptionNodeTag, descriptionNodeClass, newsNodes[i]);
+                string image = getImageUrl(website.ImgNodeClass, newsNodes[i]);
+                string description = getDescription(website.DescriptionNodeTag, website.DescriptionNodeClass, newsNodes[i]);
 
                 articles.Add(new()
                 {
                     Title = title,
-                    Url = getDirectUrl(directUrlToNews, url),
-                    ImageUrl = getDirectUrl(image, url),
+                    Url = getDirectUrl(directUrlToNews, website.Url),
+                    ImageUrl = getDirectUrl(image, website.Url),
                     Description = description
                 });
             }
 
             return await Task.FromResult(articles);
         }
+
+
+        private List<HtmlNode> parseHtmlIntoNodes(string rawHtml, string xPath, string htmlElements, string htmlElementsClass)
+        {
+            HtmlDocument htmlDoc = new();
+            htmlDoc.LoadHtml(rawHtml);
+
+            var chosenElement = htmlDoc.DocumentNode
+                .SelectNodes(xPath).First();
+
+            var elementChildren = chosenElement.Descendants(htmlElements)
+                .Where(n => n.GetAttributeValue("class", "").Contains(htmlElementsClass)).ToList();
+
+            return elementChildren;
+        }
+
 
         private string getDescription(string descriptionNodeTag, string descriptionNodeClass, HtmlNode newsNode)
         {
@@ -75,26 +82,6 @@ namespace news_scrapper.infrastructure
                 return $"{siteUrl[0..^1]}{url}";
 
             return url;
-        }
-
-        private async Task<string> callUrl(string url)
-        {
-            var response = await _httpclient.GetStringAsync(url);
-            return response;
-        }
-
-        private List<HtmlNode> parseHtml(string html, string xPath, string htmlElements, string htmlElementsClass)
-        {
-            HtmlDocument htmlDoc = new();
-            htmlDoc.LoadHtml(html);
-
-            var chosenElement = htmlDoc.DocumentNode
-                .SelectNodes(xPath).First();
-
-            var elementChildren = chosenElement.Descendants(htmlElements)
-                .Where(n => n.GetAttributeValue("class", "").Contains(htmlElementsClass)).ToList();
-            
-            return elementChildren;
         }
     }
 }

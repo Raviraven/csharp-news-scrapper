@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace news_scrapper.application.Interfaces
 {
-    public interface IHtmlScrapper
+    public interface IPagesScrapperService
     {
-        Task<List<Article>> Scrap(WebsiteDetails website, string rawHtml);
+        Task<List<Article>> ScrapAll();
     }
 }

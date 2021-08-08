@@ -1,5 +1,4 @@
-﻿using news_scrapper.domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace news_scrapper.application.Interfaces
 {
-    public interface IHtmlScrapper
+    public interface IWebsiteService
     {
-        Task<List<Article>> Scrap(WebsiteDetails website, string rawHtml);
+        Task<string> GetRawHtml(string url);
     }
 }
