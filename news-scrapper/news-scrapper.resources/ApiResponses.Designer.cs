@@ -70,6 +70,15 @@ namespace news_scrapper.resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There are no websites to scrap..
+        /// </summary>
+        public static string ThereAreNoWebsitesToScrap {
+            get {
+                return ResourceManager.GetString("ThereAreNoWebsitesToScrap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unexpected error occured: &apos;{0}&apos;..
         /// </summary>
         public static string UnexpectedErrorOccured {

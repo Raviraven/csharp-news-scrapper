@@ -121,6 +121,9 @@
     <value>Cannot  reach site with given url: '{0}'.</value>
     <comment>{0} - site url</comment>
   </data>
+  <data name="ThereAreNoWebsitesToScrap" xml:space="preserve">
+    <value>There are no websites to scrap.</value>
+  </data>
   <data name="UnexpectedErrorOccured" xml:space="preserve">
     <value>Unexpected error occured: '{0}'.</value>
     <comment>{0} - error message</comment>

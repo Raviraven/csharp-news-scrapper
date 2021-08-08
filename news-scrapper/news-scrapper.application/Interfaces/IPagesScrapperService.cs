@@ -1,4 +1,5 @@
 ﻿using news_scrapper.domain;
+using news_scrapper.domain.ResponseViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace news_scrapper.application.Interfaces
 {
     public interface IPagesScrapperService
     {
-        Task<List<Article>> ScrapAll();
+        Task<ArticlesResponseViewModel> ScrapAll();
     }
 }

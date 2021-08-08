@@ -1,10 +1,13 @@
 ﻿using news_scrapper.application.Interfaces;
 using news_scrapper.application.Repositories;
 using news_scrapper.domain;
+using news_scrapper.domain.ResponseViewModels;
+using news_scrapper.resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace news_scrapper.infrastructure.Data
@@ -24,23 +27,64 @@ namespace news_scrapper.infrastructure.Data
             _websiteRepository = websiteRepository;
         }
 
-        public async Task<List<Article>> ScrapAll()
+        public async Task<ArticlesResponseViewModel> ScrapAll()
         {
             List<WebsiteDetails> websitesToScrap = await _websiteRepository.GetAll();
 
-            List<Article> articles = new();
+            if (noWebsitesInDb(websitesToScrap))
+            {
+                return new ArticlesResponseViewModel 
+                { 
+                    ErrorMessages = new List<string> 
+                    { 
+                        ApiResponses.ThereAreNoWebsitesToScrap 
+                    }
+                };
+            }
 
+            return await scrapWebsites(websitesToScrap);
+        }
+
+        private async Task<ArticlesResponseViewModel> scrapWebsites(List<WebsiteDetails> websitesToScrap)
+        {
+            ArticlesResponseViewModel result = new();
+            
             foreach (var website in websitesToScrap)
             {
                 var rawHtml = await _websiteService.GetRawHtml(website.Url);
 
-                //Regex tagRegex = new Regex(@"<[^>]+>");
-                //bool hasTags = tagRegex.IsMatch(myString);
-
-                articles.AddRange(await _htmlScrapper.Scrap(website, rawHtml));
+                var scrappedWebsiteResult = await scrapSingleWebsite(website, rawHtml);
+                
+                result.Articles.AddRange(scrappedWebsiteResult.Articles);
+                result.ErrorMessages.AddRange(scrappedWebsiteResult.ErrorMessages);
             }
+            
+            return result;
+        }
 
-            return articles;
+        private async Task<ArticlesResponseViewModel> scrapSingleWebsite(WebsiteDetails website, string rawHtml)
+        {
+            ArticlesResponseViewModel result = new();
+            
+            if (isStringHtml(rawHtml))
+            {
+                result.Articles.AddRange(await _htmlScrapper.Scrap(website, rawHtml));
+                return result;
+            }
+            
+            result.ErrorMessages.Add(rawHtml);
+            return result;    
+        }
+
+        private bool noWebsitesInDb(List<WebsiteDetails> websitesToScrap)
+        {
+            return websitesToScrap is null || websitesToScrap.Count == 0;
+        }
+
+        private bool isStringHtml(string rawHtml)
+        {
+            Regex tagRegex = new(@"<[^>]+>");
+            return tagRegex.IsMatch(rawHtml);
         }
     }
 }

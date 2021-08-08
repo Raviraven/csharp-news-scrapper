@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using news_scrapper.application.Interfaces;
 using news_scrapper.domain;
+using news_scrapper.domain.ResponseViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ namespace news_scrapper.api.Controllers
 
 
         [HttpGet]
-        public async Task<List<Article>> GetScrappedPage()
+        public async Task<ArticlesResponseViewModel> GetScrappedPage()
         {
             return await _pagesScrapperService.ScrapAll();
         }
