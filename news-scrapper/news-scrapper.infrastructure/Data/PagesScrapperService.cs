@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace news_scrapper.infrastructure
+namespace news_scrapper.infrastructure.Data
 {
     public class PagesScrapperService : IPagesScrapperService
     {
@@ -27,12 +27,16 @@ namespace news_scrapper.infrastructure
         public async Task<List<Article>> ScrapAll()
         {
             List<WebsiteDetails> websitesToScrap = await _websiteRepository.GetAll();
-                
+
             List<Article> articles = new();
 
             foreach (var website in websitesToScrap)
             {
                 var rawHtml = await _websiteService.GetRawHtml(website.Url);
+
+                //Regex tagRegex = new Regex(@"<[^>]+>");
+                //bool hasTags = tagRegex.IsMatch(myString);
+
                 articles.AddRange(await _htmlScrapper.Scrap(website, rawHtml));
             }
 

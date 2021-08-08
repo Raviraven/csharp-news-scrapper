@@ -8,6 +8,10 @@ namespace news_scrapper.domain
 {
     public class WebsiteDetails
     {
+        public WebsiteDetails()
+        {
+        }
+
         public WebsiteDetails(string url, 
             string xPathToNewsContainer, 
             string mainNodeTag, 

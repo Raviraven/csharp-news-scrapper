@@ -10,6 +10,7 @@ using Microsoft.OpenApi.Models;
 using news_scrapper.application.Interfaces;
 using news_scrapper.application.Repositories;
 using news_scrapper.infrastructure;
+using news_scrapper.infrastructure.Data;
 using news_scrapper.infrastructure.Repositories;
 using System;
 using System.Collections.Generic;

@@ -14,6 +14,8 @@ namespace news_scrapper.infrastructure.Repositories
         {
             List<WebsiteDetails> websitesToScrap = new();
 
+            websitesToScrap.Add(new() { Url = "https://test.test" });
+
             websitesToScrap.Add(new("https://skalawyzwania.pl/", "//*[@id=\"lp-boxes-1\"]", "div", "lp-box box",
                "h4", "lp-box-title", "div", "lp-box-text-inside", "attachment-roseta-lpbox-1 size-roseta-lpbox-1"));
             websitesToScrap.Add(new("https://www.cdaction.pl/", "//*[@id=\"newsy\"]/div", "div", "news not_last_news",

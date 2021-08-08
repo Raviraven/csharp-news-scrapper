@@ -14,3 +14,5 @@
 /news-scrapper/news-scrapper.infrastructure/bin
 /news-scrapper/news-scrapper.infrastructure.unit-tests/bin
 /news-scrapper/news-scrapper.infrastructure.unit-tests/obj
+/news-scrapper/news-scrapper.resources/obj
+/news-scrapper/news-scrapper.resources/bin

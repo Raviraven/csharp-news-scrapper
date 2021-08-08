@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\news-scrapper.application\news-scrapper.application.csproj" />
+    <ProjectReference Include="..\news-scrapper.resources\news-scrapper.resources.csproj" />
   </ItemGroup>
 
 </Project>
