@@ -8,7 +8,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using news_scrapper.application.Interfaces;
+using news_scrapper.application.Repositories;
 using news_scrapper.infrastructure;
+using news_scrapper.infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -43,6 +45,9 @@ namespace news_scrapper.api
 
             services.AddTransient<IPagesScrapperService, PagesScrapperService>();
             services.AddTransient<IHtmlScrapper, HtmlScrapper>();
+
+            //Repositories 
+            services.AddTransient<IWebsitesRepository, WebsitesRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

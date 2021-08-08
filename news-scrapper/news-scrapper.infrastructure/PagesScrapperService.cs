@@ -1,4 +1,5 @@
 ﻿using news_scrapper.application.Interfaces;
+using news_scrapper.application.Repositories;
 using news_scrapper.domain;
 using System;
 using System.Collections.Generic;
@@ -12,18 +13,21 @@ namespace news_scrapper.infrastructure
     {
         private IHtmlScrapper _htmlScrapper { get; set; }
         private IWebsiteService _websiteService { get; set; }
+        private IWebsitesRepository _websiteRepository { get; set; }
 
         public PagesScrapperService(IHtmlScrapper htmlScrapper,
-            IWebsiteService websiteService)
+            IWebsiteService websiteService,
+            IWebsitesRepository websiteRepository)
         {
             _htmlScrapper = htmlScrapper;
             _websiteService = websiteService;
+            _websiteRepository = websiteRepository;
         }
 
         public async Task<List<Article>> ScrapAll()
         {
-            List<WebsiteDetails> websitesToScrap = mockDbPages();
-
+            List<WebsiteDetails> websitesToScrap = await _websiteRepository.GetAll();
+                
             List<Article> articles = new();
 
             foreach (var website in websitesToScrap)
@@ -33,19 +37,6 @@ namespace news_scrapper.infrastructure
             }
 
             return articles;
-        }
-
-        private static List<WebsiteDetails> mockDbPages()
-        {
-            List<WebsiteDetails> websitesToScrap = new();
-
-            websitesToScrap.Add(new("https://skalawyzwania.pl/", "//*[@id=\"lp-boxes-1\"]", "div", "lp-box box",
-               "h4", "lp-box-title", "div", "lp-box-text-inside", "attachment-roseta-lpbox-1 size-roseta-lpbox-1"));
-            websitesToScrap.Add(new("https://www.cdaction.pl/", "//*[@id=\"newsy\"]/div", "div", "news not_last_news",
-                "h3", "", "td", "td_lead", "news_list_img"));
-            websitesToScrap.Add(new("https://lowcygier.pl/", "//*[@id=\"page\"]/div/div[1]/div[2]/main", "article",
-                "post-widget post entry clearfix", "h2", "post-title", "div", "text-wrapper lead-wrapper", "img-fluid rounded"));
-            return websitesToScrap;
         }
     }
 }
