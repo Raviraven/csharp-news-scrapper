@@ -53,7 +53,7 @@ namespace news_scrapper.infrastructure.Data
             {
                 var rawHtml = await _websiteService.GetRawHtml(website.Url);
 
-                var scrappedWebsiteResult = await scrapSingleWebsite(website, rawHtml);
+                var scrappedWebsiteResult = scrapSingleWebsite(website, rawHtml);
                 
                 result.Articles.AddRange(scrappedWebsiteResult.Articles);
                 result.ErrorMessages.AddRange(scrappedWebsiteResult.ErrorMessages);
@@ -62,13 +62,17 @@ namespace news_scrapper.infrastructure.Data
             return result;
         }
 
-        private async Task<ArticlesResponseViewModel> scrapSingleWebsite(WebsiteDetails website, string rawHtml)
+        private ArticlesResponseViewModel scrapSingleWebsite(WebsiteDetails website, string rawHtml)
         {
             ArticlesResponseViewModel result = new();
             
             if (isStringHtml(rawHtml))
             {
-                result.Articles.AddRange(await _htmlScrapper.Scrap(website, rawHtml));
+                (List<Article> articles, List<string> errors) = _htmlScrapper.Scrap(website, rawHtml);
+
+                result.Articles.AddRange(articles);
+                result.ErrorMessages.AddRange(errors);
+
                 return result;
             }
             

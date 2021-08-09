@@ -61,6 +61,24 @@ namespace news_scrapper.resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot get main news node by xpath: &apos;{0}&apos;..
+        /// </summary>
+        public static string CannotGetMainNewsNodeByXpath {
+            get {
+                return ResourceManager.GetString("CannotGetMainNewsNodeByXpath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot get title from main node..
+        /// </summary>
+        public static string CannotGetTitleFromMainNode {
+            get {
+                return ResourceManager.GetString("CannotGetTitleFromMainNode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot  reach site with given url: &apos;{0}&apos;..
         /// </summary>
         public static string CannotReachSiteWithGivenUrl {

@@ -23,9 +23,9 @@ namespace news_scrapper.domain
             string imgNodeClass)
         {
             Url = url;
-            XPathToNewsContainer = xPathToNewsContainer;
-            MainNodeTag = mainNodeTag;
-            MainNodeClass = mainNodeClass;
+            MainNodeXPathToNewsContainer = xPathToNewsContainer;
+            NewsNodeTag = mainNodeTag;
+            NewsNodeClass = mainNodeClass;
             TitleNodeTag = titleNodeTag;
             TitleNodeClass = titleNodeClass;
             DescriptionNodeTag = descriptionNodeTag;
@@ -33,14 +33,14 @@ namespace news_scrapper.domain
             ImgNodeClass = imgNodeClass;
         }
 
-        public string Url { get; set; }
-        public string XPathToNewsContainer { get; set; }
-        public string MainNodeTag { get; set; }
-        public string MainNodeClass { get; set; }
-        public string TitleNodeTag { get; set; }
-        public string TitleNodeClass { get; set; }
-        public string DescriptionNodeTag { get; set; }
-        public string DescriptionNodeClass { get; set; }
-        public string ImgNodeClass { get; set; }
+        public string Url { get; set; } = "";
+        public string MainNodeXPathToNewsContainer { get; set; } = "";
+        public string NewsNodeTag { get; set; } = "";
+        public string NewsNodeClass { get; set; } = "";
+        public string TitleNodeTag { get; set; } = "";
+        public string TitleNodeClass { get; set; } = "";
+        public string DescriptionNodeTag { get; set; } = "";
+        public string DescriptionNodeClass { get; set; } = "";
+        public string ImgNodeClass { get; set; } = "";
     }
 }

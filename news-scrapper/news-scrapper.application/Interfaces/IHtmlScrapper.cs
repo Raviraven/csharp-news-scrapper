@@ -9,6 +9,6 @@ namespace news_scrapper.application.Interfaces
 {
     public interface IHtmlScrapper
     {
-        Task<List<Article>> Scrap(WebsiteDetails website, string rawHtml);
+        (List<Article>, List<string>) Scrap(WebsiteDetails website, string rawHtml);
     }
 }

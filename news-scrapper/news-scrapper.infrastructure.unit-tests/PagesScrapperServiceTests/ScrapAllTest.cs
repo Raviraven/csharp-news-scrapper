@@ -7,11 +7,7 @@ using news_scrapper.domain;
 using news_scrapper.domain.ResponseViewModels;
 using news_scrapper.infrastructure.Data;
 using news_scrapper.resources;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace news_scrapper.infrastructure.unit_tests.PagesScrapperServiceTests
@@ -60,7 +56,7 @@ namespace news_scrapper.infrastructure.unit_tests.PagesScrapperServiceTests
             _websiteRepository.Setup(n => n.GetAll()).ReturnsAsync(websites);
             _websiteService.Setup(n => n.GetRawHtml(It.IsAny<string>())).ReturnsAsync(rawHtmlMocked);
             _htmlScrapper.Setup(n => n.Scrap(It.IsAny<WebsiteDetails>(), rawHtmlMocked))
-                .ReturnsAsync(new List<Article> { articles });
+                .Returns((new List<Article> { articles }, new List<string>()));
 
             var result = await _sut.ScrapAll();
 
@@ -125,9 +121,29 @@ namespace news_scrapper.infrastructure.unit_tests.PagesScrapperServiceTests
         }
 
         [Fact]
-        public async void should_return_articles_from_raw_html()
+        public async void should_return_error_messages_when_scrapping_failed()
         {
+            var websites = new Faker<WebsiteDetails>()
+             .RuleFor(n => n.Url, b => b.Name.FirstName())
+             .Generate(3);
 
+            string rawHtmlMocked = "<testtag>";
+
+            List<string> scrapErrorMessages = new() { "scrap error 1", "scrap error 2" };
+
+            ArticlesResponseViewModel expectedResult = new();
+            expectedResult.ErrorMessages.AddRange(scrapErrorMessages);
+            expectedResult.ErrorMessages.AddRange(scrapErrorMessages);
+            expectedResult.ErrorMessages.AddRange(scrapErrorMessages);
+
+            _websiteRepository.Setup(n => n.GetAll()).ReturnsAsync(websites);
+            _websiteService.Setup(n => n.GetRawHtml(It.IsAny<string>())).ReturnsAsync(rawHtmlMocked);
+            _htmlScrapper.Setup(n => n.Scrap(It.IsAny<WebsiteDetails>(), rawHtmlMocked))
+                .Returns((new List<Article>(), scrapErrorMessages));
+
+            var result = await _sut.ScrapAll();
+
+            result.Should().BeEquivalentTo(expectedResult);
         }
     }
 }
