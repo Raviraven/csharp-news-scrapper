@@ -1,4 +1,5 @@
-﻿using news_scrapper.application.Interfaces;
+﻿using news_scrapper.application.Data;
+using news_scrapper.application.Interfaces;
 using news_scrapper.application.Repositories;
 using news_scrapper.domain;
 using news_scrapper.domain.ResponseViewModels;

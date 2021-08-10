@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using news_scrapper.application.Data;
 using news_scrapper.application.Interfaces;
 using news_scrapper.application.Repositories;
 using news_scrapper.infrastructure;
