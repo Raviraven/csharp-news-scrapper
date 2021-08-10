@@ -47,6 +47,7 @@ namespace news_scrapper.api
 
             services.AddTransient<IPagesScrapperService, PagesScrapperService>();
             services.AddTransient<IHtmlScrapper, HtmlScrapper>();
+            services.AddTransient<IWebsiteDetailsService, WebsiteDetailsService>();
 
             //Repositories 
             services.AddTransient<IWebsitesRepository, WebsitesRepository>();

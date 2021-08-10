@@ -33,6 +33,7 @@ namespace news_scrapper.domain
             ImgNodeClass = imgNodeClass;
         }
 
+        public int Id { get; set; }
         public string Url { get; set; } = "";
         public string MainNodeXPathToNewsContainer { get; set; } = "";
         public string NewsNodeTag { get; set; } = "";
@@ -42,5 +43,20 @@ namespace news_scrapper.domain
         public string DescriptionNodeTag { get; set; } = "";
         public string DescriptionNodeClass { get; set; } = "";
         public string ImgNodeClass { get; set; } = "";
+        public string Category { get; set; } = "";
+
+        public void UpdateValues(WebsiteDetails website)
+        {
+            this.Url = website.Url;
+            this.MainNodeXPathToNewsContainer = website.MainNodeXPathToNewsContainer;
+            this.NewsNodeTag = website.NewsNodeTag;
+            this.NewsNodeClass = website.NewsNodeClass;
+            this.TitleNodeTag = website.TitleNodeTag;
+            this.TitleNodeClass = website.TitleNodeClass;
+            this.DescriptionNodeTag = website.DescriptionNodeTag;
+            this.DescriptionNodeClass = website.DescriptionNodeClass;
+            this.ImgNodeClass = website.ImgNodeClass;
+            this.Category = website.Category;
+        }
     }
 }

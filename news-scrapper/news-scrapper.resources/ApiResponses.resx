@@ -135,4 +135,16 @@
     <value>Unexpected error occured: '{0}'.</value>
     <comment>{0} - error message</comment>
   </data>
+  <data name="WebsiteDetailsCannotBeNull" xml:space="preserve">
+    <value>Website details cannot be null.</value>
+  </data>
+  <data name="WebsiteDetailsNewsNodeCannotBeNullOrEmpty" xml:space="preserve">
+    <value>Website details news node cannot be null or empty.</value>
+  </data>
+  <data name="WebsiteDetailsUrlCannotBeNullOrEmpty" xml:space="preserve">
+    <value>Website details url cannot be null or empty.</value>
+  </data>
+  <data name="WebsiteDetailsXpathCannotBeNullOrEmpty" xml:space="preserve">
+    <value>Website details Xpath cannot be null or empty.</value>
+  </data>
 </root>

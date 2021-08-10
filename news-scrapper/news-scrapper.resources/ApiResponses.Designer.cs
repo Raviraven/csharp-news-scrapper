@@ -104,5 +104,41 @@ namespace news_scrapper.resources {
                 return ResourceManager.GetString("UnexpectedErrorOccured", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Website details cannot be null..
+        /// </summary>
+        public static string WebsiteDetailsCannotBeNull {
+            get {
+                return ResourceManager.GetString("WebsiteDetailsCannotBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Website details news node cannot be null or empty..
+        /// </summary>
+        public static string WebsiteDetailsNewsNodeCannotBeNullOrEmpty {
+            get {
+                return ResourceManager.GetString("WebsiteDetailsNewsNodeCannotBeNullOrEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Website details url cannot be null or empty..
+        /// </summary>
+        public static string WebsiteDetailsUrlCannotBeNullOrEmpty {
+            get {
+                return ResourceManager.GetString("WebsiteDetailsUrlCannotBeNullOrEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Website details Xpath cannot be null or empty..
+        /// </summary>
+        public static string WebsiteDetailsXpathCannotBeNullOrEmpty {
+            get {
+                return ResourceManager.GetString("WebsiteDetailsXpathCannotBeNullOrEmpty", resourceCulture);
+            }
+        }
     }
 }

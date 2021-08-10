@@ -1,13 +1,10 @@
 ﻿using news_scrapper.domain;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace news_scrapper.application.Repositories
+namespace news_scrapper.application.Interfaces
 {
-    public interface IWebsitesRepository
+    public interface IWebsiteDetailsService
     {
         WebsiteDetails Add(WebsiteDetails websiteDetails);
         bool Delete(int id);
