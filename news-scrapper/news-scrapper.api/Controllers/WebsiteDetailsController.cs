@@ -26,9 +26,9 @@ namespace news_scrapper.api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<WebsiteDetails>>> GetAll()
+        public ActionResult<List<WebsiteDetails>> GetAll()
         {
-            var result = await _websiteDetailsService.GetAll();
+            var result =  _websiteDetailsService.GetAll();
 
             if (result.Count == 0)
                 return NotFound(result);

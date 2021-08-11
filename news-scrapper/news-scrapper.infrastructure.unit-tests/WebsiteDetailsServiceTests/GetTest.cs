@@ -1,11 +1,8 @@
 ﻿using FluentAssertions;
+using Moq;
 using news_scrapper.domain;
+using news_scrapper.domain.DBModels;
 using news_scrapper.infrastructure.unit_tests.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace news_scrapper.infrastructure.unit_tests.WebsiteDetailsServiceTests
@@ -17,8 +14,10 @@ namespace news_scrapper.infrastructure.unit_tests.WebsiteDetailsServiceTests
         {
             int id = 1321;
             WebsiteDetails website = new WebsiteDetailsBuilder().Build();
+            WebsiteDetailsDb gotWebsite = website.Map();
 
-            _websitesRepository.Setup(n => n.Get(id)).Returns(website);
+            _mapper.Setup(n => n.Map<WebsiteDetails>(It.IsAny<WebsiteDetailsDb>())).Returns(website);
+            _websitesRepository.Setup(n => n.Get(id)).Returns(gotWebsite);
 
             var result = _sut.Get(id);
 
@@ -30,8 +29,10 @@ namespace news_scrapper.infrastructure.unit_tests.WebsiteDetailsServiceTests
         {
             int id = 1321;
             WebsiteDetails website = null;
+            WebsiteDetailsDb gotWebsite = website.Map();
 
-            _websitesRepository.Setup(n => n.Get(id)).Returns(website);
+            _mapper.Setup(n => n.Map<WebsiteDetails>(It.IsAny<WebsiteDetailsDb>())).Returns(website);
+            _websitesRepository.Setup(n => n.Get(id)).Returns(gotWebsite);
 
             var result = _sut.Get(id);
 

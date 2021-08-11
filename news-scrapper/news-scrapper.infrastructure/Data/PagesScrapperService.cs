@@ -1,4 +1,5 @@
-﻿using news_scrapper.application.Data;
+﻿using AutoMapper;
+using news_scrapper.application.Data;
 using news_scrapper.application.Interfaces;
 using news_scrapper.application.Repositories;
 using news_scrapper.domain;
@@ -18,19 +19,22 @@ namespace news_scrapper.infrastructure.Data
         private IHtmlScrapper _htmlScrapper { get; set; }
         private IWebsiteService _websiteService { get; set; }
         private IWebsitesRepository _websiteRepository { get; set; }
+        private IMapper _mapper { get; set; }
+
 
         public PagesScrapperService(IHtmlScrapper htmlScrapper,
             IWebsiteService websiteService,
-            IWebsitesRepository websiteRepository)
+            IWebsitesRepository websiteRepository, IMapper mapper)
         {
             _htmlScrapper = htmlScrapper;
             _websiteService = websiteService;
             _websiteRepository = websiteRepository;
+            _mapper = mapper;
         }
 
         public async Task<ArticlesResponseViewModel> ScrapAll()
         {
-            List<WebsiteDetails> websitesToScrap = await _websiteRepository.GetAll();
+            List<WebsiteDetails> websitesToScrap = _mapper.Map<List<WebsiteDetails>>(_websiteRepository.GetAll());
 
             if (noWebsitesInDb(websitesToScrap))
             {

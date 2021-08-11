@@ -1,15 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using news_scrapper.application.DbAccess;
 using news_scrapper.domain.DBModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace news_scrapper.infrastructure.DbAccess
 {
-    public class PostgreSqlContext : DbContext, IPostgreSqlContext
+    public class PostgreSqlContext : DbContext
     {
         public PostgreSqlContext(DbContextOptions<PostgreSqlContext> options)
             :base(options)

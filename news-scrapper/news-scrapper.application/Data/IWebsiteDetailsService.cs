@@ -8,7 +8,7 @@ namespace news_scrapper.application.Interfaces
     {
         WebsiteDetails Add(WebsiteDetails websiteDetails);
         bool Delete(int id);
-        Task<List<WebsiteDetails>> GetAll();
+        List<WebsiteDetails> GetAll();
         WebsiteDetails Get(int id);
         WebsiteDetails Save(WebsiteDetails websiteDetails);
     }

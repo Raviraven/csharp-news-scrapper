@@ -1,72 +1,58 @@
 ﻿using news_scrapper.application.Repositories;
-using news_scrapper.domain;
+using news_scrapper.domain.DBModels;
+using news_scrapper.infrastructure.DbAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace news_scrapper.infrastructure.Repositories
 {
     public class WebsitesRepository : IWebsitesRepository
     {
-        List<WebsiteDetails> websites = new();
+        private PostgreSqlContext sqlContext { get; set; }
 
-        public WebsiteDetails Add(WebsiteDetails websiteDetails)
+        public WebsitesRepository(PostgreSqlContext sqlContext)
         {
-            int id = generateId();
-            websiteDetails.Id = id;
-            websites.Add(websiteDetails);
-
-            return websiteDetails;
+            this.sqlContext = sqlContext;
         }
 
-        private int generateId()
+        public WebsiteDetailsDb Add(WebsiteDetailsDb websiteDetails)
         {
-            if (websites is null || websites.Count == 0)
-                return 1;
-
-            return websites.OrderByDescending(n => n.Id).First().Id++;
+            var test = sqlContext.WebsitesDetails.Add(websiteDetails);
+            return websiteDetails;
         }
 
         public bool Delete(int id)
         {
-            var toRemove = websites.FirstOrDefault(n => n.Id == id);
+            var toRemove = sqlContext.WebsitesDetails.FirstOrDefault(n => n.id == id);
 
             if (toRemove is null)
                 throw new Exception($"Can't find website detail with id: '{id}', so it can't be deleted.");
 
-            return websites.Remove(toRemove);
+            sqlContext.WebsitesDetails.Remove(toRemove);
+
+            return true;
         }
 
-        public WebsiteDetails Get(int id)
+        public WebsiteDetailsDb Get(int id)
         {
-            return websites.FirstOrDefault(n => n.Id == id);
+            return sqlContext.WebsitesDetails.FirstOrDefault(n => n.id == id);
         }
 
-        public async Task<List<WebsiteDetails>> GetAll()
+        public List<WebsiteDetailsDb> GetAll()
         {
-            //websites.Add(new() { Url = "https://test.test" });
-
-            //websites.Add(new("https://skalawyzwania.pl/", "//*[@id=\"lp-boxes-1\"]", "div", "lp-box box",
-            //   "h4", "lp-box-title", "div", "lp-box-text-inside", "attachment-roseta-lpbox-1 size-roseta-lpbox-1"));
-            //websites.Add(new("https://www.cdaction.pl/", "//*[@id=\"newsy\"]/div", "div", "news not_last_news",
-            //    "h3", "", "td", "td_lead", "news_list_img"));
-            //websites.Add(new("https://lowcygier.pl/", "//*[@id=\"page\"]/div/div[1]/div[2]/main", "article",
-            //    "post-widget post entry clearfix", "h2", "post-title", "div", "text-wrapper lead-wrapper", "img-fluid rounded"));
-
-            return await Task.FromResult(websites);
+            return sqlContext.WebsitesDetails.ToList(); ;
         }
 
-        public WebsiteDetails Save(WebsiteDetails websiteDetails)
+        public WebsiteDetailsDb Save(WebsiteDetailsDb websiteDetails)
         {
-            var websiteToEdit = websites.FirstOrDefault(n => n.Id == websiteDetails.Id);
+            sqlContext.WebsitesDetails.Update(websiteDetails);
+            return websiteDetails;
+        }
 
-            if (websiteToEdit is null)
-                throw new Exception($"Website detail with id: '{websiteDetails.Id}' not found.");
-
-            websiteToEdit.UpdateValues(websiteDetails);
-            return websiteToEdit;
+        public void Commit()
+        {
+            sqlContext.SaveChanges();
         }
     }
 }

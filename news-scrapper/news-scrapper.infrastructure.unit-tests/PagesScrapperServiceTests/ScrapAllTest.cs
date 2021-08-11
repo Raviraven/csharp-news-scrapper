@@ -1,11 +1,14 @@
-﻿using Bogus;
+﻿using AutoMapper;
+using Bogus;
 using FluentAssertions;
 using Moq;
 using news_scrapper.application.Interfaces;
 using news_scrapper.application.Repositories;
 using news_scrapper.domain;
+using news_scrapper.domain.DBModels;
 using news_scrapper.domain.ResponseViewModels;
 using news_scrapper.infrastructure.Data;
+using news_scrapper.infrastructure.unit_tests.Builders;
 using news_scrapper.resources;
 using System.Collections.Generic;
 using Xunit;
@@ -18,6 +21,8 @@ namespace news_scrapper.infrastructure.unit_tests.PagesScrapperServiceTests
         private Mock<IWebsiteService> _websiteService { get; set; }
         private Mock<IWebsitesRepository> _websiteRepository { get; set; }
 
+        private Mock<IMapper> _mapper { get; set; }
+
         protected PagesScrapperService _sut { get; set; }
 
         public ScrapAllTest()
@@ -26,17 +31,20 @@ namespace news_scrapper.infrastructure.unit_tests.PagesScrapperServiceTests
             _websiteService = new Mock<IWebsiteService>();
             _websiteRepository = new Mock<IWebsitesRepository>();
 
+            _mapper = new Mock<IMapper>();
+
             _sut = new PagesScrapperService(_htmlScrapper.Object,
                 _websiteService.Object, 
-                _websiteRepository.Object);
+                _websiteRepository.Object, 
+                _mapper.Object);
         }
 
         [Fact]
         public async void should_return_articles()
         {
-            var websites = new Faker<WebsiteDetails>()
-                .RuleFor(n=>n.Url, b=>b.Name.FirstName())
-                .Generate(3);
+            var websites = new WebsiteDetailsBuilder().Build(3);
+
+            var gotWebsites = websites.Map();
 
             string rawHtmlMocked = "<testtag>";
 
@@ -53,7 +61,8 @@ namespace news_scrapper.infrastructure.unit_tests.PagesScrapperServiceTests
                 ErrorMessages = new()
             };
 
-            _websiteRepository.Setup(n => n.GetAll()).ReturnsAsync(websites);
+            _mapper.Setup(n => n.Map<List<WebsiteDetails>>(It.IsAny<List<WebsiteDetailsDb>>())).Returns(websites);
+            _websiteRepository.Setup(n => n.GetAll()).Returns(gotWebsites);
             _websiteService.Setup(n => n.GetRawHtml(It.IsAny<string>())).ReturnsAsync(rawHtmlMocked);
             _htmlScrapper.Setup(n => n.Scrap(It.IsAny<WebsiteDetails>(), rawHtmlMocked))
                 .Returns((new List<Article> { articles }, new List<string>()));
@@ -74,7 +83,10 @@ namespace news_scrapper.infrastructure.unit_tests.PagesScrapperServiceTests
         [MemberData(nameof(EmptyWebsites))]
         public async void should_return_empty_list_when_no_websites_in_db(List<WebsiteDetails> websites)
         {
-            _websiteRepository.Setup(n => n.GetAll()).ReturnsAsync(websites);
+            var gotWebsites = websites.Map();
+
+            _mapper.Setup(n => n.Map<List<WebsiteDetails>>(It.IsAny<List<WebsiteDetailsDb>>())).Returns(websites);
+            _websiteRepository.Setup(n => n.GetAll()).Returns(gotWebsites);
 
             var result = await _sut.ScrapAll();
 
@@ -85,11 +97,14 @@ namespace news_scrapper.infrastructure.unit_tests.PagesScrapperServiceTests
         [MemberData(nameof(EmptyWebsites))]
         public async void should_return_errors_when_no_websites_in_db(List<WebsiteDetails> websites)
         {
+            var gotWebsites = websites.Map();
+
             ArticlesResponseViewModel expectedResult = new() { 
                 ErrorMessages = new List<string> { ApiResponses.ThereAreNoWebsitesToScrap }
             };
 
-            _websiteRepository.Setup(n => n.GetAll()).ReturnsAsync(websites);
+            _mapper.Setup(n => n.Map<List<WebsiteDetails>>(It.IsAny<List<WebsiteDetailsDb>>())).Returns(websites);
+            _websiteRepository.Setup(n => n.GetAll()).Returns(gotWebsites);
 
             var result = await _sut.ScrapAll();
 
@@ -99,9 +114,8 @@ namespace news_scrapper.infrastructure.unit_tests.PagesScrapperServiceTests
         [Fact]
         public async void should_return_empty_articles_and_error_messages_when_wrong_raw_html()
         {
-            var websites = new Faker<WebsiteDetails>()
-               .RuleFor(n => n.Url, b => b.Name.FirstName())
-               .Generate(3);
+            var websites = new WebsiteDetailsBuilder().Build(3);
+            var gotWebsites = websites.Map();
 
             string rawHtmlMocked = "wrong raw html";
 
@@ -111,8 +125,9 @@ namespace news_scrapper.infrastructure.unit_tests.PagesScrapperServiceTests
                 ErrorMessages = new() { rawHtmlMocked, rawHtmlMocked, rawHtmlMocked }
             };
 
-           
-            _websiteRepository.Setup(n => n.GetAll()).ReturnsAsync(websites);
+
+            _mapper.Setup(n => n.Map<List<WebsiteDetails>>(It.IsAny<List<WebsiteDetailsDb>>())).Returns(websites);
+            _websiteRepository.Setup(n => n.GetAll()).Returns(gotWebsites);
             _websiteService.Setup(n => n.GetRawHtml(It.IsAny<string>())).ReturnsAsync(rawHtmlMocked);
 
             var result = await _sut.ScrapAll();
@@ -123,9 +138,8 @@ namespace news_scrapper.infrastructure.unit_tests.PagesScrapperServiceTests
         [Fact]
         public async void should_return_error_messages_when_scrapping_failed()
         {
-            var websites = new Faker<WebsiteDetails>()
-             .RuleFor(n => n.Url, b => b.Name.FirstName())
-             .Generate(3);
+            var websites = new WebsiteDetailsBuilder().Build(3);
+            var gotWebsites = websites.Map();
 
             string rawHtmlMocked = "<testtag>";
 
@@ -136,7 +150,8 @@ namespace news_scrapper.infrastructure.unit_tests.PagesScrapperServiceTests
             expectedResult.ErrorMessages.AddRange(scrapErrorMessages);
             expectedResult.ErrorMessages.AddRange(scrapErrorMessages);
 
-            _websiteRepository.Setup(n => n.GetAll()).ReturnsAsync(websites);
+            _mapper.Setup(n => n.Map<List<WebsiteDetails>>(It.IsAny<List<WebsiteDetailsDb>>())).Returns(websites);
+            _websiteRepository.Setup(n => n.GetAll()).Returns(gotWebsites);
             _websiteService.Setup(n => n.GetRawHtml(It.IsAny<string>())).ReturnsAsync(rawHtmlMocked);
             _htmlScrapper.Setup(n => n.Scrap(It.IsAny<WebsiteDetails>(), rawHtmlMocked))
                 .Returns((new List<Article>(), scrapErrorMessages));

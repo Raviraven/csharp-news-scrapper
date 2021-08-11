@@ -1,6 +1,8 @@
-﻿using news_scrapper.application.Interfaces;
+﻿using AutoMapper;
+using news_scrapper.application.Interfaces;
 using news_scrapper.application.Repositories;
 using news_scrapper.domain;
+using news_scrapper.domain.DBModels;
 using news_scrapper.domain.Exceptions;
 using news_scrapper.resources;
 using System;
@@ -12,37 +14,55 @@ namespace news_scrapper.infrastructure.Data
     public class WebsiteDetailsService : IWebsiteDetailsService
     {
         private IWebsitesRepository _websitesRepository { get; set; }
+        private IMapper _mapper { get; set; }
 
-        public WebsiteDetailsService(IWebsitesRepository websitesRepository)
+        public WebsiteDetailsService(IWebsitesRepository websitesRepository, IMapper mapper)
         {
             _websitesRepository = websitesRepository;
+            _mapper = mapper;
         }
 
         public WebsiteDetails Add(WebsiteDetails websiteDetails)
         {
             validateWebsiteDetails(websiteDetails);
-            return _websitesRepository.Add(websiteDetails);
+
+            var websiteDetailsDb = _mapper.Map<WebsiteDetailsDb>(websiteDetails);
+            var result = _mapper.Map<WebsiteDetails>(_websitesRepository.Add(websiteDetailsDb));
+
+            _websitesRepository.Commit();
+
+            return result;
         }
 
         public bool Delete(int id)
         {
-            return _websitesRepository.Delete(id);
+            _websitesRepository.Delete(id);
+            _websitesRepository.Commit();
+            return true;
         }
 
-        public async Task<List<WebsiteDetails>> GetAll()
+        public List<WebsiteDetails> GetAll()
         {
-            return await _websitesRepository.GetAll();
+            var result = _mapper.Map<List<WebsiteDetails>>(_websitesRepository.GetAll());
+            return result;
         }
 
         public WebsiteDetails Get(int id)
         {
-            return _websitesRepository.Get(id);
+            var result = _mapper.Map<WebsiteDetails>(_websitesRepository.Get(id));
+            return result;
         }
 
         public WebsiteDetails Save(WebsiteDetails websiteDetails)
         {
             validateWebsiteDetails(websiteDetails);
-            return _websitesRepository.Save(websiteDetails);
+
+            var websiteDetailsDb = _mapper.Map<WebsiteDetailsDb>(websiteDetails);
+            var result = _mapper.Map<WebsiteDetails>(_websitesRepository.Save(websiteDetailsDb));
+
+            _websitesRepository.Commit();
+
+            return result;
         }
 
 
