@@ -2,16 +2,19 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using news_scrapper.application.Data;
+using news_scrapper.application.DbAccess;
 using news_scrapper.application.Interfaces;
 using news_scrapper.application.Repositories;
 using news_scrapper.infrastructure;
 using news_scrapper.infrastructure.Data;
+using news_scrapper.infrastructure.DbAccess;
 using news_scrapper.infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
@@ -39,6 +42,9 @@ namespace news_scrapper.api
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "news_scrapper.api", Version = "v1" });
             });
 
+            services.AddDbContext<IPostgreSqlContext, PostgreSqlContext>(options =>
+                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddHttpClient<IWebsiteService, WebsiteService>(
                 opts => {
                     ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls13;
@@ -54,8 +60,10 @@ namespace news_scrapper.api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IPostgreSqlContext sqlContext)
         {
+            sqlContext.MigrateDatabase();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
