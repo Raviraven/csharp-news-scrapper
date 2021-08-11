@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using news_scrapper.api.Middleware;
 using news_scrapper.application.Data;
 using news_scrapper.application.Interfaces;
 using news_scrapper.application.Repositories;
@@ -77,6 +78,8 @@ namespace news_scrapper.api
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseMiddleware<ErrorHandlerMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

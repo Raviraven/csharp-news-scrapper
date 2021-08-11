@@ -31,7 +31,7 @@ namespace news_scrapper.api.Controllers
             var result =  _websiteDetailsService.GetAll();
 
             if (result.Count == 0)
-                return NotFound(result);
+                throw new KeyNotFoundException();
 
             return Ok(result);
         }
@@ -42,7 +42,7 @@ namespace news_scrapper.api.Controllers
             var result =  _websiteDetailsService.Get(id);
 
             if (result is null)
-                return NotFound(result);
+                throw new KeyNotFoundException();
 
             return Ok(result);
         }
