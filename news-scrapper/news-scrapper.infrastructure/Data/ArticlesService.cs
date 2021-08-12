@@ -3,10 +3,10 @@ using news_scrapper.application.Data;
 using news_scrapper.application.UnitsOfWork;
 using news_scrapper.domain.DBModels;
 using news_scrapper.domain.Models;
+using news_scrapper.resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace news_scrapper.infrastructure.Data
@@ -24,29 +24,53 @@ namespace news_scrapper.infrastructure.Data
             _mapper = mapper;
         }
 
-        public async Task Scrap()
+        public async Task<List<string>> Scrap()
         {
-            var scrappedArticles = await _pagesScrapperService.ScrapAll();
-            //what about error messages? just pass it  ? 
-
+            List<string> result = new();
             List<Article> articlesToAdd = new();
 
-            foreach (var article in scrappedArticles.Articles)
-            {
-                var dbArticle = _articlesUnitOfWork.Articles.Get(
-                    filter: n => n.WebsiteDetailsId == article.WebsiteDetailsId && n.Title == article.Title)
-                .FirstOrDefault();
+            var scrappedArticles = await _pagesScrapperService.ScrapAll();
+            result.AddRange(scrappedArticles.ErrorMessages);
 
-                if (dbArticle is null)
-                    articlesToAdd.Add(article);
+            try
+            {
+               articlesToAdd.AddRange(insertScrappedArticles(scrappedArticles.Articles));
+            }
+            catch (Exception e)
+            {
+                result.Add(e.Message);
+            }
+            
+            string summaryMessage = string.Format(ApiResponses.ArticlesAddedAfterScrapping, articlesToAdd.Count());
+            result.Add(summaryMessage);
+
+            return result;
+        }
+
+        private List<Article> insertScrappedArticles(List<Article> scrappedArticles)
+        {
+            List<Article> articlesToAdd = new();
+            if (scrappedArticles is not null)
+            {
+                foreach (var article in scrappedArticles)
+                {
+                    var dbArticle = _articlesUnitOfWork.Articles.Get()
+                        .FirstOrDefault(n => n.WebsiteDetailsId == article.WebsiteDetailsId
+                        && n.Title == article.Title);
+
+                    //var searchedArticles = _articlesUnitOfWork.Articles.Get(
+                    //    filter: n => n.WebsiteDetailsId == article.WebsiteDetailsId && n.Title == article.Title).ToList();
+                    //var dbArticle = searchedArticles.FirstOrDefault();
+
+                    if (dbArticle is null)
+                        articlesToAdd.Add(article);
+                }
             }
 
             _articlesUnitOfWork.Articles.InsertRange(_mapper.Map<List<ArticleDb>>(articlesToAdd));
             _articlesUnitOfWork.Commit();
 
-
-            //returns some kind of results...
-            var addedArticles = articlesToAdd.Count();
+            return articlesToAdd;
         }
     }
 }

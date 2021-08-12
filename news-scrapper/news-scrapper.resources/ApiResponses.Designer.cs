@@ -61,6 +61,15 @@ namespace news_scrapper.resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Articles added after scrapping: &apos;{0}&apos;..
+        /// </summary>
+        public static string ArticlesAddedAfterScrapping {
+            get {
+                return ResourceManager.GetString("ArticlesAddedAfterScrapping", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot get main news node by xpath: &apos;{0}&apos;..
         /// </summary>
         public static string CannotGetMainNewsNodeByXpath {

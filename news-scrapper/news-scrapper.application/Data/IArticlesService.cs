@@ -8,6 +8,6 @@ namespace news_scrapper.application.Data
 {
     public interface IArticlesService
     {
-        Task Scrap();
+        Task<List<string>> Scrap();
     }
 }
