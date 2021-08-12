@@ -21,5 +21,7 @@ namespace news_scrapper.domain.DBModels
         public string DescriptionNodeClass { get; set; }
         public string ImgNodeClass { get; set; }
         public string Category { get; set; }
+
+        public ICollection<ArticleDb> Articles { get; set; }
     }
 }

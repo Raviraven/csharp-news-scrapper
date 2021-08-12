@@ -11,6 +11,7 @@ namespace news_scrapper.infrastructure.DbAccess
         }
 
         public DbSet<WebsiteDetailsDb> WebsitesDetails { get; set; }
+        public DbSet<ArticleDb> Articles { get; set; }
 
         public void MigrateDatabase()
         {
