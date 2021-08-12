@@ -6,7 +6,7 @@ using news_scrapper.infrastructure.unit_tests.Builders;
 using System.Collections.Generic;
 using Xunit;
 
-namespace news_scrapper.infrastructure.unit_tests.WebsiteDetailsServiceTests
+namespace news_scrapper.infrastructure.unit_tests.Tests.WebsiteDetailsServiceTests
 {
     public class GetAllTest : BaseTest
     {
@@ -19,7 +19,7 @@ namespace news_scrapper.infrastructure.unit_tests.WebsiteDetailsServiceTests
             _mapper.Setup(n => n.Map<List<WebsiteDetails>>(It.IsAny<List<WebsiteDetailsDb>>())).Returns(websiteDetails);
             _websitesRepository.Setup(n => n.GetAll()).Returns(gotWebsites);
 
-            var result =  _sut.GetAll();
+            var result = _sut.GetAll();
 
             result.Should().BeEquivalentTo(websiteDetails);
         }

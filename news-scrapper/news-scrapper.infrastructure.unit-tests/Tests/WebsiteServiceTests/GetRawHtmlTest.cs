@@ -5,7 +5,7 @@ using System;
 using System.Net.Http;
 using Xunit;
 
-namespace news_scrapper.infrastructure.unit_tests.WebsiteServiceTests
+namespace news_scrapper.infrastructure.unit_tests.Tests.WebsiteServiceTests
 {
     public class GetRawHtmlTest
     {

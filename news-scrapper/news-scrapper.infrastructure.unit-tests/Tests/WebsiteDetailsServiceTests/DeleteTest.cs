@@ -2,7 +2,7 @@
 using System;
 using Xunit;
 
-namespace news_scrapper.infrastructure.unit_tests.WebsiteDetailsServiceTests
+namespace news_scrapper.infrastructure.unit_tests.Tests.WebsiteDetailsServiceTests
 {
     public class DeleteTest : BaseTest
     {

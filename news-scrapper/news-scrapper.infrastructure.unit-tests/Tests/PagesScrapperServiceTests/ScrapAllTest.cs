@@ -13,7 +13,7 @@ using news_scrapper.resources;
 using System.Collections.Generic;
 using Xunit;
 
-namespace news_scrapper.infrastructure.unit_tests.PagesScrapperServiceTests
+namespace news_scrapper.infrastructure.unit_tests.Tests.PagesScrapperServiceTests
 {
     public class ScrapAllTest
     {
@@ -34,8 +34,8 @@ namespace news_scrapper.infrastructure.unit_tests.PagesScrapperServiceTests
             _mapper = new Mock<IMapper>();
 
             _sut = new PagesScrapperService(_htmlScrapper.Object,
-                _websiteService.Object, 
-                _websiteRepository.Object, 
+                _websiteService.Object,
+                _websiteRepository.Object,
                 _mapper.Object);
         }
 
@@ -49,10 +49,10 @@ namespace news_scrapper.infrastructure.unit_tests.PagesScrapperServiceTests
             string rawHtmlMocked = "<testtag>";
 
             var articles = new Faker<Article>()
-                .RuleFor(n=>n.Url, b => b.Internet.Url())
-                .RuleFor(n=>n.Title, b=>b.Name.FirstName())
-                .RuleFor(n=>n.ImageUrl, b=>b.Internet.Url())
-                .RuleFor(n=>n.Description, b=>b.Name.LastName())
+                .RuleFor(n => n.Url, b => b.Internet.Url())
+                .RuleFor(n => n.Title, b => b.Name.FirstName())
+                .RuleFor(n => n.ImageUrl, b => b.Internet.Url())
+                .RuleFor(n => n.Description, b => b.Name.LastName())
                 .Generate();
 
             ArticlesResponseViewModel expectedResult = new()
@@ -99,7 +99,8 @@ namespace news_scrapper.infrastructure.unit_tests.PagesScrapperServiceTests
         {
             var gotWebsites = websites.Map();
 
-            ArticlesResponseViewModel expectedResult = new() { 
+            ArticlesResponseViewModel expectedResult = new()
+            {
                 ErrorMessages = new List<string> { ApiResponses.ThereAreNoWebsitesToScrap }
             };
 
@@ -120,7 +121,8 @@ namespace news_scrapper.infrastructure.unit_tests.PagesScrapperServiceTests
             string rawHtmlMocked = "wrong raw html";
 
 
-            ArticlesResponseViewModel expectedResult = new() {
+            ArticlesResponseViewModel expectedResult = new()
+            {
                 Articles = new(),
                 ErrorMessages = new() { rawHtmlMocked, rawHtmlMocked, rawHtmlMocked }
             };

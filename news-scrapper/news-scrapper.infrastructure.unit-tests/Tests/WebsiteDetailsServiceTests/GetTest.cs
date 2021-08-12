@@ -5,7 +5,7 @@ using news_scrapper.domain.Models;
 using news_scrapper.infrastructure.unit_tests.Builders;
 using Xunit;
 
-namespace news_scrapper.infrastructure.unit_tests.WebsiteDetailsServiceTests
+namespace news_scrapper.infrastructure.unit_tests.Tests.WebsiteDetailsServiceTests
 {
     public class GetTest : BaseTest
     {

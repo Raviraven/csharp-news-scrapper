@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace news_scrapper.infrastructure.unit_tests.HtmlScrapperTests
+namespace news_scrapper.infrastructure.unit_tests.Tests.HtmlScrapperTests
 {
     public class ScrapTest
     {
@@ -54,7 +54,7 @@ namespace news_scrapper.infrastructure.unit_tests.HtmlScrapperTests
             _dateTimeProvider.Setup(n => n.Now).Returns(mockedNow);
 
             (var articles, var errors) = _sut.Scrap(details, rawHtml);
-            
+
             errors.Should().BeEmpty();
             articles.Should().BeEquivalentTo(expectedArticles);
         }
@@ -63,7 +63,7 @@ namespace news_scrapper.infrastructure.unit_tests.HtmlScrapperTests
         public void should_return_article_with_just_title_when_cant_find_nodes_with_article_data()
         {
             string newsTitle = "just the test news title";
-            string rawHtml = $"<wrapper id=\"test-news-id\"><testTag></testTag><testTag class=\"test-news-class\">"+
+            string rawHtml = $"<wrapper id=\"test-news-id\"><testTag></testTag><testTag class=\"test-news-class\">" +
                 $"<h1 class=\"news-title\">{newsTitle}<h1></testTag></wrapper>";
             DateTime mockedNow = new(2980, 10, 10);
             WebsiteDetails details = new()
