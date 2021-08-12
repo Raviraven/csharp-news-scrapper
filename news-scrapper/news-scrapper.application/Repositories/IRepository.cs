@@ -18,6 +18,7 @@ namespace news_scrapper.application.Repositories
         TEntity GetById(object id);
         IEnumerable<TEntity> GetWithRawSql(string query, params object[] parameters);
         TEntity Insert(TEntity entity);
+        IEnumerable<TEntity> InsertRange(List<TEntity> entities);
         TEntity Update(TEntity entityToUpdate);
 
     }

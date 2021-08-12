@@ -10,11 +10,13 @@ using news_scrapper.api.Middleware;
 using news_scrapper.application.Data;
 using news_scrapper.application.Interfaces;
 using news_scrapper.application.Repositories;
+using news_scrapper.application.UnitsOfWork;
 using news_scrapper.infrastructure;
 using news_scrapper.infrastructure.Data;
 using news_scrapper.infrastructure.DbAccess;
 using news_scrapper.infrastructure.MapperProfiles;
 using news_scrapper.infrastructure.Repositories;
+using news_scrapper.infrastructure.UnitsOfWork;
 using System.Net;
 
 namespace news_scrapper.api
@@ -49,14 +51,22 @@ namespace news_scrapper.api
             services.AddTransient<IPagesScrapperService, PagesScrapperService>();
             services.AddTransient<IHtmlScrapper, HtmlScrapper>();
             services.AddTransient<IWebsiteDetailsService, WebsiteDetailsService>();
+            services.AddTransient<IDateTimeProvider, DateTimeProvider>();
+            services.AddTransient<IArticlesService, ArticlesService>();
 
             //Repositories 
             services.AddTransient<IWebsitesRepository, WebsitesRepository>();
+            services.AddTransient(typeof(IRepository<>), typeof(BaseRepository<>));
+            //services.AddTransient<IArticlesRepository, ArticlesRepository>();
 
+
+            //UoW
+            services.AddTransient<IArticlesUnitOfWork, ArticlesUnitOfWork>();
 
             services.AddSingleton(provider => new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new WebsiteDetailsProfile());
+                cfg.AddProfile(new ArticlesProfile());
             }).CreateMapper());
         }
 

@@ -77,6 +77,12 @@ namespace news_scrapper.infrastructure.Repositories
             return entity;
         }
 
+        public IEnumerable<TEntity> InsertRange(List<TEntity> entities)
+        {
+            dbSet.AddRange(entities);
+            return entities;
+        }
+
         public TEntity Update(TEntity entityToUpdate)
         {
             //dbSet.Attach(entityToUpdate);
