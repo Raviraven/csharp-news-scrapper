@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace news_scrapper.domain
+namespace news_scrapper.domain.Models
 {
     public class WebsiteDetails
     {
@@ -12,14 +12,14 @@ namespace news_scrapper.domain
         {
         }
 
-        public WebsiteDetails(string url, 
-            string xPathToNewsContainer, 
-            string mainNodeTag, 
-            string mainNodeClass, 
-            string titleNodeTag, 
-            string titleNodeClass, 
-            string descriptionNodeTag, 
-            string descriptionNodeClass, 
+        public WebsiteDetails(string url,
+            string xPathToNewsContainer,
+            string mainNodeTag,
+            string mainNodeClass,
+            string titleNodeTag,
+            string titleNodeClass,
+            string descriptionNodeTag,
+            string descriptionNodeClass,
             string imgNodeClass)
         {
             Url = url;
@@ -47,16 +47,16 @@ namespace news_scrapper.domain
 
         public void UpdateValues(WebsiteDetails website)
         {
-            this.Url = website.Url;
-            this.MainNodeXPathToNewsContainer = website.MainNodeXPathToNewsContainer;
-            this.NewsNodeTag = website.NewsNodeTag;
-            this.NewsNodeClass = website.NewsNodeClass;
-            this.TitleNodeTag = website.TitleNodeTag;
-            this.TitleNodeClass = website.TitleNodeClass;
-            this.DescriptionNodeTag = website.DescriptionNodeTag;
-            this.DescriptionNodeClass = website.DescriptionNodeClass;
-            this.ImgNodeClass = website.ImgNodeClass;
-            this.Category = website.Category;
+            Url = website.Url;
+            MainNodeXPathToNewsContainer = website.MainNodeXPathToNewsContainer;
+            NewsNodeTag = website.NewsNodeTag;
+            NewsNodeClass = website.NewsNodeClass;
+            TitleNodeTag = website.TitleNodeTag;
+            TitleNodeClass = website.TitleNodeClass;
+            DescriptionNodeTag = website.DescriptionNodeTag;
+            DescriptionNodeClass = website.DescriptionNodeClass;
+            ImgNodeClass = website.ImgNodeClass;
+            Category = website.Category;
         }
     }
 }

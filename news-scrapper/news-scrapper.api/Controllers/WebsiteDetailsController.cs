@@ -2,8 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using news_scrapper.application.Interfaces;
-using news_scrapper.domain;
 using news_scrapper.domain.Exceptions;
+using news_scrapper.domain.Models;
 using news_scrapper.domain.ResponseViewModels;
 using System;
 using System.Collections.Generic;

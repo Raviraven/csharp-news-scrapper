@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace news_scrapper.domain
+namespace news_scrapper.domain.Models
 {
     public class Article
     {

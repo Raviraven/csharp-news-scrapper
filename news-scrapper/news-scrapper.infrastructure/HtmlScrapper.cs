@@ -1,6 +1,6 @@
 ﻿using HtmlAgilityPack;
 using news_scrapper.application.Interfaces;
-using news_scrapper.domain;
+using news_scrapper.domain.Models;
 using news_scrapper.resources;
 using System;
 using System.Collections.Generic;

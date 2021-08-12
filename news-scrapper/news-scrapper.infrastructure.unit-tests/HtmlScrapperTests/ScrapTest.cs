@@ -1,6 +1,6 @@
 ﻿using Bogus;
 using FluentAssertions;
-using news_scrapper.domain;
+using news_scrapper.domain.Models;
 using news_scrapper.resources;
 using System.Collections.Generic;
 using System.Text;

@@ -1,4 +1,4 @@
-﻿using news_scrapper.domain;
+﻿using news_scrapper.domain.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

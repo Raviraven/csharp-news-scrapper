@@ -1,7 +1,7 @@
 ﻿using FluentAssertions;
 using Moq;
-using news_scrapper.domain;
 using news_scrapper.domain.DBModels;
+using news_scrapper.domain.Models;
 using news_scrapper.infrastructure.unit_tests.Builders;
 using Xunit;
 

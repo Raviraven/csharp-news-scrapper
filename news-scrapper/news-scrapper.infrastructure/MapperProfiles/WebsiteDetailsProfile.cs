@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using news_scrapper.domain;
 using news_scrapper.domain.DBModels;
+using news_scrapper.domain.Models;
 
 namespace news_scrapper.infrastructure.MapperProfiles
 {

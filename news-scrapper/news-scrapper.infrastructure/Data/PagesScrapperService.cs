@@ -2,7 +2,7 @@
 using news_scrapper.application.Data;
 using news_scrapper.application.Interfaces;
 using news_scrapper.application.Repositories;
-using news_scrapper.domain;
+using news_scrapper.domain.Models;
 using news_scrapper.domain.ResponseViewModels;
 using news_scrapper.resources;
 using System;
