@@ -1,5 +1,7 @@
 ﻿using Bogus;
 using FluentAssertions;
+using Moq;
+using news_scrapper.application.Interfaces;
 using news_scrapper.domain.Models;
 using news_scrapper.resources;
 using System.Collections.Generic;
@@ -11,10 +13,11 @@ namespace news_scrapper.infrastructure.unit_tests.HtmlScrapperTests
     public class ScrapTest
     {
         protected HtmlScrapper _sut { get; set; }
+        private Mock<IDateTimeProvider> _dateTimeProvider { get; set; }
 
         public ScrapTest()
         {
-            _sut = new HtmlScrapper();
+            _sut = new HtmlScrapper(_dateTimeProvider.Object);
         }
 
         [Fact]

@@ -14,6 +14,13 @@ namespace news_scrapper.infrastructure
 {
     public class HtmlScrapper : IHtmlScrapper
     {
+        private IDateTimeProvider _dateTimeProvider { get; set; }
+
+        public HtmlScrapper(IDateTimeProvider dateTimeProvider)
+        {
+            _dateTimeProvider = dateTimeProvider;
+        }
+
         public (List<Article>, List<string>) Scrap(WebsiteDetails website, string rawHtml)
         {
             List<Article> articles = new();
@@ -38,7 +45,9 @@ namespace news_scrapper.infrastructure
                         Title = title,
                         Url = getDirectUrl(directUrlToNews, website.Url),
                         ImageUrl = getDirectUrl(image, website.Url),
-                        Description = description
+                        Description = description,
+                        DateScrapped = _dateTimeProvider.Now,
+                        WebsiteDetailsId = website.Id
                     });
                 }
             }
