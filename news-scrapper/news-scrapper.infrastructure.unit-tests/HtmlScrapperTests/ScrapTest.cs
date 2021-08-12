@@ -3,7 +3,9 @@ using FluentAssertions;
 using Moq;
 using news_scrapper.application.Interfaces;
 using news_scrapper.domain.Models;
+using news_scrapper.infrastructure.unit_tests.Builders;
 using news_scrapper.resources;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Xunit;
@@ -17,6 +19,8 @@ namespace news_scrapper.infrastructure.unit_tests.HtmlScrapperTests
 
         public ScrapTest()
         {
+            _dateTimeProvider = new Mock<IDateTimeProvider>();
+
             _sut = new HtmlScrapper(_dateTimeProvider.Object);
         }
 
@@ -30,8 +34,9 @@ namespace news_scrapper.infrastructure.unit_tests.HtmlScrapperTests
             string imageUrl = "/image urll";
 
             string mainNodeId = "test-news-id";
-            WebsiteDetails details = createNewWebDetails(url, mainNodeId);
+            WebsiteDetails details = new WebsiteDetailsBuilder().WithUrl(url).WithMainNodeId(mainNodeId).Build();
             string rawHtml = generateRawHtml(details, mainNodeId, newsTitle, newsUrl, description, imageUrl);
+            DateTime mockedNow = new(2980, 10, 10);
 
             List<Article> expectedArticles = new()
             {
@@ -41,8 +46,12 @@ namespace news_scrapper.infrastructure.unit_tests.HtmlScrapperTests
                     Url = $"{url[0..^1]}{newsUrl}",
                     Description = $"{description}",
                     ImageUrl = $"{url[0..^1]}{imageUrl}",
+                    DateScrapped = mockedNow,
+                    WebsiteDetailsId = details.Id
                 }
             };
+
+            _dateTimeProvider.Setup(n => n.Now).Returns(mockedNow);
 
             (var articles, var errors) = _sut.Scrap(details, rawHtml);
             
@@ -56,7 +65,7 @@ namespace news_scrapper.infrastructure.unit_tests.HtmlScrapperTests
             string newsTitle = "just the test news title";
             string rawHtml = $"<wrapper id=\"test-news-id\"><testTag></testTag><testTag class=\"test-news-class\">"+
                 $"<h1 class=\"news-title\">{newsTitle}<h1></testTag></wrapper>";
-
+            DateTime mockedNow = new(2980, 10, 10);
             WebsiteDetails details = new()
             {
                 MainNodeXPathToNewsContainer = "//*[@id=\"test-news-id\"]",
@@ -74,8 +83,12 @@ namespace news_scrapper.infrastructure.unit_tests.HtmlScrapperTests
                     Url = "",
                     Description = "",
                     ImageUrl = "",
+                    DateScrapped = mockedNow,
+                    WebsiteDetailsId = details.Id
                 }
             };
+
+            _dateTimeProvider.Setup(n => n.Now).Returns(mockedNow);
 
             (var articles, var errors) = _sut.Scrap(details, rawHtml);
 
@@ -87,7 +100,7 @@ namespace news_scrapper.infrastructure.unit_tests.HtmlScrapperTests
         public void should_return_empty_articles_when_cant_get_main_node_by_xpath()
         {
             string rawHtml = "<wrapper id=\"test-news-id\"><testTag></wrapper>";
-
+            DateTime mockedNow = new(2980, 10, 10);
             WebsiteDetails details = new()
             {
                 MainNodeXPathToNewsContainer = "//*[@id=\"totally-wrong-id\"]",
@@ -97,6 +110,8 @@ namespace news_scrapper.infrastructure.unit_tests.HtmlScrapperTests
             {
                 string.Format(ApiResponses.CannotGetMainNewsNodeByXpath, details.MainNodeXPathToNewsContainer)
             };
+
+            _dateTimeProvider.Setup(n => n.Now).Returns(mockedNow);
 
             (var articles, var errors) = _sut.Scrap(details, rawHtml);
 
@@ -108,13 +123,15 @@ namespace news_scrapper.infrastructure.unit_tests.HtmlScrapperTests
         public void should_return_empty_articles_when_cant_get_news_nodes()
         {
             string rawHtml = "<wrapper id=\"test-news-id\"><testTag></testTag><testTag class=\"test-news-class\"></testTag></wrapper>";
-
+            DateTime mockedNow = new(2980, 10, 10);
             WebsiteDetails details = new()
             {
                 MainNodeXPathToNewsContainer = "//*[@id=\"test-news-id\"]",
                 NewsNodeTag = "testTag",
                 NewsNodeClass = "wrong-class"
             };
+
+            _dateTimeProvider.Setup(n => n.Now).Returns(mockedNow);
 
             (var articles, var errors) = _sut.Scrap(details, rawHtml);
 
@@ -126,7 +143,7 @@ namespace news_scrapper.infrastructure.unit_tests.HtmlScrapperTests
         public void should_return_error_messages_when_cant_get_title_node()
         {
             string rawHtml = "<wrapper id=\"test-news-id\"><testTag></testTag><testTag class=\"test-news-class\"></testTag></wrapper>";
-
+            DateTime mockedNow = new(2980, 10, 10);
             WebsiteDetails details = new()
             {
                 MainNodeXPathToNewsContainer = "//*[@id=\"test-news-id\"]",
@@ -138,6 +155,8 @@ namespace news_scrapper.infrastructure.unit_tests.HtmlScrapperTests
             {
                 ApiResponses.CannotGetTitleFromMainNode
             };
+
+            _dateTimeProvider.Setup(n => n.Now).Returns(mockedNow);
 
             (var articles, var errors) = _sut.Scrap(details, rawHtml);
 
@@ -154,8 +173,8 @@ namespace news_scrapper.infrastructure.unit_tests.HtmlScrapperTests
             string imageUrl = "/image urll";
 
             string mainNodeId = "test-news-id";
-
-            WebsiteDetails details = createNewWebDetails(null, mainNodeId);
+            DateTime mockedNow = new(2980, 10, 10);
+            WebsiteDetails details = new WebsiteDetailsBuilder().WithUrl(null).WithMainNodeId(mainNodeId).Build();
 
             string rawHtml = generateRawHtml(details, mainNodeId, newsTitle, newsUrl, description, imageUrl);
 
@@ -167,8 +186,12 @@ namespace news_scrapper.infrastructure.unit_tests.HtmlScrapperTests
                     Url = $"{newsUrl}",
                     Description = $"{description}",
                     ImageUrl = $"{imageUrl}",
+                    DateScrapped = mockedNow,
+                    WebsiteDetailsId = details.Id
                 }
             };
+
+            _dateTimeProvider.Setup(n => n.Now).Returns(mockedNow);
 
             (var articles, var errors) = _sut.Scrap(details, rawHtml);
 
@@ -184,10 +207,10 @@ namespace news_scrapper.infrastructure.unit_tests.HtmlScrapperTests
             string newsUrl = $"{url}news-url";
             string description = "test news description";
             string imageUrl = $"{url}image urll";
-
+            DateTime mockedNow = new(2980, 10, 10);
             string mainNodeId = "test-news-id";
 
-            WebsiteDetails details = createNewWebDetails(url, mainNodeId);
+            WebsiteDetails details = new WebsiteDetailsBuilder().WithUrl(url).WithMainNodeId(mainNodeId).Build();
             string rawHtml = generateRawHtml(details, mainNodeId, newsTitle, newsUrl, description, imageUrl);
 
             List<Article> expectedArticles = new()
@@ -198,8 +221,12 @@ namespace news_scrapper.infrastructure.unit_tests.HtmlScrapperTests
                     Url = $"{newsUrl}",
                     Description = $"{description}",
                     ImageUrl = $"{imageUrl}",
+                    DateScrapped = mockedNow,
+                    WebsiteDetailsId = details.Id
                 }
             };
+
+            _dateTimeProvider.Setup(n => n.Now).Returns(mockedNow);
 
             (var articles, var errors) = _sut.Scrap(details, rawHtml);
 
@@ -215,10 +242,10 @@ namespace news_scrapper.infrastructure.unit_tests.HtmlScrapperTests
             string newsUrl = "/news-url";
             string description = "test news description";
             string imageUrl = "/image urll";
-
+            DateTime mockedNow = new(2980, 10, 10);
             string mainNodeId = "test-news-id";
 
-            WebsiteDetails details = createNewWebDetails(url, mainNodeId);
+            WebsiteDetails details = new WebsiteDetailsBuilder().WithUrl(url).WithMainNodeId(mainNodeId).Build();
             string rawHtml = generateRawHtml(details, mainNodeId, newsTitle, newsUrl, description, imageUrl);
 
             List<Article> expectedArticles = new()
@@ -229,8 +256,12 @@ namespace news_scrapper.infrastructure.unit_tests.HtmlScrapperTests
                     Url = $"{url}{newsUrl}",
                     Description = $"{description}",
                     ImageUrl = $"{url}{imageUrl}",
+                    DateScrapped = mockedNow,
+                    WebsiteDetailsId = details.Id
                 }
             };
+
+            _dateTimeProvider.Setup(n => n.Now).Returns(mockedNow);
 
             (var articles, var errors) = _sut.Scrap(details, rawHtml);
 
@@ -238,22 +269,6 @@ namespace news_scrapper.infrastructure.unit_tests.HtmlScrapperTests
             errors.Should().BeEmpty();
         }
 
-
-
-        private WebsiteDetails createNewWebDetails(string url, string mainNodeId)
-        {
-            return new Faker<WebsiteDetails>()
-                .RuleFor(n => n.MainNodeXPathToNewsContainer, b => $"//*[@id=\"{mainNodeId}\"]")
-                .RuleFor(n => n.NewsNodeTag, b => b.Name.FirstName() + "-news-tag")
-                .RuleFor(n => n.NewsNodeClass, b => b.Name.FirstName() + "-news-class")
-                .RuleFor(n => n.TitleNodeTag, b => b.Name.FirstName() + "-title-tag")
-                .RuleFor(n => n.TitleNodeClass, b => b.Name.FirstName() + "-title-class")
-                .RuleFor(n => n.DescriptionNodeTag, b => b.Name.FirstName() + "-description-tag")
-                .RuleFor(n => n.DescriptionNodeClass, b => b.Name.FirstName() + "-description-class")
-                .RuleFor(n => n.ImgNodeClass, b => b.Name.FirstName() + "-img-class")
-                .RuleFor(n => n.Url, b => url)
-                .Generate();
-        }
 
         private static string generateRawHtml(WebsiteDetails websiteDetail, string mainNodeId,
             string newsTitle, string newsUrl, string description, string imageUrl)
