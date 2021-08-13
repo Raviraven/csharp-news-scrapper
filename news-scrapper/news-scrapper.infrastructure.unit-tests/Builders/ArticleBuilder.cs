@@ -15,7 +15,7 @@ namespace news_scrapper.infrastructure.unit_tests.Builders
         public List<Article> Build(int count)
         {
             return new Faker<Article>()
-                .RuleFor(n=>n.DateScrapped, b=>b.Date.Recent())
+                .RuleFor(n=>n.DateScrapped, b=>b.Date.Future())
                 .RuleFor(n=>n.Description, b=>b.Name.FirstName())
                 .RuleFor(n=>n.Id, b=>b.Random.Int())
                 .RuleFor(n=>n.ImageUrl, b=>b.Internet.Url())

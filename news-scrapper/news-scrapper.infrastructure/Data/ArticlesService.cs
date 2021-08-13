@@ -24,6 +24,83 @@ namespace news_scrapper.infrastructure.Data
             _mapper = mapper;
         }
 
+
+        public List<Article> Get()
+        {
+            var orderedArticles = _articlesUnitOfWork.Articles.Get(
+                    orderBy: n => n.OrderByDescending(n => n.DateScrapped)
+                );
+
+            if (orderedArticles is null || orderedArticles.Count() == 0)
+                return null;
+
+            var articlesFromDb = orderedArticles.ToList();
+            return _mapper.Map<List<Article>>(articlesFromDb);
+        }
+
+        public List<Article> Get(int articlesPerPage, int pageNo)
+        {
+            var orderedArticles = _articlesUnitOfWork.Articles.Get(
+                orderBy: n => n.OrderByDescending(n => n.DateScrapped)
+                );
+
+            if (orderedArticles is null || orderedArticles.Count() == 0)
+                return null;
+
+            int allPages = getAllAmountOfPages(articlesPerPage, orderedArticles);
+
+            if (pageNo < 0 || pageNo > allPages)
+                return null;
+
+            var articlesToReturn = orderedArticles
+                .Skip((pageNo - 1) * articlesPerPage)
+                .Take(articlesPerPage)
+                .ToList();
+
+            return _mapper.Map<List<Article>>(articlesToReturn);
+        }
+
+        private static int getAllAmountOfPages(int articlesPerPage, IEnumerable<ArticleDb> orderedArticles)
+        {
+            double amountOfArticlesPerPage = orderedArticles.Count()
+                / (double)articlesPerPage;
+
+            int amountOfArticlesAsInt = Convert.ToInt32(amountOfArticlesPerPage);
+
+            int allPages = (amountOfArticlesAsInt == amountOfArticlesPerPage)
+                ? amountOfArticlesAsInt : amountOfArticlesAsInt + 1;
+            return allPages;
+        }
+
+        public Article GetById(int id)
+        {
+            var article = _articlesUnitOfWork.Articles.GetById(id);
+
+            if (article is null)
+                return null;
+
+            return _mapper.Map<Article>(article);
+        }
+
+        public List<Article> GetNew()
+        {
+            var orderedArticles = _articlesUnitOfWork.Articles.Get(
+                    orderBy: n=>n.OrderByDescending(n=>n.DateScrapped)
+                );
+
+            if (orderedArticles is null || orderedArticles.Count() == 0)
+                return null;
+
+            var newestDate = orderedArticles.First().DateScrapped;
+            var newestArticles = orderedArticles
+                .Where(n => n.DateScrapped.ToShortDateString() == newestDate.ToShortDateString()
+                    && n.DateScrapped.ToShortTimeString() == newestDate.ToShortTimeString())
+                .ToList();
+
+            return _mapper.Map<List<Article>>(newestArticles);
+        }
+
+
         public async Task<List<string>> Scrap()
         {
             List<string> result = new();

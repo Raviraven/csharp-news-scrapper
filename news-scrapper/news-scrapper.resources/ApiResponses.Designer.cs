@@ -70,6 +70,24 @@ namespace news_scrapper.resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Articles not found..
+        /// </summary>
+        public static string ArticlesNotFound {
+            get {
+                return ResourceManager.GetString("ArticlesNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Article with id: &apos;{0}&apos; not found..
+        /// </summary>
+        public static string ArticleWithIdNotFound {
+            get {
+                return ResourceManager.GetString("ArticleWithIdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot get main news node by xpath: &apos;{0}&apos;..
         /// </summary>
         public static string CannotGetMainNewsNodeByXpath {

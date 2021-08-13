@@ -36,7 +36,7 @@ namespace news_scrapper.api.Controllers
             return Ok(result);
         }
 
-        [HttpGet("/{id}")]
+        [HttpGet("{id}")]
         public ActionResult<List<WebsiteDetails>> Get(int id)
         {
             var result =  _websiteDetailsService.Get(id);
@@ -79,7 +79,7 @@ namespace news_scrapper.api.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("/{id}")]
+        [HttpDelete("{id}")]
         public ActionResult<bool> Delete(int id)
         {
             var result = _websiteDetailsService.Delete(id);

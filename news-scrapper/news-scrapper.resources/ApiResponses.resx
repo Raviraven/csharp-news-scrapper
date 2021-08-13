@@ -121,6 +121,13 @@
     <value>Articles added after scrapping: '{0}'.</value>
     <comment>{0} - number of articles added</comment>
   </data>
+  <data name="ArticlesNotFound" xml:space="preserve">
+    <value>Articles not found.</value>
+  </data>
+  <data name="ArticleWithIdNotFound" xml:space="preserve">
+    <value>Article with id: '{0}' not found.</value>
+    <comment>{0} - article id</comment>
+  </data>
   <data name="CannotGetMainNewsNodeByXpath" xml:space="preserve">
     <value>Cannot get main news node by xpath: '{0}'.</value>
     <comment>{0} - xpath</comment>
