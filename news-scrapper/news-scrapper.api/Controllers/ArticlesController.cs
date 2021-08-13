@@ -23,10 +23,10 @@ namespace news_scrapper.api.Controllers
         }
 
         [HttpGet("/scrap")]
-        public async Task<ActionResult> Scrap()
+        public async Task<ActionResult<List<string>>> Scrap()
         {
-            await _articlesService.Scrap();
-            return Ok();
+            var result = await _articlesService.Scrap();
+            return Ok(result);
         }
 
     }

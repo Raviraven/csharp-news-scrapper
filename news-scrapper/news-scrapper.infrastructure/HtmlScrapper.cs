@@ -35,10 +35,10 @@ namespace news_scrapper.infrastructure
                 {
                     HtmlNode titleNode = getTitleNode(website.TitleNodeTag, website.TitleNodeClass, newsNodes[i]);
 
-                    var title = titleNode?.InnerText ?? "";
+                    var title = removeTabsAndNewLines(titleNode?.InnerText ?? "");
                     string directUrlToNews = getNewsUrl(titleNode);
                     string image = getImageUrl(website.ImgNodeClass, newsNodes[i]);
-                    string description = getDescription(website.DescriptionNodeTag, website.DescriptionNodeClass, newsNodes[i]);
+                    string description = removeTabsAndNewLines(getDescription(website.DescriptionNodeTag, website.DescriptionNodeClass, newsNodes[i]));
 
                     articles.Add(new()
                     {
@@ -57,6 +57,13 @@ namespace news_scrapper.infrastructure
             }
 
             return (articles, errors);
+        }
+
+        private string removeTabsAndNewLines(string str)
+        {
+            str = str.Replace("\n", string.Empty);
+            str = str.Replace("\t", string.Empty);
+            return str.Trim();
         }
 
         private HtmlNode getMainNode(string rawHtml, string xPath)
