@@ -5,4 +5,8 @@
     <RootNamespace>news_scrapper.domain</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="5.0.9" />
+  </ItemGroup>
+
 </Project>
