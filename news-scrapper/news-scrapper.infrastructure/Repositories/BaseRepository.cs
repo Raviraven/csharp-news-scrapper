@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using news_scrapper.application.Repositories;
-using news_scrapper.domain.DBModels;
 using news_scrapper.infrastructure.DbAccess;
 using System;
 using System.Collections.Generic;
@@ -40,7 +39,7 @@ namespace news_scrapper.infrastructure.Repositories
         {
             IQueryable<TEntity> query = dbSet;
 
-            if(filter != null)
+            if (filter != null)
             {
                 query = query.Where(filter);
             }
@@ -53,7 +52,7 @@ namespace news_scrapper.infrastructure.Repositories
                 }
             }
 
-            if(orderBy != null)
+            if (orderBy != null)
             {
                 return orderBy(query).ToList();
             }

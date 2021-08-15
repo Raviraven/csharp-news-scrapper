@@ -39,28 +39,32 @@ namespace news_scrapper.infrastructure.Data
 
         public AuthenticateResponse Authenticate(AuthenticateRequest model, string ipAddress)
         {
-            var user = _usersUnitOfWork.Users.Get(
-                    filter: n=>n.Username == model.Username
-                )
-                .SingleOrDefault();
+            var userFromDb = _usersUnitOfWork.Users.Get(
+                filter: n => n.Username == model.Username).SingleOrDefault();
 
+            var user = _mapper.Map<User>(userFromDb);
+                
             if (user is null || !BCryptNet.Verify(model.Password, user.PasswordHash))
                 throw new Exception("Username or password is incorrect");
 
-            var mappedUser = _mapper.Map<User>(user);
-
-            var jwtToken = _jwtUtils.GenerateJwtToken(mappedUser);
+            var jwtToken = _jwtUtils.GenerateJwtToken(user);
             var refreshToken = _jwtUtils.GenerateRefreshToken(ipAddress);
 
-            mappedUser.RefreshTokens.Add(refreshToken);
+            user.RefreshTokens.Add(refreshToken);
 
-            removeOldRefreshTokens(mappedUser);
+            
+            removeOldRefreshTokens(user);
 
-            _usersUnitOfWork.Users.Update(_mapper.Map<UserDb>(mappedUser));
+            _mapper.Map(user, userFromDb);
+
+
+            _usersUnitOfWork.Users.Update(userFromDb);
             _usersUnitOfWork.Commit();
 
-            return new AuthenticateResponse(mappedUser, jwtToken, refreshToken.Token);
+            return new AuthenticateResponse(user, jwtToken, refreshToken.Token);
         }
+
+       
 
         public IEnumerable<User> GetAll()
         {
@@ -78,7 +82,10 @@ namespace news_scrapper.infrastructure.Data
 
         public AuthenticateResponse RefreshToken(string token, string ipAddress)
         {
-            var user = getUserByRefreshToken(token);
+            var userFromDb = getUserDbByRefreshToken(token);
+
+            var user = _mapper.Map<User>(userFromDb);
+
             var refreshToken = user.RefreshTokens.Single(n => n.Token == token);
 
             if (refreshToken.IsRevoked)
@@ -97,7 +104,9 @@ namespace news_scrapper.infrastructure.Data
 
             removeOldRefreshTokens(user);
 
-            _usersUnitOfWork.Users.Update(_mapper.Map<UserDb>(user));
+            _mapper.Map(user, userFromDb);
+
+            _usersUnitOfWork.Users.Update(userFromDb);
             _usersUnitOfWork.Commit();
 
             var jwtToken = _jwtUtils.GenerateJwtToken(user);
@@ -107,14 +116,18 @@ namespace news_scrapper.infrastructure.Data
 
         public void RevokeToken(string token, string ipAddress)
         {
-            var user = getUserByRefreshToken(token);
+            var userFromDb = getUserDbByRefreshToken(token);
+            var user = _mapper.Map<User>(userFromDb);
+
             var refreshToken = user.RefreshTokens.Single(n => n.Token == token);
 
             if (!refreshToken.IsActive)
                 throw new Exception("Invalid token");
 
             revokeRefreshToken(refreshToken, ipAddress, "Revoked without replacement");
-            _usersUnitOfWork.Users.Update(_mapper.Map<UserDb>(user));
+            _mapper.Map(user, userFromDb);
+
+            _usersUnitOfWork.Users.Update(userFromDb);
             _usersUnitOfWork.Commit();
         }
 
@@ -126,7 +139,7 @@ namespace news_scrapper.infrastructure.Data
             token.ReplacedByToken = replacedByToken;
         }
 
-        private User getUserByRefreshToken(string token)
+        private UserDb getUserDbByRefreshToken(string token)
         {
             var user = _usersUnitOfWork.Users.Get(
                     filter: n=>n.RefreshTokens.Any(t => t.Token == token)
@@ -136,7 +149,7 @@ namespace news_scrapper.infrastructure.Data
             if (user is null)
                 throw new Exception("Invalid token");
 
-            return _mapper.Map<User>(user);
+            return user;
         }
 
         private void revokeDescendantRefreshTokens(RefreshToken refreshToken, User user, string ipAddress, string reason)
@@ -161,9 +174,9 @@ namespace news_scrapper.infrastructure.Data
 
         private void removeOldRefreshTokens(User user)
         {
-            user.RefreshTokens.RemoveAll( x=>
-                !x.IsActive &&
-                x.Created.AddDays(_appSettings.RefreshTokenTTL) <= _dateTimeProvider.Now);
+            user.RefreshTokens.RemoveAll(x =>
+               !x.IsActive &&
+               x.Created.AddDays(_appSettings.RefreshTokenTTL) <= _dateTimeProvider.Now);
         }
 
     }

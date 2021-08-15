@@ -13,8 +13,8 @@ namespace news_scrapper.application.Repositories
             Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             string includeProperties = "");
-        
-        
+
+
         TEntity GetById(object id);
         IEnumerable<TEntity> GetWithRawSql(string query, params object[] parameters);
         TEntity Insert(TEntity entity);
