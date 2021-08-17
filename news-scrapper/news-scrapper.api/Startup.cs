@@ -60,8 +60,9 @@ namespace news_scrapper.api
             services.AddTransient<IWebsiteDetailsService, WebsiteDetailsService>();
             services.AddTransient<IDateTimeProvider, DateTimeProvider>();
             services.AddTransient<IArticlesService, ArticlesService>();
-            services.AddScoped<IJwtUtils, JwtUtils>();
+            services.AddTransient<IJwtUtils, JwtUtils>();
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IRandomCryptoBytesGenerator, RandomCryptoBytesGenerator>();
 
             //Repositories 
             services.AddTransient<IWebsitesRepository, WebsitesRepository>();
