@@ -12,6 +12,7 @@ using System.Linq;
 using AutoMapper;
 using news_scrapper.domain.DBModels;
 using news_scrapper.application.Interfaces;
+using news_scrapper.resources;
 
 namespace news_scrapper.infrastructure.Data
 {
@@ -42,29 +43,25 @@ namespace news_scrapper.infrastructure.Data
             var userFromDb = _usersUnitOfWork.Users.Get(
                 filter: n => n.Username == model.Username).SingleOrDefault();
 
+            if (userFromDb is null || !BCryptNet.Verify(model.Password, userFromDb.PasswordHash))
+                throw new Exception(ApiResponses.UsernameOrPasswordIsIncorrect);
+            
             var user = _mapper.Map<User>(userFromDb);
-                
-            if (user is null || !BCryptNet.Verify(model.Password, user.PasswordHash))
-                throw new Exception("Username or password is incorrect");
 
             var jwtToken = _jwtUtils.GenerateJwtToken(user);
             var refreshToken = _jwtUtils.GenerateRefreshToken(ipAddress);
 
             user.RefreshTokens.Add(refreshToken);
 
-            
             removeOldRefreshTokens(user);
 
             _mapper.Map(user, userFromDb);
-
 
             _usersUnitOfWork.Users.Update(userFromDb);
             _usersUnitOfWork.Commit();
 
             return new AuthenticateResponse(user, jwtToken, refreshToken.Token);
         }
-
-       
 
         public IEnumerable<User> GetAll()
         {
@@ -75,7 +72,7 @@ namespace news_scrapper.infrastructure.Data
         {
             var user = _usersUnitOfWork.Users.GetById(id);
             if (user is null)
-                throw new KeyNotFoundException("User not found");
+                throw new KeyNotFoundException(ApiResponses.UserNotFound);
 
             return _mapper.Map<User>(user);
         }
@@ -91,13 +88,17 @@ namespace news_scrapper.infrastructure.Data
             if (refreshToken.IsRevoked)
             {
                 //revoke all descendant tokens in case this token has been compromised
-                revokeDescendantRefreshTokens(refreshToken, user, ipAddress, $"Attempted reuse of revoked ancestor token: {token}");
+                revokeDescendantRefreshTokens(refreshToken, user, ipAddress, string.Format(ApiResponses.AttemptedReuseOfRevokedToken, token));
                 _usersUnitOfWork.Users.Update(_mapper.Map<UserDb>(user));
                 _usersUnitOfWork.Commit();
             }
 
             if (!refreshToken.IsActive)
-                throw new Exception("Invalid token");
+            {
+                //_usersUnitOfWork.Users.Update(_mapper.Map<UserDb>(user));
+                //_usersUnitOfWork.Commit();
+                throw new Exception(ApiResponses.InvalidToken);
+            }
 
             var newRefreshToken = rotateRefreshToken(refreshToken, ipAddress);
             user.RefreshTokens.Add(newRefreshToken);
@@ -122,9 +123,9 @@ namespace news_scrapper.infrastructure.Data
             var refreshToken = user.RefreshTokens.Single(n => n.Token == token);
 
             if (!refreshToken.IsActive)
-                throw new Exception("Invalid token");
+                throw new Exception(ApiResponses.InvalidToken);
 
-            revokeRefreshToken(refreshToken, ipAddress, "Revoked without replacement");
+            revokeRefreshToken(refreshToken, ipAddress, ApiResponses.RevokedWithoutReplacement);
             _mapper.Map(user, userFromDb);
 
             _usersUnitOfWork.Users.Update(userFromDb);
@@ -147,7 +148,7 @@ namespace news_scrapper.infrastructure.Data
                 .SingleOrDefault();
 
             if (user is null)
-                throw new Exception("Invalid token");
+                throw new Exception(ApiResponses.InvalidToken);
 
             return user;
         }
@@ -168,7 +169,7 @@ namespace news_scrapper.infrastructure.Data
         private RefreshToken rotateRefreshToken(RefreshToken refreshToken, string ipAddress)
         {
             var newRefreshToken = _jwtUtils.GenerateRefreshToken(ipAddress);
-            revokeRefreshToken(refreshToken, ipAddress, "Replaced by new token", newRefreshToken.Token);
+            revokeRefreshToken(refreshToken, ipAddress, ApiResponses.ReplacedByNewToken, newRefreshToken.Token);
             return newRefreshToken;
         }
 

@@ -128,6 +128,10 @@
     <value>Article with id: '{0}' not found.</value>
     <comment>{0} - article id</comment>
   </data>
+  <data name="AttemptedReuseOfRevokedToken" xml:space="preserve">
+    <value>Attempted reuse of revoked ancestor token: {0}.</value>
+    <comment>{0} - used token</comment>
+  </data>
   <data name="CannotGetMainNewsNodeByXpath" xml:space="preserve">
     <value>Cannot get main news node by xpath: '{0}'.</value>
     <comment>{0} - xpath</comment>
@@ -139,12 +143,27 @@
     <value>Cannot  reach site with given url: '{0}'.</value>
     <comment>{0} - site url</comment>
   </data>
+  <data name="InvalidToken" xml:space="preserve">
+    <value>Invalid token.</value>
+  </data>
+  <data name="ReplacedByNewToken" xml:space="preserve">
+    <value>Replaced by new token.</value>
+  </data>
+  <data name="RevokedWithoutReplacement" xml:space="preserve">
+    <value>Revoked without replacement.</value>
+  </data>
   <data name="ThereAreNoWebsitesToScrap" xml:space="preserve">
     <value>There are no websites to scrap.</value>
   </data>
   <data name="UnexpectedErrorOccured" xml:space="preserve">
     <value>Unexpected error occured: '{0}'.</value>
     <comment>{0} - error message</comment>
+  </data>
+  <data name="UsernameOrPasswordIsIncorrect" xml:space="preserve">
+    <value>Username or password is incorrect.</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>User not found.</value>
   </data>
   <data name="WebsiteDetailsCannotBeNull" xml:space="preserve">
     <value>Website details cannot be null.</value>

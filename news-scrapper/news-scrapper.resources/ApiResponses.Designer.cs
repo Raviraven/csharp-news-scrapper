@@ -88,6 +88,15 @@ namespace news_scrapper.resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Attempted reuse of revoked ancestor token: {0}..
+        /// </summary>
+        public static string AttemptedReuseOfRevokedToken {
+            get {
+                return ResourceManager.GetString("AttemptedReuseOfRevokedToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot get main news node by xpath: &apos;{0}&apos;..
         /// </summary>
         public static string CannotGetMainNewsNodeByXpath {
@@ -115,6 +124,33 @@ namespace news_scrapper.resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid token..
+        /// </summary>
+        public static string InvalidToken {
+            get {
+                return ResourceManager.GetString("InvalidToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replaced by new token..
+        /// </summary>
+        public static string ReplacedByNewToken {
+            get {
+                return ResourceManager.GetString("ReplacedByNewToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Revoked without replacement..
+        /// </summary>
+        public static string RevokedWithoutReplacement {
+            get {
+                return ResourceManager.GetString("RevokedWithoutReplacement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There are no websites to scrap..
         /// </summary>
         public static string ThereAreNoWebsitesToScrap {
@@ -129,6 +165,24 @@ namespace news_scrapper.resources {
         public static string UnexpectedErrorOccured {
             get {
                 return ResourceManager.GetString("UnexpectedErrorOccured", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username or password is incorrect..
+        /// </summary>
+        public static string UsernameOrPasswordIsIncorrect {
+            get {
+                return ResourceManager.GetString("UsernameOrPasswordIsIncorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User not found..
+        /// </summary>
+        public static string UserNotFound {
+            get {
+                return ResourceManager.GetString("UserNotFound", resourceCulture);
             }
         }
         
