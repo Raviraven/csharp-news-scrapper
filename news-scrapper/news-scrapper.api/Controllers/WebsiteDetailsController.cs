@@ -1,25 +1,23 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using news_scrapper.application.Interfaces;
 using news_scrapper.domain.Exceptions;
 using news_scrapper.domain.Models;
 using news_scrapper.domain.ResponseViewModels;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace news_scrapper.api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class WebsiteDetailsController : ControllerBase
     {
-        private readonly ILogger<PageController> _logger;
+        private readonly ILogger<WebsiteDetailsController> _logger;
         private IWebsiteDetailsService _websiteDetailsService { get; set; }
 
-        public WebsiteDetailsController(ILogger<PageController> logger, IWebsiteDetailsService websiteDetailsService)
+        public WebsiteDetailsController(ILogger<WebsiteDetailsController> logger, IWebsiteDetailsService websiteDetailsService)
         {
             _logger = logger;
             _websiteDetailsService = websiteDetailsService;

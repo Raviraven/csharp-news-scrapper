@@ -90,8 +90,6 @@ namespace news_scrapper.api
             var context = scope.ServiceProvider.GetService<PostgreSqlContext>();
             context.MigrateDatabase();
             
-            //createTestUser(context);
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -112,20 +110,6 @@ namespace news_scrapper.api
             {
                 endpoints.MapControllers();
             });
-        }
-
-        private void createTestUser(PostgreSqlContext context)
-        {
-            var testUser = new UserDb
-            {
-                FirstName = "Test",
-                LastName = "User",
-                Username = "test",
-                PasswordHash = BCrypt.Net.BCrypt.HashPassword("q")
-            };
-
-            context.Users.Add(testUser);
-            context.SaveChanges();
         }
     }
 }

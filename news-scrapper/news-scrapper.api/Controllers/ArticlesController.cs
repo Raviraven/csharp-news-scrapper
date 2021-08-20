@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using news_scrapper.api.Attributes;
 using news_scrapper.application.Data;
 using news_scrapper.domain.Models;
 using news_scrapper.resources;
@@ -10,6 +11,7 @@ namespace news_scrapper.api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class ArticlesController : ControllerBase
     {
         private readonly ILogger<ArticlesController> _logger;
