@@ -81,11 +81,19 @@ namespace news_scrapper.api
                 cfg.AddProfile(new UserProfile());
                 cfg.AddProfile(new RefreshTokenProfile());
             }).CreateMapper());
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(options =>
+                options.WithOrigins("http://localhost:4200")
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+            ) ;
+
             using var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
             var context = scope.ServiceProvider.GetService<PostgreSqlContext>();
             context.MigrateDatabase();
@@ -94,7 +102,7 @@ namespace news_scrapper.api
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "news_scrapper.api v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("../swagger/v1/swagger.json", "news_scrapper.api v1"));
             }
 
             app.UseHttpsRedirection();
