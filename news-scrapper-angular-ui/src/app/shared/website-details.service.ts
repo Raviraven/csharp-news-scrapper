@@ -13,7 +13,7 @@ export class WebsiteDetailsService {
 
   
   getAllWebsiteDetails(){
-    return this.http.get<Array<WebsiteDetails>>(this.baseUrl);
+    return this.http.get<WebsiteDetails[]>(this.baseUrl);
   }
 
   addWebsiteDetails(model: WebsiteDetails){

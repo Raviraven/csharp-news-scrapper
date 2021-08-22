@@ -1,0 +1,49 @@
+<h3>Website details</h3>
+
+<div class="row">
+  <div class="errors" *ngIf="errors.length > 0">
+    <ul *ngFor="let error of errors">
+      <li class="error">{{ error }}</li>
+    </ul>
+  </div>
+
+  <table
+    class="table table-striped table-bordered"
+    *ngIf="websitesDetails.length > 0"
+  >
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Url</th>
+        <th scope="col">Xpath to main node</th>
+        <th scope="col">News tag</th>
+        <th scope="col">Mews class</th>
+        <th scope="col">Title tag</th>
+        <th scope="col">Title class</th>
+        <th scope="col">Desc tag</th>
+        <th scope="col">Desc class</th>
+        <th scope="col">Img class</th>
+        <th scope="col">Action</th>
+        <!-- <th scope="col">category</th> -->
+      </tr>
+    </thead>
+    <tbody *ngFor="let item of websitesDetails">
+      <tr>
+        <td scope="row">{{ item.id }}</td>
+        <td>{{ item.url }}</td>
+        <td>{{ item.mainNodeXPathToNewsContainer }}</td>
+        <td>{{ item.newsNodeTag }}</td>
+        <td>{{ item.newsNodeClass }}</td>
+        <td>{{ item.titleNodeTag }}</td>
+        <td>{{ item.titleNodeClass }}</td>
+        <td>{{ item.descriptionNodeTag }}</td>
+        <td>{{ item.descriptionNodeClass }}</td>
+        <td>{{ item.imgNodeClass }}</td>
+        <td>
+          <button class="btn btn-danger" (click)="onRemove(item.id)">x</button>
+        </td>
+        <!-- <td>{{ item.category }}</td> -->
+      </tr>
+    </tbody>
+  </table>
+</div>
