@@ -10,13 +10,17 @@ import { AuthInterceptor } from './interceptors/auth-interceptor';
 
 import { AddWebsiteDetailsComponent } from './website-details/add-website-details/add-website-details.component';
 import { WebsiteDetailsListComponent } from './website-details/website-details-list/website-details-list.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     AddWebsiteDetailsComponent,
-    WebsiteDetailsListComponent
+    WebsiteDetailsListComponent,
+    SidenavComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
