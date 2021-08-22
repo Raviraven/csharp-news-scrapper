@@ -8,10 +8,15 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AuthInterceptor } from './interceptors/auth-interceptor';
 
+import { AddWebsiteDetailsComponent } from './website-details/add-website-details/add-website-details.component';
+import { WebsiteDetailsListComponent } from './website-details/website-details-list/website-details-list.component';
+
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    AddWebsiteDetailsComponent,
+    WebsiteDetailsListComponent
   ],
   imports: [
     BrowserModule,

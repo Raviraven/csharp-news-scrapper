@@ -1,0 +1,171 @@
+<h3>Add new website details</h3>
+
+<div class="errors" *ngIf="errors.length > 0">
+  <ul *ngFor="let error of errors">
+      <li class="error">{{ error }}</li>
+  </ul>
+</div>
+
+<div class="row">
+  <form #currentForm="ngForm" (submit)="onSubmit()">
+    <div class="form-group">
+      <label for="url-id">Website Url</label>
+      <input
+        id="url-id"
+        type="text"
+        class="form-control form-control-lg"
+        placeholder="Website Url"
+        name="url"
+        #url="ngModel"
+        [(ngModel)]="model.url"
+        required
+        minlength="1"
+        [class.invalid]="url.invalid && url.touched"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="main-node-xpath-id">XPath to element containing news</label>
+      <input
+        id="main-node-xpath-id"
+        type="text"
+        class="form-control form-control-lg"
+        placeholder="Xpath"
+        name="mainNodeXpath"
+        #mainNodeXpath="ngModel"
+        [(ngModel)]="model.mainNodeXPathToNewsContainer"
+        required
+        minlength="1"
+        [class.invalid]="mainNodeXpath.invalid && mainNodeXpath.touched"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="news-node-tag-id">Tag for the news node</label>
+      <input
+        id="news-node-tag-id"
+        type="text"
+        class="form-control form-control-lg"
+        placeholder="News node tag"
+        name="newsNodeTag"
+        #newsNodeTag="ngModel"
+        [(ngModel)]="model.newsNodeTag"
+        required
+        minlength="1"
+        [class.invalid]="newsNodeTag.invalid && newsNodeTag.touched"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="news-node-class-id">Class for the news node</label>
+      <input
+        id="news-node-class-id"
+        type="text"
+        class="form-control form-control-lg"
+        placeholder="News node class"
+        name="newsNodeClass"
+        #newsNodeClass="ngModel"
+        [(ngModel)]="model.newsNodeClass"
+        required
+        minlength="1"
+        [class.invalid]="newsNodeClass.invalid && newsNodeClass.touched"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="title-node-tag-id">Tag for the title node</label>
+      <input
+        id="title-node-tag-id"
+        type="text"
+        class="form-control form-control-lg"
+        placeholder="Title node tag"
+        name="titleNodeTag"
+        #titleNodeTag="ngModel"
+        [(ngModel)]="model.titleNodeTag"
+        required
+        minlength="1"
+        [class.invalid]="titleNodeTag.invalid && titleNodeTag.touched"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="title-node-class-id">Class for the title node</label>
+      <input
+        id="title-node-class-id"
+        type="text"
+        class="form-control form-control-lg"
+        placeholder="Title node class"
+        name="titleNodeClass"
+        #titleNodeClass="ngModel"
+        [(ngModel)]="model.titleNodeClass"
+        required
+        minlength="1"
+        [class.invalid]="titleNodeClass.invalid && titleNodeClass.touched"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="description-node-tag-id">Tag for the description node</label>
+      <input
+        id="description-node-tag-id"
+        type="text"
+        class="form-control form-control-lg"
+        placeholder="Description node tag"
+        name="descriptionNodeTag"
+        #descriptionNodeTag="ngModel"
+        [(ngModel)]="model.descriptionNodeTag"
+        required
+        minlength="1"
+        [class.invalid]="
+          descriptionNodeTag.invalid && descriptionNodeTag.touched
+        "
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="description-node-class-id"
+        >Class for the description node</label
+      >
+      <input
+        id="description-node-class-id"
+        type="text"
+        class="form-control form-control-lg"
+        placeholder="Description node class"
+        name="descriptionNodeClass"
+        #descriptionNodeClass="ngModel"
+        [(ngModel)]="model.descriptionNodeClass"
+        required
+        minlength="1"
+        [class.invalid]="
+          descriptionNodeClass.invalid && descriptionNodeClass.touched
+        "
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="img-node-class-id">Class for the image node</label>
+      <input
+        id="img-node-class-id"
+        type="text"
+        class="form-control form-control-lg"
+        placeholder="Class for the img node"
+        name="imgNodeClass"
+        #imgNodeClass="ngModel"
+        [(ngModel)]="model.imgNodeClass"
+        required
+        minlength="1"
+        [class.invalid]="imgNodeClass.invalid && imgNodeClass.touched"
+      />
+    </div>
+
+    <div class="form-group">
+      <button
+        class="btn btn-info btn-block btn-block"
+        type="submit"
+        [disabled]="currentForm.invalid"
+      >
+        Add new website details
+      </button>
+    </div>
+  </form>
+</div>
