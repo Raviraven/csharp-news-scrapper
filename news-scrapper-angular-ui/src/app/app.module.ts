@@ -12,6 +12,7 @@ import { AddWebsiteDetailsComponent } from './website-details/add-website-detail
 import { WebsiteDetailsListComponent } from './website-details/website-details-list/website-details-list.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { EditWebsiteDetailsComponent } from './website-details/edit-website-details/edit-website-details.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     AddWebsiteDetailsComponent,
     WebsiteDetailsListComponent,
     SidenavComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    EditWebsiteDetailsComponent
   ],
   imports: [
     BrowserModule,

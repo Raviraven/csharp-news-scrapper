@@ -14,6 +14,7 @@ export class AddWebsiteDetailsComponent implements OnInit {
 
   model: WebsiteDetails = new WebsiteDetails();
   errors: string[] = [];
+  id: number = 0;
 
   onSubmit() {
     this.errors = [];
