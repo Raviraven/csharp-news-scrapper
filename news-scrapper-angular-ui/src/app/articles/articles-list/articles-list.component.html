@@ -1,0 +1,47 @@
+<h3>List of scrapped articles</h3>
+
+<div class="row">
+  <div class="errors" *ngIf="errors.length > 0">
+    <ul *ngFor="let error of errors">
+      <li class="error">{{ error }}</li>
+    </ul>
+  </div>
+</div>
+
+<div class="row" *ngIf="dataLoaded">
+  <button class="btn btn-primary btn-lg btn-block" (click)="scrapArticles()">
+    Scrap
+  </button>
+
+  <table
+    class="table table-stripped table-bordered"
+    *ngIf="articles.length > 0"
+  >
+    <thead>
+      <tr>
+        <!-- <th>Id</th> -->
+        <!-- <th>DateScrapped</th> -->
+        <th>Title</th>
+        <!-- <th>Url</th> -->
+        <th>Description</th>
+        <th>Image</th>
+        <!-- <th>WebsiteDetailsId</th> -->
+      </tr>
+    </thead>
+    <tbody *ngFor="let item of articles">
+      <tr>
+        <!-- <td>{{ item.id }}</td> -->
+        <!-- <td>{{ item.dateScrapped }}</td> -->
+        <td>
+          <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{
+            item.title
+          }}</a>
+        </td>
+        <!-- <td>{{ item.url }}</td> -->
+        <td>{{ item.description }}</td>
+        <td><img alt="zdjęcie artykułu - {{item.title}}" src="{{ item.imageUrl }}" /></td>
+        <!-- <td>{{ item.websiteDetailsId }}</td> -->
+      </tr>
+    </tbody>
+  </table>
+</div>
