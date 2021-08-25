@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using news_scrapper.api.Attributes;
 using news_scrapper.application.Interfaces;
 using news_scrapper.domain.Exceptions;
 using news_scrapper.domain.Models;
