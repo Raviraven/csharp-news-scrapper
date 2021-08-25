@@ -97,6 +97,43 @@ namespace news_scrapper.infrastructure.unit_tests.Tests.HtmlScrapperTests
         }
 
         [Fact]
+        public void should_return_articles_with_short_datetime()
+        {
+            string newsTitleEncoded = "just&#8211;the&#8211;test news title";
+            string newsTitle = "just–the–test news title";
+            string url = "https://test.test/";
+            string newsUrl = "/news-url";
+            string descriptionEncoded = "test &lt;news&gt; description";
+            string description = "test <news> description";
+            string imageUrl = "/image urll";
+
+            string mainNodeId = "test-news-id";
+            WebsiteDetails details = new WebsiteDetailsBuilder().WithUrl(url).WithMainNodeId(mainNodeId).Build();
+            string rawHtml = generateRawHtml(details, mainNodeId, newsTitleEncoded, newsUrl, descriptionEncoded, imageUrl);
+            DateTime mockedNow = new(2980, 10, 10, 20, 32, 15);
+
+            List<Article> expectedArticles = new()
+            {
+                new()
+                {
+                    Title = $"{newsTitle}",
+                    Url = $"{url[0..^1]}{newsUrl}",
+                    Description = $"{description}",
+                    ImageUrl = $"{url[0..^1]}{imageUrl}",
+                    DateScrapped = new DateTime(2980, 10, 10, 20, 32, 00),
+                    WebsiteDetailsId = details.Id
+                }
+            };
+
+            _dateTimeProvider.Setup(n => n.Now).Returns(mockedNow);
+
+            (var articles, var errors) = _sut.Scrap(details, rawHtml);
+
+            errors.Should().BeEmpty();
+            articles.Should().BeEquivalentTo(expectedArticles);
+        }
+
+        [Fact]
         public void should_return_articles_with_removed_tabs_new_lines_whitespaces_from_title_and_description()
         {
             string newsTitle = "\n\n\t\t \t \t \njust the test news title\t \n \n";

@@ -45,7 +45,7 @@ namespace news_scrapper.infrastructure
                         Url = getDirectUrl(directUrlToNews, website.Url),
                         ImageUrl = getDirectUrl(image, website.Url),
                         Description = description,
-                        DateScrapped = _dateTimeProvider.Now,
+                        DateScrapped = getShortDateTime(_dateTimeProvider.Now),
                         WebsiteDetailsId = website.Id
                     });
                 }
@@ -56,6 +56,11 @@ namespace news_scrapper.infrastructure
             }
 
             return (articles, errors);
+        }
+
+        private DateTime getShortDateTime(DateTime now)
+        {
+            return new DateTime(now.Year, now.Month, now.Day, now.Hour, now.Minute, 00);
         }
 
         private string getTitle(HtmlNode titleNode)
