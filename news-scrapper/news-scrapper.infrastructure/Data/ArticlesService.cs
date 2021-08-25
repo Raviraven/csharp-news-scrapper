@@ -28,10 +28,10 @@ namespace news_scrapper.infrastructure.Data
         public List<Article> Get()
         {
             var orderedArticles = _articlesUnitOfWork.Articles.Get(
-                    orderBy: n => n.OrderByDescending(n => n.DateScrapped)
+                    orderBy: n => n.OrderByDescending(n => n.DateScrapped).ThenBy(n=>n.Id)
                 );
 
-            if (orderedArticles is null || orderedArticles.Count() == 0)
+            if (orderedArticles is null || !orderedArticles.Any())
                 return null;
 
             var articlesFromDb = orderedArticles.ToList();
@@ -41,10 +41,10 @@ namespace news_scrapper.infrastructure.Data
         public List<Article> Get(int articlesPerPage, int pageNo)
         {
             var orderedArticles = _articlesUnitOfWork.Articles.Get(
-                orderBy: n => n.OrderByDescending(n => n.DateScrapped)
+                orderBy: n => n.OrderByDescending(n => n.DateScrapped).ThenBy(n => n.Id)
                 );
 
-            if (orderedArticles is null || orderedArticles.Count() == 0)
+            if (orderedArticles is null || !orderedArticles.Any())
                 return null;
 
             int allPages = getAllAmountOfPages(articlesPerPage, orderedArticles);
@@ -85,10 +85,10 @@ namespace news_scrapper.infrastructure.Data
         public List<Article> GetNew()
         {
             var orderedArticles = _articlesUnitOfWork.Articles.Get(
-                    orderBy: n=>n.OrderByDescending(n=>n.DateScrapped)
+                    orderBy: n=>n.OrderByDescending(n=>n.DateScrapped).ThenBy(n => n.Id)
                 );
 
-            if (orderedArticles is null || orderedArticles.Count() == 0)
+            if (orderedArticles is null || !orderedArticles.Any())
                 return null;
 
             var newestDate = orderedArticles.First().DateScrapped;
