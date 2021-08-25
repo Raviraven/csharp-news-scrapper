@@ -1,6 +1,9 @@
-<nav class="navigation">
-  <a [routerLink]="['/']" routerLinkActive="router-link-active">Home</a>
+<nav class="navigation" *ngIf="usersService.token.length <= 0">
   <a [routerLink]="['/login']" routerLinkActive="router-link-active">Login</a>
+</nav>
+
+<nav class="navigation" *ngIf="usersService.token.length > 0">
+  <a [routerLink]="['/']" routerLinkActive="router-link-active">Home</a>
   <a [routerLink]="['/website-details']" routerLinkActive="router-link-active"
     >Website details list</a
   >
