@@ -50,12 +50,14 @@ export class ArticlesListComponent implements OnInit {
             this.errors = res;
           } else {
             console.log(res);
-            this.getAllArticles();
           }
         },
         (err) => {
           this.errors.push(err.error.message);
         }
-      );
+      )
+      .finally(() => {
+        this.getAllArticles();
+      });
   }
 }
