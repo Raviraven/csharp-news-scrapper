@@ -9,39 +9,22 @@
 </div>
 
 <div class="row" *ngIf="dataLoaded">
-  <button class="btn btn-primary btn-lg btn-block" (click)="scrapArticles()">
+  <button class="btn btn-secondary" (click)="scrapArticles()">
     Scrap
   </button>
-
-  <table
-    class="table table-stripped table-bordered"
-    *ngIf="articles.length > 0"
-  >
-    <thead>
-      <tr>
-        <!-- <th>Id</th> -->
-        <!-- <th>DateScrapped</th> -->
-        <th>Title</th>
-        <!-- <th>Url</th> -->
-        <th>Description</th>
-        <th>Image</th>
-        <!-- <th>WebsiteDetailsId</th> -->
-      </tr>
-    </thead>
-    <tbody *ngFor="let item of articles">
-      <tr>
-        <!-- <td>{{ item.id }}</td> -->
-        <!-- <td>{{ item.dateScrapped }}</td> -->
-        <td>
-          <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{
-            item.title
-          }}</a>
-        </td>
-        <!-- <td>{{ item.url }}</td> -->
-        <td>{{ item.description }}</td>
-        <td><img alt="zdjęcie artykułu - {{item.title}}" src="{{ item.imageUrl }}" /></td>
-        <!-- <td>{{ item.websiteDetailsId }}</td> -->
-      </tr>
-    </tbody>
-  </table>
+</div>
+<div class="row articles__container" *ngIf="articles.length > 0">
+  <article class="article" *ngFor="let item of articles">
+    <p class="article__header">
+      <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{
+        item.title
+      }}</a>
+    </p>
+    <p class="article__description">{{ item.description }}</p>
+    <img
+      alt="zdjęcie artykułu - {{ item.title }}"
+      class="article__image"
+      src="{{ item.imageUrl }}"
+    />
+  </article>
 </div>

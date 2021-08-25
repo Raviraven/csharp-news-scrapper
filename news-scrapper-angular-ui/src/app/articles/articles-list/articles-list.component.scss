@@ -1,0 +1,44 @@
+@import "../../_variables.scss";
+
+.article {
+  background-color: #e4e4e4;
+  border-radius: $border_radius;
+
+  width: 100%;
+
+  padding: 0.5rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  &__description {
+  }
+
+  &__header {
+    text-align: center;
+    font-weight: bold;
+  }
+
+  &__image {
+    width: 100%;
+    object-fit: cover;
+    border-radius: $border_radius;
+  }
+}
+
+.articles__container {
+  padding-top: 1rem;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.5rem 0.5rem;
+
+  @media screen and (max-width: $smaller_desktop) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media screen and (max-width: $tablet) {
+    grid-template-columns: 1fr;
+  }
+}
