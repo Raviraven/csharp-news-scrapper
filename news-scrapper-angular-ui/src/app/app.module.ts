@@ -14,6 +14,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { EditWebsiteDetailsComponent } from './website-details/edit-website-details/edit-website-details.component';
 import { ArticlesListComponent } from './articles/articles-list/articles-list.component';
+import { AuthErrorsComponent } from './auth-errors/auth-errors.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ArticlesListComponent } from './articles/articles-list/articles-list.co
     PageNotFoundComponent,
     EditWebsiteDetailsComponent,
     ArticlesListComponent,
+    AuthErrorsComponent,
   ],
   imports: [
     BrowserModule,

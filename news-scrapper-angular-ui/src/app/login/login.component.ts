@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthErrorHandlerService } from '../shared/auth-error-handler.service';
 import { UsersService } from '../shared/users.service';
 
 @Component({
@@ -9,7 +10,11 @@ import { UsersService } from '../shared/users.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  constructor(public service: UsersService, private router: Router) {}
+  constructor(
+    public service: UsersService,
+    private router: Router,
+    private authErrorHandlerService: AuthErrorHandlerService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -24,6 +29,7 @@ export class LoginComponent implements OnInit {
     this.service.postLoginDetails().subscribe(
       (res) => {
         this.service.token = res.jwtToken;
+        this.authErrorHandlerService.ClearErrors();
         this.router.navigate(['']);
       },
       (err) => {
