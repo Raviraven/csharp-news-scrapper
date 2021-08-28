@@ -1,0 +1,29 @@
+<h3>New articles (from last scrap)</h3>
+
+<div class="row">
+  <div class="errors" *ngIf="errors.length > 0">
+    <ul *ngFor="let error of errors">
+      <li class="error">{{ error }}</li>
+    </ul>
+  </div>
+</div>
+
+<div class="row new-articles__container" *ngIf="articles.length > 0">
+  <article class="new-article" *ngFor="let item of articles">
+    <div class="new-article__texts">
+      <p class="new-article__texts--header">
+        <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{
+          item.title
+        }}</a>
+      </p>
+      <p class="new-article__texts--description">{{ item.description }}</p>
+    </div>
+    <div class="new-article__image">
+      <img
+        alt="zdjęcie artykułu - {{ item.title }}"
+        class="new-article__image--thumbnail"
+        src="{{ item.imageUrl }}"
+      />
+    </div>
+  </article>
+</div>

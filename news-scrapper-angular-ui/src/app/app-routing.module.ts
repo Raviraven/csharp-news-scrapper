@@ -1,6 +1,7 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ArticlesListComponent } from './articles/articles-list/articles-list.component';
+import { ArticlesNewComponent } from './articles/articles-new/articles-new.component';
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AddWebsiteDetailsComponent } from './website-details/add-website-details/add-website-details.component';
@@ -10,16 +11,17 @@ import { WebsiteDetailsListComponent } from './website-details/website-details-l
 const routes: Routes = [
   // { path: '', redirectTo: '/articles', pathMatch: 'full' },
   { path: '', component: ArticlesListComponent },
-  { path: 'login', component: LoginComponent },  
-  { path: 'website-details', component: WebsiteDetailsListComponent,  },
+  { path: 'login', component: LoginComponent },
+  { path: 'website-details', component: WebsiteDetailsListComponent },
   { path: 'website-details/add', component: AddWebsiteDetailsComponent },
   { path: 'website-details/edit/:id', component: EditWebsiteDetailsComponent },
   { path: 'articles', component: ArticlesListComponent },
-  { path: '**', component: PageNotFoundComponent }
+  { path: 'articles-new', component: ArticlesNewComponent },
+  { path: '**', component: PageNotFoundComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

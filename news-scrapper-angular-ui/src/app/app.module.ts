@@ -15,6 +15,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { EditWebsiteDetailsComponent } from './website-details/edit-website-details/edit-website-details.component';
 import { ArticlesListComponent } from './articles/articles-list/articles-list.component';
 import { AuthErrorsComponent } from './auth-errors/auth-errors.component';
+import { ArticlesNewComponent } from './articles/articles-new/articles-new.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { AuthErrorsComponent } from './auth-errors/auth-errors.component';
     EditWebsiteDetailsComponent,
     ArticlesListComponent,
     AuthErrorsComponent,
+    ArticlesNewComponent,
   ],
   imports: [
     BrowserModule,
