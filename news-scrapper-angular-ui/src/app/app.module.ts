@@ -16,6 +16,7 @@ import { EditWebsiteDetailsComponent } from './website-details/edit-website-deta
 import { ArticlesListComponent } from './articles/articles-list/articles-list.component';
 import { AuthErrorsComponent } from './auth-errors/auth-errors.component';
 import { ArticlesNewComponent } from './articles/articles-new/articles-new.component';
+import { JwPaginationComponent } from './jw-pagination/jw-pagination.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ArticlesNewComponent } from './articles/articles-new/articles-new.compo
     ArticlesListComponent,
     AuthErrorsComponent,
     ArticlesNewComponent,
+    JwPaginationComponent,
   ],
   imports: [
     BrowserModule,
