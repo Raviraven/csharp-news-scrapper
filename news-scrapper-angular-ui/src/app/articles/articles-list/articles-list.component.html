@@ -14,7 +14,7 @@
   </button>
 </div>
 <div class="row articles__container" *ngIf="articles.length > 0">
-  <article class="article" *ngFor="let item of articles">
+  <article class="article" *ngFor="let item of articlesOnPage">
     <p class="article__header">
       <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{
         item.title
@@ -27,4 +27,6 @@
       src="{{ item.imageUrl }}"
     />
   </article>
+
+  <app-jw-pagination [items]="articles" (changePage)="onChangePage($event)"></app-jw-pagination>
 </div>

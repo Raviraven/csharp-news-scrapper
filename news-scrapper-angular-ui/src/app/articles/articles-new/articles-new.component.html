@@ -9,7 +9,7 @@
 </div>
 
 <div class="row new-articles__container" *ngIf="articles.length > 0">
-  <article class="new-article" *ngFor="let item of articles">
+  <article class="new-article" *ngFor="let item of articlesPerPage">
     <div class="new-article__texts">
       <p class="new-article__texts--header">
         <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{
@@ -27,3 +27,5 @@
     </div>
   </article>
 </div>
+
+<app-jw-pagination [items]="articles" (changePage)="onChangePage($event)" [pageSize]="20"></app-jw-pagination>

@@ -16,8 +16,14 @@ export class ArticlesListComponent implements OnInit {
   }
 
   articles: Article[] = [];
+  articlesOnPage: Article[] = [];
+
   dataLoaded: boolean = false;
   errors: string[] = [];
+
+  onChangePage(articlesOnPage: Article[]) {
+    this.articlesOnPage = articlesOnPage;
+  }
 
   getAllArticles() {
     this.articles = [];

@@ -16,7 +16,12 @@ export class ArticlesNewComponent implements OnInit {
   }
 
   articles: Article[] = [];
+  articlesPerPage: Article[] = [];
   errors: string[] = [];
+
+  onChangePage(articlesPerPage: Article[]) {
+    this.articlesPerPage = articlesPerPage;
+  }
 
   getNewArticles() {
     this.articles = [];
