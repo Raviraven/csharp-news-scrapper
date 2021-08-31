@@ -28,4 +28,9 @@
   </article>
 </div>
 
-<app-jw-pagination [items]="articles" (changePage)="onChangePage($event)" [pageSize]="20"></app-jw-pagination>
+<app-jw-pagination
+  class="jw-pagination"
+  [items]="articles"
+  (changePage)="onChangePage($event)"
+  [pageSize]="20"
+></app-jw-pagination>

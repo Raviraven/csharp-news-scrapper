@@ -9,9 +9,7 @@
 </div>
 
 <div class="row" *ngIf="dataLoaded">
-  <button class="btn btn-secondary" (click)="scrapArticles()">
-    Scrap
-  </button>
+  <button class="btn btn-secondary" (click)="scrapArticles()">Scrap</button>
 </div>
 <div class="row articles__container" *ngIf="articles.length > 0">
   <article class="article" *ngFor="let item of articlesOnPage">
@@ -27,6 +25,10 @@
       src="{{ item.imageUrl }}"
     />
   </article>
-
-  <app-jw-pagination [items]="articles" (changePage)="onChangePage($event)"></app-jw-pagination>
 </div>
+
+<app-jw-pagination
+  class="jw-pagination"
+  [items]="articles"
+  (changePage)="onChangePage($event)"
+></app-jw-pagination>
