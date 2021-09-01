@@ -1,3 +1,10 @@
+@import "~hamburgers/_sass/hamburgers/hamburgers.scss";
+@import "../_variables.scss";
+
+.header {
+  border-bottom: 1px solid #e2e8f0;
+}
+
 .main-content {
   padding: 1rem;
   grid-column: 2;
@@ -9,6 +16,97 @@
 
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  padding: 1rem 0.5rem 0 0.5rem;
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem 0.5rem 0 0.5rem;
+    list-style: none;
+    z-index: 1000;
+
+    &.active {
+      left: 0;
+    }
+
+    &--hidden {
+      @media screen and (max-width: $tablet) {
+      }
+    }
+
+    &--item {
+      @media screen and (max-width: $tablet) {
+        font-size: 2rem;
+        padding: 0.125rem;
+      }
+    }
+
+    &--link {
+      text-decoration: none;
+    }
+
+    &--link:hover {
+      color: #482ff7;
+    }
+
+    @media screen and (max-width: $tablet) {
+      position: fixed;
+      left: -100%;
+      top: 3.75rem;
+      background-color: #fff;
+      width: 100vw;
+      transition: 0.3s;
+      box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+      padding: 1rem 0.5rem;
+    }
+  }
+
+  &__hamburger {
+    display: none;
+    padding: 15px 15px;
+    background-color: transparent;
+    border: 0;
+    margin: 0;
+    overflow: visible;
+
+    .hamburger-container {
+      .bar {
+        display: block;
+        width: 25px;
+        height: 3px;
+        margin: 5px auto;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+        background-color: #101010;
+      }
+
+      .text {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+
+      @media screen and (max-width: $tablet) {
+        &.active {
+          .bar:nth-child(2) {
+            opacity: 0;
+          }
+
+          .bar:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+          }
+
+          .bar:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+          }
+        }
+      }
+    }
+
+    @media screen and (max-width: $tablet) {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
 }
