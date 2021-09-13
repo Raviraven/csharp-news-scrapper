@@ -1,4 +1,10 @@
+@import "_variables.scss";
+
 .wrapper {
-    display: grid;
-    grid-template-columns: 12rem 1fr;
+  display: grid;
+  grid-template-columns: 12rem 1fr;
+
+  @media screen and (max-width: $tablet) {
+    display: block;
+  }
 }

@@ -1,23 +1,59 @@
-<nav class="navigation" *ngIf="usersService.token.length <= 0">
-  <a [routerLink]="['/login']" routerLinkActive="router-link-active">Login</a>
-</nav>
+<header class="header">
+  <nav class="navigation">
+    <button
+      class="navigation__hamburger"
+      type="button"
+      appHamburgerToggle
+      (click)="toggleNavigation()"
+    >
+      <span class="hamburger-container" [class.active]="NavigationActive">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="text">Menu</span>
+      </span>
+    </button>
 
-<nav class="navigation" *ngIf="usersService.token.length > 0">
-  <a [routerLink]="['/']" routerLinkActive="router-link-active">Home</a>
-  <a [routerLink]="['/website-details']" routerLinkActive="router-link-active"
-    >Website details list</a
-  >
-  <a
-    [routerLink]="['/website-details/add']"
-    routerLinkActive="router-link-active"
-    >Add website details</a
-  >
-  <a [routerLink]="['/articles-new/']" routerLinkActive="router-link-active"
-    >Get new articles</a
-  >
-</nav>
+    <ul
+      class="navigation__list"
+      [class.active]="NavigationActive"
+      *ngIf="usersService.token.length <= 0"
+    >
+      <li class="navigation__list--item">
+        <a [routerLink]="['/login']" class="navigation__list--link">Login</a>
+      </li>
+    </ul>
 
-<div class="main-content">
+    <ul
+      class="navigation__list"
+      [class.active]="NavigationActive"
+      *ngIf="usersService.token.length > 0"
+    >
+      <li class="navigation__list--item">
+        <a [routerLink]="['/']" class="navigation__list--link">Home</a>
+      </li>
+      <li class="navigation__list--item">
+        <a [routerLink]="['/website-details']" class="navigation__list--link"
+          >Website details list</a
+        >
+      </li>
+      <li class="navigation__list--item">
+        <a
+          [routerLink]="['/website-details/add']"
+          class="navigation__list--link"
+          >Add website details</a
+        >
+      </li>
+      <li class="navigation__list--item">
+        <a [routerLink]="['/articles-new/']" class="navigation__list--link"
+          >Get new articles</a
+        >
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<main class="main-content">
   <app-auth-errors></app-auth-errors>
   <router-outlet></router-outlet>
-</div>
+</main>
