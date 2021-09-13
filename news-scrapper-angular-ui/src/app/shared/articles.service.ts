@@ -1,29 +1,29 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Article } from './article.model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ArticlesService {
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) { }
+  readonly baseUrl = environment.apiUrl + 'articles/';
 
-  readonly baseUrl ='http://localhost/news-scrapper.api/articles/';
-
-  getAllArticles(){
+  getAllArticles() {
     return this.http.get<Article[]>(this.baseUrl);
   }
 
-  getArticleById(id: number){
+  getArticleById(id: number) {
     return this.http.get<Article>(this.baseUrl + id);
   }
 
-  getNewArticles(){
+  getNewArticles() {
     return this.http.get<Article[]>(this.baseUrl + 'new');
   }
 
-  scrapArticles(){
+  scrapArticles() {
     return this.http.get<string[]>(this.baseUrl + 'scrap');
   }
 }

@@ -89,16 +89,20 @@ namespace news_scrapper.api
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseCors(options =>
-                options.WithOrigins("http://localhost:4200")
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-            ) ;
+                options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()
+                //options.WithOrigins("http://localhost:4200", 
+                //"http://localhost:8080",
+                //"http://angular:80",
+                //"http://192.168.0.113:8080")
+                //.AllowAnyMethod()
+                //.AllowAnyHeader()
+            );
 
             using var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
             var context = scope.ServiceProvider.GetService<PostgreSqlContext>();
             context.MigrateDatabase();
             
-            if (env.IsDevelopment())
+            if (env.IsDevelopment() || env.IsEnvironment("Development-Docker"))
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();

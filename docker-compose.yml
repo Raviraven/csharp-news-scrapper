@@ -1,0 +1,47 @@
+version: "3.9"
+services:
+  db:
+    image: "postgres:13.4-alpine3.14"
+    container_name: news-scrapper-db
+    volumes:
+      - postgres-data:/postgres-data/
+      - ./postgres-data:/mapped-locally/
+    ports:
+      - 5400:5432
+    environment:
+      - POSTGRES_DB=news-scrapper-database
+      - POSTGRES_USER=news-scrapper-user
+      - POSTGRES_PASSWORD=test-password
+    networks:
+      - backend-network
+
+  net-core:
+    build: ./news-scrapper
+    container_name: news-scrapper-backend
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development-Docker
+      - ConnectionStrings__DefaultConnection=Server=db;Port=5432;Database=news-scrapper-database;User Id=news-scrapper-user;Password=test-password;
+    depends_on:
+      - db
+    ports:
+      - 8080:80
+    networks:
+      - backend-network
+      - frontend-network
+
+  angular:
+    build: ./news-scrapper-angular-ui
+    container_name: news-scrapper-ui
+    depends_on:
+      - net-core
+    ports:
+      - 4205:80
+    networks:
+      - frontend-network
+
+volumes:
+  postgres-data:
+
+networks:
+  backend-network:
+  frontend-network:
