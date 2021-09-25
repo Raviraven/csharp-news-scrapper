@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { WebsiteDetails } from 'src/app/shared/website-details.model';
 import { WebsiteDetailsService } from 'src/app/shared/website-details.service';
 
@@ -8,7 +9,7 @@ import { WebsiteDetailsService } from 'src/app/shared/website-details.service';
   styleUrls: ['./add-website-details.component.scss'],
 })
 export class AddWebsiteDetailsComponent implements OnInit {
-  constructor(private service: WebsiteDetailsService) {}
+  constructor(private service: WebsiteDetailsService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -20,7 +21,9 @@ export class AddWebsiteDetailsComponent implements OnInit {
     this.errors = [];
 
     this.service.addWebsiteDetails(this.model).subscribe(
-      (res) => {},
+      (res) => {
+        this.router.navigate(['/website-details']);
+      },
       (err) => {
         this.errors.push(err.error.message);
       }
