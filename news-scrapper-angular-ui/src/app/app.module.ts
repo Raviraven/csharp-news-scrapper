@@ -18,6 +18,7 @@ import { AuthErrorsComponent } from './auth-errors/auth-errors.component';
 import { ArticlesNewComponent } from './articles/articles-new/articles-new.component';
 import { JwPaginationComponent } from './jw-pagination/jw-pagination.component';
 import { HamburgerToggleDirective } from './directives/hamburger-toggle.directive';
+import { UserManagementComponent } from './user-management/user-management.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { HamburgerToggleDirective } from './directives/hamburger-toggle.directiv
     AuthErrorsComponent,
     ArticlesNewComponent,
     JwPaginationComponent,
-    HamburgerToggleDirective
+    HamburgerToggleDirective,
+    UserManagementComponent
   ],
   imports: [
     BrowserModule,

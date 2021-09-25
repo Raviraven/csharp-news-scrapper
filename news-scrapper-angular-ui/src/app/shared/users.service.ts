@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AuthenticateRequest } from './authenticate-request.model';
 import { AuthenticateResponse } from './authenticate-response.model';
 import { environment } from 'src/environments/environment';
+import { User } from './user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,8 @@ export class UsersService {
 
   formData: AuthenticateRequest = new AuthenticateRequest();
 
-  token: string = '';
+  Token: string = '';
+  Id: number = 0;
 
   postLoginDetails() {
     return this.http.post<AuthenticateResponse>(
@@ -23,7 +25,17 @@ export class UsersService {
     );
   }
 
+  GetCurrentUserDetails() {
+    return this.http.get<User>(this.baseUrl + this.Id);
+  }
+
   getUsers() {
     return this.http.get(this.baseUrl);
+  }
+
+  RevokeToken(token: string) {
+    return this.http.post(this.baseUrl + 'revoke-token', {
+      token: token,
+    });
   }
 }

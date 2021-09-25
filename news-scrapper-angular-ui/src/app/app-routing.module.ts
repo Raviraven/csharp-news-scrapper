@@ -4,6 +4,7 @@ import { ArticlesListComponent } from './articles/articles-list/articles-list.co
 import { ArticlesNewComponent } from './articles/articles-new/articles-new.component';
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { UserManagementComponent } from './user-management/user-management.component';
 import { AddWebsiteDetailsComponent } from './website-details/add-website-details/add-website-details.component';
 import { EditWebsiteDetailsComponent } from './website-details/edit-website-details/edit-website-details.component';
 import { WebsiteDetailsListComponent } from './website-details/website-details-list/website-details-list.component';
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'website-details/edit/:id', component: EditWebsiteDetailsComponent },
   { path: 'articles', component: ArticlesListComponent },
   { path: 'articles-new', component: ArticlesNewComponent },
+  { path: 'account', component: UserManagementComponent },
   { path: '**', component: PageNotFoundComponent },
 ];
 

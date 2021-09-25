@@ -1,0 +1,32 @@
+header {
+    margin-bottom: 2rem;
+}
+
+.details {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    margin-bottom: 2rem;
+
+  .key {
+    grid-column: 1;
+    margin: 0;
+    font-weight: bold;
+    padding-bottom: 0.5rem;
+  }
+
+  .value {
+    grid-column: 2;
+    margin: 0;
+    padding-bottom: 0.5rem;
+  }
+}
+
+.revoke-token{
+    .revoke-input {
+        margin-bottom: 0.5rem;
+    }
+
+    .revoke-button {
+
+    }
+}

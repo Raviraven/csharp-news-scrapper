@@ -28,7 +28,8 @@ export class LoginComponent implements OnInit {
     this.clearErrors();
     this.service.postLoginDetails().subscribe(
       (res) => {
-        this.service.token = res.jwtToken;
+        this.service.Token = res.jwtToken;
+        this.service.Id = res.id;
         this.authErrorHandlerService.ClearErrors();
         this.router.navigate(['']);
       },

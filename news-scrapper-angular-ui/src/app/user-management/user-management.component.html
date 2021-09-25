@@ -1,0 +1,41 @@
+<header><h3>Account details</h3></header>
+
+<div *ngIf="UserDetails">
+  <section class="details">
+    <p class="key">Username:</p>
+    <p class="value">{{ UserDetails.username }}</p>
+
+    <p class="key">First Name:</p>
+    <p class="value">{{ UserDetails.firstName }}</p>
+
+    <p class="key">Last Name:</p>
+    <p class="value">{{ UserDetails.lastName }}</p>
+  </section>
+
+  <section class="revoke-token">
+    <form #currentForm="ngForm" (submit)="OnSubmit()">
+      <div class="form-group">
+        <label for="token">Token to revoke</label>
+        <input
+          id="token"
+          type="text"
+          class="form-control revoke-input"
+          placeholder="Token to revoke"
+          name="revoketoken"
+          #revoketoken="ngModel"
+          [(ngModel)]="Token"
+          [class.invalid]="revoketoken.invalid && revoketoken.touched"
+          required
+        />
+      </div>
+
+      <button
+        class="btn btn-primary btn-block revoke-button"
+        type="submit"
+        [disabled]="currentForm.invalid"
+      >
+        Revoke
+      </button>
+    </form>
+  </section>
+</div>

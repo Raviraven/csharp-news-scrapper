@@ -25,7 +25,7 @@ export class AuthInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const authToken = this.auth.token;
+    const authToken = this.auth.Token;
 
     const authReq = req.clone({
       headers: req.headers.set('Authorization', authToken),
@@ -33,23 +33,35 @@ export class AuthInterceptor implements HttpInterceptor {
 
     return next.handle(authReq).pipe(
       catchError((error: HttpErrorResponse) => {
-        let errorMsg = '';
-
-        if (error.error instanceof ErrorEvent) {
-          //console.log('this is client side error');
-          errorMsg = `Error: ${error.error.message}`;
-        } else {
-          //console.log('this is server side error');
-          errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
-        }
-        console.log(errorMsg);
-
-        this.authErrorHandlerService.AddError(
-          `${error.status.toString()} - ${error.statusText}`
-        );
-        this.router.navigate(['/login']);
+        let errorMsg = this.buildErrorConsoleMessage(error);
+        this.handleError(error);
         return throwError(errorMsg);
       })
     );
+  }
+
+  private buildErrorConsoleMessage(error: HttpErrorResponse) {
+    let errorMsg = '';
+
+    if (error.error instanceof ErrorEvent) {
+      //console.log('this is client side error');
+      errorMsg = `Error: ${error.error.message}`;
+    } else {
+      //console.log('this is server side error');
+      errorMsg = `Error Code: ${error.status},  Message: ${error.message}`;
+    }
+    return errorMsg;
+  }
+
+  private handleError(error: HttpErrorResponse) {
+    if(error.status > 401 && error.status < 500)
+      return;
+
+    this.authErrorHandlerService.ClearErrors();
+    this.authErrorHandlerService.AddError(
+      `${error.status.toString()} - ${error.statusText}`
+    );
+
+    this.router.navigate(['/login']);
   }
 }
