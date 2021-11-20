@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace news_scrapper.domain.DBModels
 {
@@ -23,5 +19,6 @@ namespace news_scrapper.domain.DBModels
         public string Category { get; set; }
 
         public ICollection<ArticleDb> Articles { get; set; }
+        public ICollection<CategoryDb> Categories { get; set; }
     }
 }
