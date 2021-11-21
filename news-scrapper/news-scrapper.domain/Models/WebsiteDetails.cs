@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using news_scrapper.domain.Models.Categories;
 
 namespace news_scrapper.domain.Models
 {
@@ -44,6 +40,8 @@ namespace news_scrapper.domain.Models
         public string DescriptionNodeClass { get; set; } = "";
         public string ImgNodeClass { get; set; } = "";
         public string Category { get; set; } = "";
+
+        public Category[] Categories { get; set; }
 
         public void UpdateValues(WebsiteDetails website)
         {

@@ -132,6 +132,12 @@
     <value>Attempted reuse of revoked ancestor token: {0}.</value>
     <comment>{0} - used token</comment>
   </data>
+  <data name="CannotAddCategoryWithNameNullOrEmpty" xml:space="preserve">
+    <value>Cannot add category with name null or empty.</value>
+  </data>
+  <data name="CannotAddNullCategory" xml:space="preserve">
+    <value>Cannot add null category.</value>
+  </data>
   <data name="CannotGetMainNewsNodeByXpath" xml:space="preserve">
     <value>Cannot get main news node by xpath: '{0}'.</value>
     <comment>{0} - xpath</comment>
@@ -142,6 +148,13 @@
   <data name="CannotReachSiteWithGivenUrl" xml:space="preserve">
     <value>Cannot  reach site with given url: '{0}'.</value>
     <comment>{0} - site url</comment>
+  </data>
+  <data name="CategoryWithGivenIdNotFound" xml:space="preserve">
+    <value>Category with given id: {0} not found.</value>
+    <comment>{0} - category Id</comment>
+  </data>
+  <data name="CategoryYouWishToUpdateCannotBeNull" xml:space="preserve">
+    <value>Category you wish to update cannot be null.</value>
   </data>
   <data name="InvalidToken" xml:space="preserve">
     <value>Invalid token.</value>

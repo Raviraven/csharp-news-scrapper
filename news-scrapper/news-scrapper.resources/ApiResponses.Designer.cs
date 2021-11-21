@@ -19,7 +19,7 @@ namespace news_scrapper.resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ApiResponses {
@@ -97,6 +97,24 @@ namespace news_scrapper.resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cannot add category with name null or empty..
+        /// </summary>
+        public static string CannotAddCategoryWithNameNullOrEmpty {
+            get {
+                return ResourceManager.GetString("CannotAddCategoryWithNameNullOrEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cannot add null category..
+        /// </summary>
+        public static string CannotAddNullCategory {
+            get {
+                return ResourceManager.GetString("CannotAddNullCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cannot get main news node by xpath: &apos;{0}&apos;..
         /// </summary>
         public static string CannotGetMainNewsNodeByXpath {
@@ -120,6 +138,24 @@ namespace news_scrapper.resources {
         public static string CannotReachSiteWithGivenUrl {
             get {
                 return ResourceManager.GetString("CannotReachSiteWithGivenUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category with given id: {0} not found..
+        /// </summary>
+        public static string CategoryWithGivenIdNotFound {
+            get {
+                return ResourceManager.GetString("CategoryWithGivenIdNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category you wish to update cannot be null..
+        /// </summary>
+        public static string CategoryYouWishToUpdateCannotBeNull {
+            get {
+                return ResourceManager.GetString("CategoryYouWishToUpdateCannotBeNull", resourceCulture);
             }
         }
         
