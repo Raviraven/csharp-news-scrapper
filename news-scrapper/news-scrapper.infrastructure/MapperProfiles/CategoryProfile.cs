@@ -10,7 +10,11 @@ namespace news_scrapper.infrastructure.MapperProfiles
         {
             CreateMap<CategoryDb, Category>();
             CreateMap<CategoryAdd, Category>();
+            CreateMap<CategoryAdd, CategoryDb>().ReverseMap();
             CreateMap<CategoryEdit, Category>().ReverseMap();
+            CreateMap<CategoryEdit, CategoryDb>().ReverseMap();
+
+            CreateMap<CategoryDb, CategoryWebsiteDetails>();
         }
     }
 }

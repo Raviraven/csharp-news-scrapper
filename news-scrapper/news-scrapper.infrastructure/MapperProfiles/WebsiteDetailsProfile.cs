@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using news_scrapper.domain.DBModels;
-using news_scrapper.domain.Models;
+using news_scrapper.domain.Models.WebsiteDetails;
 
 namespace news_scrapper.infrastructure.MapperProfiles
 {
@@ -9,6 +9,7 @@ namespace news_scrapper.infrastructure.MapperProfiles
         public WebsiteDetailsProfile()
         {
             CreateMap<WebsiteDetails, WebsiteDetailsDb>().ReverseMap();
+            CreateMap<WebsiteDetailsDb, WebsiteDetailsCategory>();
         }
     }
 }

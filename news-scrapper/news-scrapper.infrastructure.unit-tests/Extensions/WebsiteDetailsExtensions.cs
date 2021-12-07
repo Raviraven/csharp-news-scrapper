@@ -1,5 +1,5 @@
 ﻿using news_scrapper.domain.DBModels;
-using news_scrapper.domain.Models;
+using news_scrapper.domain.Models.WebsiteDetails;
 using System;
 using System.Collections.Generic;
 using System.Linq;

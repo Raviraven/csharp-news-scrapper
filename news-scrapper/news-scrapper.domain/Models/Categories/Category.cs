@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using news_scrapper.domain.Models.WebsiteDetails;
+using System.Collections.Generic;
 
 namespace news_scrapper.domain.Models.Categories
 {
@@ -6,6 +7,6 @@ namespace news_scrapper.domain.Models.Categories
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<WebsiteDetails> Websites { get; set; }
+        public List<WebsiteDetailsCategory> Websites { get; set; }
     }
 }

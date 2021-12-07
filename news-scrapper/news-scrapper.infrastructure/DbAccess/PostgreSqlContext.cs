@@ -13,6 +13,8 @@ namespace news_scrapper.infrastructure.DbAccess
         public DbSet<WebsiteDetailsDb> WebsitesDetails { get; set; }
         public DbSet<ArticleDb> Articles { get; set; }
         public DbSet<UserDb> Users { get; set; }
+        public DbSet<CategoryDb> Categories { get; set; }
+        public DbSet<RefreshTokenDb> RefreshTokens { get; set; }
 
         public void MigrateDatabase()
         {

@@ -3,7 +3,7 @@ using news_scrapper.application.Interfaces;
 using news_scrapper.application.Repositories;
 using news_scrapper.domain.DBModels;
 using news_scrapper.domain.Exceptions;
-using news_scrapper.domain.Models;
+using news_scrapper.domain.Models.WebsiteDetails;
 using news_scrapper.resources;
 using System;
 using System.Collections.Generic;

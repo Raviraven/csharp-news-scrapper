@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 using news_scrapper.api.Attributes;
 using news_scrapper.application.Interfaces;
 using news_scrapper.domain.Exceptions;
-using news_scrapper.domain.Models;
+using news_scrapper.domain.Models.WebsiteDetails;
 using news_scrapper.domain.ResponseViewModels;
 using System.Collections.Generic;
 
@@ -11,7 +11,7 @@ namespace news_scrapper.api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class WebsiteDetailsController : ControllerBase
     {
         private readonly ILogger<WebsiteDetailsController> _logger;

@@ -63,6 +63,7 @@ namespace news_scrapper.api
             services.AddTransient<IJwtUtils, JwtUtils>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IRandomCryptoBytesGenerator, RandomCryptoBytesGenerator>();
+            services.AddTransient<ICategoriesService, CategoriesService>();
 
             //Repositories 
             services.AddTransient<IWebsitesRepository, WebsitesRepository>();
@@ -73,6 +74,7 @@ namespace news_scrapper.api
             //UoW
             services.AddTransient<IArticlesUnitOfWork, ArticlesUnitOfWork>();
             services.AddTransient<IUsersUnitOfWork, UsersUnitOfWork>();
+            services.AddTransient<ICategoriesUnitOfWork, CategoriesUnitOfWork>();
 
             services.AddSingleton(provider => new MapperConfiguration(cfg =>
             {
@@ -80,6 +82,7 @@ namespace news_scrapper.api
                 cfg.AddProfile(new ArticlesProfile());
                 cfg.AddProfile(new UserProfile());
                 cfg.AddProfile(new RefreshTokenProfile());
+                cfg.AddProfile(new CategoryProfile());
             }).CreateMapper());
 
             services.AddCors();

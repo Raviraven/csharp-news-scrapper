@@ -6,6 +6,7 @@ namespace news_scrapper.application.UnitsOfWork
     public interface ICategoriesUnitOfWork
     {
         IRepository<CategoryDb> Categories { get; }
+        IRepository<WebsiteDetailsDb> WebsiteDetails { get; }
         void Commit();
     }
 }

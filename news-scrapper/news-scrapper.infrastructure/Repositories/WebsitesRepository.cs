@@ -1,4 +1,5 @@
-﻿using news_scrapper.application.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using news_scrapper.application.Repositories;
 using news_scrapper.domain.DBModels;
 using news_scrapper.infrastructure.DbAccess;
 using System;
@@ -41,7 +42,9 @@ namespace news_scrapper.infrastructure.Repositories
 
         public List<WebsiteDetailsDb> GetAll()
         {
-            return sqlContext.WebsitesDetails.ToList(); ;
+            return sqlContext.WebsitesDetails
+                .Include(n=>n.Categories)
+                .ToList();
         }
 
         public WebsiteDetailsDb Save(WebsiteDetailsDb websiteDetails)

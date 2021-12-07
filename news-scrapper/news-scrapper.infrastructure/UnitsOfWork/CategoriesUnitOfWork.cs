@@ -10,6 +10,7 @@ namespace news_scrapper.infrastructure.UnitsOfWork
     {
         private PostgreSqlContext _context;
         private BaseRepository<CategoryDb> _articles;
+        private BaseRepository<WebsiteDetailsDb> _websiteDetails;
 
         public CategoriesUnitOfWork(PostgreSqlContext context)
         {
@@ -19,6 +20,11 @@ namespace news_scrapper.infrastructure.UnitsOfWork
         public IRepository<CategoryDb> Categories
         {
             get { return _articles ??= new BaseRepository<CategoryDb>(_context); }
+        }
+
+        public IRepository<WebsiteDetailsDb> WebsiteDetails
+        {
+            get { return _websiteDetails ??= new BaseRepository<WebsiteDetailsDb>(_context); }
         }
 
         public void Commit()

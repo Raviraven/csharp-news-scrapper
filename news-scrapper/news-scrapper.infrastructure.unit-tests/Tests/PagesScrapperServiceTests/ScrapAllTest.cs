@@ -6,6 +6,7 @@ using news_scrapper.application.Interfaces;
 using news_scrapper.application.Repositories;
 using news_scrapper.domain.DBModels;
 using news_scrapper.domain.Models;
+using news_scrapper.domain.Models.WebsiteDetails;
 using news_scrapper.domain.ResponseViewModels;
 using news_scrapper.infrastructure.Data;
 using news_scrapper.infrastructure.unit_tests.Builders;

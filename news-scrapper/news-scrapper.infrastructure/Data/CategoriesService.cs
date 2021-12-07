@@ -30,8 +30,15 @@ namespace news_scrapper.infrastructure.Data
                 throw new ArgumentNullException(ApiResponses.CannotAddCategoryWithNameNullOrEmpty, innerException: null);
 
             var mappedCategory = _mapper.Map<CategoryDb>(category);
+
+            var websiteDetailsList = _categoriesUnitOfWork.WebsiteDetails
+                .Get(n => category.WebsitesIds.Contains(n.id)).ToList();
+
+            mappedCategory.Websites = websiteDetailsList;
             _categoriesUnitOfWork.Categories.Insert(mappedCategory);
             _categoriesUnitOfWork.Commit();
+
+            _mapper.Map(mappedCategory, category);
             //will that store category id?
             return category;
         }
@@ -51,7 +58,7 @@ namespace news_scrapper.infrastructure.Data
 
         public List<Category> Get()
         {
-            var categories = _categoriesUnitOfWork.Categories.Get();
+            var categories = _categoriesUnitOfWork.Categories.Get(includeProperties: "Websites");
             var result = _mapper.Map<List<Category>>(categories);
             return result;
         }
