@@ -65,6 +65,21 @@ namespace news_scrapper.infrastructure.Repositories
             return dbSet.Find(id);
         }
 
+        public TEntity GetById(object id, string includeProperties = "")
+        {
+            IQueryable<TEntity> query = dbSet;
+
+            if (includeProperties != null)
+            {
+                foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+                }
+            }
+
+            return dbSet.Find(id);
+        }
+
         public IEnumerable<TEntity> GetWithRawSql(string query, params object[] parameters)
         {
             return dbSet.FromSqlRaw(query, parameters).ToList();

@@ -16,6 +16,7 @@ namespace news_scrapper.application.Repositories
 
 
         TEntity GetById(object id);
+        TEntity GetById(object id, string includeProperties = "");
         IEnumerable<TEntity> GetWithRawSql(string query, params object[] parameters);
         TEntity Insert(TEntity entity);
         IEnumerable<TEntity> InsertRange(List<TEntity> entities);

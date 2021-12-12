@@ -54,7 +54,7 @@ namespace news_scrapper.infrastructure.unit_tests.Tests.CategoriesServiceTests
         }
 
         [Fact]
-        public void should_return_single_category_by_id()
+        public void should_return_single_category_with_websites_included_by_id()
         {
             CategoryDb categoryDb = new()
             {
@@ -62,7 +62,7 @@ namespace news_scrapper.infrastructure.unit_tests.Tests.CategoriesServiceTests
             };
             Category categoryFound =  categoryDb.MapToCategory();
 
-            _categories.Setup(n=>n.GetById(1)).Returns(categoryDb);
+            _categories.Setup(n=>n.GetById(1, "Websites")).Returns(categoryDb);
             _mapper.Setup(n => n.Map<Category>(categoryDb)).Returns(categoryFound);
 
             var result = _sut.Get(1);

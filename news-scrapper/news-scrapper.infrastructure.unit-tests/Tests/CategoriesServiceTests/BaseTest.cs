@@ -13,6 +13,7 @@ namespace news_scrapper.infrastructure.unit_tests.Tests.CategoriesServiceTests
         protected Mock<ICategoriesUnitOfWork> _categoriesUnitOfWork { get; set; }
 
         protected Mock<IRepository<CategoryDb>> _categories { get; set; }
+        protected Mock<IRepository<WebsiteDetailsDb>> _websiteDetails { get; set; }
 
         protected CategoriesService _sut;
 
@@ -22,8 +23,10 @@ namespace news_scrapper.infrastructure.unit_tests.Tests.CategoriesServiceTests
             _categoriesUnitOfWork = new();
 
             _categories = new();
+            _websiteDetails = new();
 
             _categoriesUnitOfWork.Setup(n => n.Categories).Returns(_categories.Object);
+            _categoriesUnitOfWork.Setup(n=>n.WebsiteDetails).Returns(_websiteDetails.Object);
 
             _sut = new CategoriesService(_mapper.Object, 
                 _categoriesUnitOfWork.Object);

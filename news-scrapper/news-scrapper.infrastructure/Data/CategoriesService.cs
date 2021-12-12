@@ -31,15 +31,18 @@ namespace news_scrapper.infrastructure.Data
 
             var mappedCategory = _mapper.Map<CategoryDb>(category);
 
-            var websiteDetailsList = _categoriesUnitOfWork.WebsiteDetails
-                .Get(n => category.WebsitesIds.Contains(n.id)).ToList();
+            if (category.WebsitesIds is not null)
+            {
+                var websiteDetailsList = _categoriesUnitOfWork.WebsiteDetails
+                  .Get(n => category.WebsitesIds.Contains(n.id)).ToList();
 
-            mappedCategory.Websites = websiteDetailsList;
+                mappedCategory.Websites = websiteDetailsList;
+            }
+
             _categoriesUnitOfWork.Categories.Insert(mappedCategory);
             _categoriesUnitOfWork.Commit();
 
             _mapper.Map(mappedCategory, category);
-            //will that store category id?
             return category;
         }
 
@@ -65,7 +68,7 @@ namespace news_scrapper.infrastructure.Data
 
         public Category Get(int id)
         {
-            var category = _categoriesUnitOfWork.Categories.GetById(id);
+            var category = _categoriesUnitOfWork.Categories.GetById(id, "Websites");
             var mappedCategory = _mapper.Map<Category>(category);
             return mappedCategory;
         }
