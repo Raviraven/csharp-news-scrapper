@@ -8,7 +8,7 @@ namespace news_scrapper.api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class CategoriesController : ControllerBase
     {
         private ICategoriesService _categoriesService { get; set; }
