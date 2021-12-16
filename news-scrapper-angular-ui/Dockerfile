@@ -8,7 +8,7 @@ RUN npm run build
 
 ####################################################
 
-FROM nginx:1.21.3-alpine
+FROM nginx:1.21.4-alpine
 
 COPY --from=build /usr/local/app/dist/news-scrapper-angular-ui /usr/share/nginx/html
 COPY /news-scrapper-nginx/default.conf /etc/nginx/conf.d/default.conf
