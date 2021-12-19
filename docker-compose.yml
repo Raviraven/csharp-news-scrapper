@@ -7,7 +7,7 @@ services:
       - postgres-data:/postgres-data/
       - ./postgres-data:/mapped-locally/
     ports:
-      - 5400:5432
+      - 6400:5432
     environment:
       - POSTGRES_DB=news-scrapper-database
       - POSTGRES_USER=news-scrapper-user
@@ -35,7 +35,7 @@ services:
     depends_on:
       - net-core
     ports:
-      - 4205:80
+      - 5205:80
     networks:
       - frontend-network
 
