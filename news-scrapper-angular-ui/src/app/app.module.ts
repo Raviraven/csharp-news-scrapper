@@ -19,6 +19,9 @@ import { ArticlesNewComponent } from './articles/articles-new/articles-new.compo
 import { JwPaginationComponent } from './jw-pagination/jw-pagination.component';
 import { HamburgerToggleDirective } from './directives/hamburger-toggle.directive';
 import { UserManagementComponent } from './user-management/user-management.component';
+import { AddCategoryComponent } from './categories/add-category/add-category.component';
+import { CategoriesComponent } from './categories/categories/categories.component';
+import { EditCategoryComponent } from './categories/edit-category/edit-category.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import { UserManagementComponent } from './user-management/user-management.compo
     ArticlesNewComponent,
     JwPaginationComponent,
     HamburgerToggleDirective,
-    UserManagementComponent
+    UserManagementComponent,
+    AddCategoryComponent,
+    CategoriesComponent,
+    EditCategoryComponent
   ],
   imports: [
     BrowserModule,

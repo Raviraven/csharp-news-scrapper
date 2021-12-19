@@ -1,3 +1,5 @@
+import { CategoryWebsiteDetails } from "./categories/category-website-details.model";
+
 export class WebsiteDetails {
     id :number=0;
     url :string='';
@@ -9,5 +11,6 @@ export class WebsiteDetails {
     descriptionNodeTag :string='';
     descriptionNodeClass :string='';
     imgNodeClass :string='';
-    category :string='';    
+    category: string='';
+    categories: CategoryWebsiteDetails[] = [];
 }
