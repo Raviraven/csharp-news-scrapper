@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { WebsiteDetails } from 'src/app/shared/website-details.model';
+import { WebsiteDetails } from 'src/app/shared/website-details/website-details.model';
 import { WebsiteDetailsService } from 'src/app/shared/website-details.service';
 
 @Component({
