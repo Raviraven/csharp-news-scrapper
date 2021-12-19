@@ -39,16 +39,15 @@
         <td *ngIf="item.websites.length > 0">
           <div *ngFor="let website of item.websites">
             {{ website.id }} - {{ website.url }}
+            <hr />
           </div>
         </td>
         <td *ngIf="item.websites.length <= 0">-</td>
 
         <td>
           <button class="btn btn-danger" (click)="onRemove(item.id)">x</button>
-          <a
-            [routerLink]="['/categories/edit', item.id]"
-            class="btn btn-info"
-            >e</a 
+          <a [routerLink]="['/categories/edit', item.id]" class="btn btn-info"
+            >e</a
           >
         </td>
       </tr>

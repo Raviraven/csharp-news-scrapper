@@ -28,6 +28,7 @@
         <th scope="col">Desc tag</th>
         <th scope="col">Desc class</th>
         <th scope="col">Img class</th>
+        <th scope="col">Categories</th>
         <th scope="col">Actions</th>
         <!-- <th scope="col">category</th> -->
       </tr>
@@ -44,6 +45,12 @@
         <td>{{ item.descriptionNodeTag }}</td>
         <td>{{ item.descriptionNodeClass }}</td>
         <td>{{ item.imgNodeClass }}</td>
+        <td *ngIf="item.categories.length > 0">
+          <div *ngFor="let category of item.categories">
+            {{ category.id }} - {{ category.name }} <hr/>
+          </div>
+        </td>
+        <td *ngIf="item.categories.length <= 0">-</td>
         <td>
           <button class="btn btn-danger" (click)="onRemove(item.id)">x</button>
           <a [routerLink]="['/website-details/edit', item.id]" class="btn btn-info">e</a>
