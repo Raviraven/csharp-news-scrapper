@@ -45,12 +45,12 @@
         <td>{{ item.descriptionNodeTag }}</td>
         <td>{{ item.descriptionNodeClass }}</td>
         <td>{{ item.imgNodeClass }}</td>
-        <td *ngIf="item.categories.length > 0">
+        <td *ngIf="item.categories != null && item.categories.length > 0">
           <div *ngFor="let category of item.categories">
             {{ category.id }} - {{ category.name }} <hr/>
           </div>
         </td>
-        <td *ngIf="item.categories.length <= 0">-</td>
+        <td *ngIf="item.categories == null || item.categories.length <= 0">-</td>
         <td>
           <button class="btn btn-danger" (click)="onRemove(item.id)">x</button>
           <a [routerLink]="['/website-details/edit', item.id]" class="btn btn-info">e</a>

@@ -59,9 +59,16 @@ namespace news_scrapper.infrastructure.Data
             return true;
         }
 
-        public List<Category> Get()
+        public List<Category> GetWithWebsites()
         {
             var categories = _categoriesUnitOfWork.Categories.Get(includeProperties: "Websites");
+            var result = _mapper.Map<List<Category>>(categories);
+            return result;
+        }
+
+        public List<Category> Get()
+        {
+            var categories = _categoriesUnitOfWork.Categories.Get();
             var result = _mapper.Map<List<Category>>(categories);
             return result;
         }

@@ -29,7 +29,7 @@ namespace news_scrapper.infrastructure.unit_tests.Tests.CategoriesServiceTests
                 It.IsAny<string>())).Returns(categories);
             _mapper.Setup(n=>n.Map<List<Category>>(categories)).Returns(mappedCategories);
 
-            var result = _sut.Get();
+            var result = _sut.GetWithWebsites();
 
             result.Should().BeEquivalentTo(new List<Category> { 
                 new() { Id = 1, Name = "name 1" },
@@ -48,7 +48,7 @@ namespace news_scrapper.infrastructure.unit_tests.Tests.CategoriesServiceTests
                 It.IsAny<string>())).Returns(categoriesDb);
             _mapper.Setup(n => n.Map<List<Category>>(categoriesDb)).Returns(mappedCategories);
 
-            var result = _sut.Get();
+            var result = _sut.GetWithWebsites();
 
             result.Should().BeEmpty(); 
         }

@@ -18,6 +18,10 @@ export class CategoriesService {
     return this.http.get<Category[]>(this.baseUrl);
   }
 
+  getAllWithWebsiteDetails(){
+    return this.http.get<Category[]>(this.baseUrl + 'WithWebsiteDetails');
+  }
+
   add(model: CategoryAdd){
     return this.http.post<CategoryAdd>(this.baseUrl, model);
   }

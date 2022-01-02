@@ -1,10 +1,8 @@
 ﻿using Bogus;
+using news_scrapper.domain.Models.Categories;
 using news_scrapper.domain.Models.WebsiteDetails;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace news_scrapper.infrastructure.unit_tests.Builders
 {
@@ -13,10 +11,13 @@ namespace news_scrapper.infrastructure.unit_tests.Builders
         private string _mainNodeId = "";
         private string _url = "";
         private int _id = 0;
+        private CategoryWebsiteDetails[] _categories = null;
+        private int _categoriesCount = 2;
 
         private bool _shouldGenerateUrl = true;
         private bool _shouldGenerateMainNodeId = true;
         private bool _shouldGenerateId = true;
+        private bool _shouldGenerateCategories = true;
 
         public WebsiteDetailsBuilder WithId(int id)
         {
@@ -39,6 +40,19 @@ namespace news_scrapper.infrastructure.unit_tests.Builders
             return this;
         }
 
+        public WebsiteDetailsBuilder WithCategories(CategoryWebsiteDetails[] categories)
+        {
+            _categories = categories;
+            _shouldGenerateCategories = false;
+            return this;
+        }
+
+        public WebsiteDetailsBuilder WithCategories(int categoriesCount)
+        {
+            _categoriesCount = categoriesCount;
+            return this;
+        }
+
         public WebsiteDetails Build()
         {
             return Build(1).ElementAt(0);
@@ -58,8 +72,17 @@ namespace news_scrapper.infrastructure.unit_tests.Builders
                 .RuleFor(n => n.DescriptionNodeClass, b => b.Name.FirstName() + "-description-class")
                 .RuleFor(n => n.ImgNodeClass, b => b.Name.FirstName() + "-img-class")
                 .RuleFor(n => n.Url, b => (_shouldGenerateUrl) ? b.Internet.Url() : _url)
+                .RuleFor(n=>n.Categories, b => (_shouldGenerateCategories) ? generateCategories() : _categories)
                 .Generate(count);
         }
 
+        private CategoryWebsiteDetails[] generateCategories()
+        {
+            return new Faker<CategoryWebsiteDetails>()
+                .RuleFor(n=>n.Id, b=>b.Random.Int(min: 1))
+                .RuleFor(n=>n.Name, b=>b.Random.String())
+                .Generate(_categoriesCount)
+                .ToArray();
+        }
     }
 }

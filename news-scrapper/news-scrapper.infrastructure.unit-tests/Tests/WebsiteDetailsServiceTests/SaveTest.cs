@@ -2,10 +2,14 @@
 using Moq;
 using news_scrapper.domain.DBModels;
 using news_scrapper.domain.Exceptions;
+using news_scrapper.domain.Models.Categories;
 using news_scrapper.domain.Models.WebsiteDetails;
 using news_scrapper.infrastructure.unit_tests.Builders;
 using news_scrapper.resources;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using Xunit;
 
 namespace news_scrapper.infrastructure.unit_tests.Tests.WebsiteDetailsServiceTests
@@ -21,6 +25,7 @@ namespace news_scrapper.infrastructure.unit_tests.Tests.WebsiteDetailsServiceTes
 
             Action<WebsiteDetailsDb> save = (_) => { savedWebsite = true; };
 
+            _websitesRepository.Setup(n => n.GetWithCategories(website.Id)).Returns(websiteDb);
             _mapper.Setup(n => n.Map<WebsiteDetailsDb>(It.IsAny<WebsiteDetailsDb>())).Returns(websiteDb);
             _mapper.Setup(n => n.Map<WebsiteDetails>(It.IsAny<WebsiteDetailsDb>())).Returns(website);
             _websitesRepository.Setup(n => n.Save(It.IsAny<WebsiteDetailsDb>())).Callback(save);
@@ -36,6 +41,7 @@ namespace news_scrapper.infrastructure.unit_tests.Tests.WebsiteDetailsServiceTes
             WebsiteDetails website = new WebsiteDetailsBuilder().WithId(123).Build();
             WebsiteDetailsDb savedWebsite = website.Map();
 
+            _websitesRepository.Setup(n => n.GetWithCategories(website.Id)).Returns(savedWebsite);
             _mapper.Setup(n => n.Map<WebsiteDetailsDb>(It.IsAny<WebsiteDetailsDb>())).Returns(savedWebsite);
             _mapper.Setup(n => n.Map<WebsiteDetails>(It.IsAny<WebsiteDetailsDb>())).Returns(website);
             _websitesRepository.Setup(n => n.Save(It.IsAny<WebsiteDetailsDb>())).Returns(savedWebsite);
@@ -98,5 +104,148 @@ namespace news_scrapper.infrastructure.unit_tests.Tests.WebsiteDetailsServiceTes
 
             _sut.Invoking(n => n.Save(website)).Should().Throw<InvalidWebsiteDetailsException>().WithMessage(errorMessage);
         }
+        
+        [Fact]
+        public void should_throw_exception_when_trying_to_save_website_with_duplicated_category()
+        {
+            CategoryWebsiteDetails[] categories = new CategoryWebsiteDetails[]
+            {
+                new CategoryWebsiteDetails() { Id = 1, Name = "something 1"},
+                new CategoryWebsiteDetails() { Id = 1, Name = "duplicated ID"}
+            };
+
+            WebsiteDetails websiteDetails = new WebsiteDetailsBuilder().WithCategories(categories).Build();
+
+            _sut.Invoking(n => n.Save(websiteDetails))
+                .Should()
+                .Throw<InvalidWebsiteDetailsException>()
+                .WithMessage(ApiResponses.WebsiteDetailsCategoriesCannotBeDuplicated);
+        }
+
+        [Fact]
+        public void should_get_categories_by_id_from_database()
+        {
+            CategoryWebsiteDetails[] categories = new CategoryWebsiteDetails[]
+            {
+                new CategoryWebsiteDetails() { Id = 1, Name = "something 1"},
+                new CategoryWebsiteDetails() { Id = 2, Name = "something 2"}
+            };
+
+            WebsiteDetailsDb alreadyExistingWebsiteDetails = new WebsiteDetailsBuilder().WithCategories(2).Build().Map();
+            alreadyExistingWebsiteDetails.Categories = new List<CategoryDb>() 
+            { 
+                new() { Id = 3, Name = "test name" },
+                new() { Id = 4, Name = "test name 2" },
+            };
+
+            WebsiteDetails websiteDetails = new WebsiteDetailsBuilder().WithCategories(categories).Build();
+            var mappedWebsiteDetails = websiteDetails.Map();
+
+            _websitesRepository.Setup(n=>n.GetWithCategories(websiteDetails.Id)).Returns(alreadyExistingWebsiteDetails);
+
+            _sut.Save(websiteDetails);
+
+            _categoriesRepository.Verify(n => n.Get(
+               It.IsAny<Expression<Func<CategoryDb, bool>>>(),
+               It.IsAny<Func<IQueryable<CategoryDb>, IOrderedQueryable<CategoryDb>>>(),
+               It.IsAny<string>()), Times.Once);
+        }
+
+        [Fact]
+        public void should_remove_categories_not_existing_in_model()
+        {
+            CategoryWebsiteDetails[] categories = new CategoryWebsiteDetails[]
+            {
+                new CategoryWebsiteDetails() { Id = 1, Name = "something 1"},
+                new CategoryWebsiteDetails() { Id = 2, Name = "something 2"}
+            };
+
+            List<CategoryDb> categoriesDb = new()
+            {
+                new() { Id = 1, Name = "something 1" },
+                new() { Id = 2, Name = "something 2" }
+            };
+
+            List<CategoryDb> actualCategories = new()
+            {
+                new() { Id = 3, Name = "test name" },
+                new() { Id = 4, Name = "test name 2" },
+            };
+
+
+            WebsiteDetailsDb alreadyExistingWebsiteDetails = new WebsiteDetailsBuilder().WithCategories(2).Build().Map();
+            alreadyExistingWebsiteDetails.Categories = actualCategories;
+            
+            WebsiteDetails websiteDetails = new WebsiteDetailsBuilder().WithCategories(categories).Build();
+            var mappedWebsiteDetails = websiteDetails.Map();
+
+            WebsiteDetailsDb result = null;
+            Action<WebsiteDetailsDb> saveWebsiteDetails = (websiteDb) => { result = websiteDb; };
+
+            _websitesRepository.Setup(n => n.GetWithCategories(websiteDetails.Id)).Returns(alreadyExistingWebsiteDetails);
+            _websitesRepository.Setup(n => n.Save(It.IsAny<WebsiteDetailsDb>())).Callback(saveWebsiteDetails);
+            _categoriesRepository.Setup(n => n.Get(It.IsAny<Expression<Func<CategoryDb, bool>>>(),
+               It.IsAny<Func<IQueryable<CategoryDb>, IOrderedQueryable<CategoryDb>>>(),
+               It.IsAny<string>())).Returns(categoriesDb);
+
+            _sut.Save(websiteDetails);
+
+            result.Categories
+                .Should()
+                .NotContain(new List<CategoryDb>()
+                    {
+                        new() { Id = 3, Name = "test name" },
+                        new() { Id = 4, Name = "test name 2" },
+                    });
+        }
+
+        [Fact]
+        public void should_save_chosen_categories()
+        {
+            CategoryWebsiteDetails[] categories = new CategoryWebsiteDetails[]
+           {
+                new CategoryWebsiteDetails() { Id = 1, Name = "something 1"},
+                new CategoryWebsiteDetails() { Id = 2, Name = "something 2"}
+           };
+
+            List<CategoryDb> categoriesDb = new()
+            {
+                new() { Id = 1, Name = "something 1" },
+                new() { Id = 2, Name = "something 2" }
+            };
+
+            List<CategoryDb> actualCategories = new()
+            {
+                new() { Id = 3, Name = "test name" },
+                new() { Id = 4, Name = "test name 2" },
+            };
+
+
+            WebsiteDetailsDb alreadyExistingWebsiteDetails = new WebsiteDetailsBuilder().WithCategories(2).Build().Map();
+            alreadyExistingWebsiteDetails.Categories = actualCategories;
+
+            WebsiteDetails websiteDetails = new WebsiteDetailsBuilder().WithCategories(categories).Build();
+            var mappedWebsiteDetails = websiteDetails.Map();
+
+            WebsiteDetailsDb result = null;
+            Action<WebsiteDetailsDb> saveWebsiteDetails = (websiteDb) => { result = websiteDb; };
+
+            _websitesRepository.Setup(n => n.GetWithCategories(websiteDetails.Id)).Returns(alreadyExistingWebsiteDetails);
+            _websitesRepository.Setup(n => n.Save(It.IsAny<WebsiteDetailsDb>())).Callback(saveWebsiteDetails);
+            _categoriesRepository.Setup(n => n.Get(It.IsAny<Expression<Func<CategoryDb, bool>>>(),
+               It.IsAny<Func<IQueryable<CategoryDb>, IOrderedQueryable<CategoryDb>>>(),
+               It.IsAny<string>())).Returns(categoriesDb);
+
+            _sut.Save(websiteDetails);
+
+            result.Categories
+                .Should()
+                .BeEquivalentTo(new List<CategoryDb>()
+                    {
+                        new() { Id = 1, Name = "something 1" },
+                        new() { Id = 2, Name = "something 2" }
+                    });
+        }
+
     }
 }

@@ -1,10 +1,5 @@
-﻿using news_scrapper.domain;
-using news_scrapper.domain.DBModels;
-using System;
+﻿using news_scrapper.domain.DBModels;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace news_scrapper.application.Repositories
 {
@@ -14,6 +9,7 @@ namespace news_scrapper.application.Repositories
         bool Delete(int id);
         List<WebsiteDetailsDb> GetAll();
         WebsiteDetailsDb Get(int id);
+        WebsiteDetailsDb GetWithCategories(int id);
         WebsiteDetailsDb Save(WebsiteDetailsDb websiteDetails);
 
         void Commit();

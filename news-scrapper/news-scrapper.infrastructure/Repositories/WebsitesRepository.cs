@@ -40,6 +40,13 @@ namespace news_scrapper.infrastructure.Repositories
             return sqlContext.WebsitesDetails.FirstOrDefault(n => n.id == id);
         }
 
+        public WebsiteDetailsDb GetWithCategories(int id)
+        {
+            return sqlContext.WebsitesDetails
+                .Include(n=>n.Categories)
+                .FirstOrDefault(n => n.id == id);
+        }
+
         public List<WebsiteDetailsDb> GetAll()
         {
             return sqlContext.WebsitesDetails

@@ -2,7 +2,7 @@
 
 <div class="errors" *ngIf="errors.length > 0">
   <ul *ngFor="let error of errors">
-      <li class="error">{{ error }}</li>
+    <li class="error">{{ error }}</li>
   </ul>
 </div>
 
@@ -13,7 +13,7 @@
       <input
         id="url-id"
         type="text"
-        class="form-control form-control-lg"
+        class="form-control"
         placeholder="Website Url"
         name="url"
         #url="ngModel"
@@ -29,7 +29,7 @@
       <input
         id="main-node-xpath-id"
         type="text"
-        class="form-control form-control-lg"
+        class="form-control"
         placeholder="Xpath"
         name="mainNodeXpath"
         #mainNodeXpath="ngModel"
@@ -45,7 +45,7 @@
       <input
         id="news-node-tag-id"
         type="text"
-        class="form-control form-control-lg"
+        class="form-control"
         placeholder="News node tag"
         name="newsNodeTag"
         #newsNodeTag="ngModel"
@@ -61,7 +61,7 @@
       <input
         id="news-node-class-id"
         type="text"
-        class="form-control form-control-lg"
+        class="form-control"
         placeholder="News node class"
         name="newsNodeClass"
         #newsNodeClass="ngModel"
@@ -77,7 +77,7 @@
       <input
         id="title-node-tag-id"
         type="text"
-        class="form-control form-control-lg"
+        class="form-control"
         placeholder="Title node tag"
         name="titleNodeTag"
         #titleNodeTag="ngModel"
@@ -93,7 +93,7 @@
       <input
         id="title-node-class-id"
         type="text"
-        class="form-control form-control-lg"
+        class="form-control"
         placeholder="Title node class"
         name="titleNodeClass"
         #titleNodeClass="ngModel"
@@ -109,7 +109,7 @@
       <input
         id="description-node-tag-id"
         type="text"
-        class="form-control form-control-lg"
+        class="form-control"
         placeholder="Description node tag"
         name="descriptionNodeTag"
         #descriptionNodeTag="ngModel"
@@ -129,7 +129,7 @@
       <input
         id="description-node-class-id"
         type="text"
-        class="form-control form-control-lg"
+        class="form-control"
         placeholder="Description node class"
         name="descriptionNodeClass"
         #descriptionNodeClass="ngModel"
@@ -147,7 +147,7 @@
       <input
         id="img-node-class-id"
         type="text"
-        class="form-control form-control-lg"
+        class="form-control"
         placeholder="Class for the img node"
         name="imgNodeClass"
         #imgNodeClass="ngModel"
@@ -156,6 +156,63 @@
         minlength="1"
         [class.invalid]="imgNodeClass.invalid && imgNodeClass.touched"
       />
+    </div>
+
+    <div class="categories-card card">
+      <div class="form-group">
+        <label for="">Categories</label>
+        <div class="categories-dropdown-container">
+          <select
+            name="test-name"
+            [(ngModel)]="selectedCategory"
+            class="form-control form-select"
+          >
+            <option></option>
+            <option
+              *ngFor="let item of availableCategories"
+              [ngValue]="item"
+              value="{{ item.id }}"
+            >
+              <!-- *ngIf="item.visible == true" -->
+              {{ item.name }}
+            </option>
+          </select>
+          <button
+            type="button"
+            class="btn btn-secondary col-md-2 categories-dropdown-button"
+            (click)="onCategoryAdd()"
+          >
+            Add
+          </button>
+        </div>
+      </div>
+
+      <div class="form-group" *ngIf="chosenCategories.length > 0">
+        <table class="table-secondary">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of chosenCategories">
+              <td>{{ item.id }}</td>
+              <td>{{ item.name }}</td>
+              <td>
+                <button
+                  class=""
+                  (click)="onCategoryRemove(item.id)"
+                  type="button"
+                >
+                  remove
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <div class="form-group">

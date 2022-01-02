@@ -1,0 +1,14 @@
+.categories-card {
+    margin: 1rem;
+    padding: 0.5rem;
+}
+
+.categories-dropdown {
+  &-container {
+    display: flex;
+  }
+
+  &-button {
+    margin-left: 1rem;
+  }
+}

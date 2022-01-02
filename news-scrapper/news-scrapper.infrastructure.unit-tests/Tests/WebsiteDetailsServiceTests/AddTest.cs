@@ -2,10 +2,13 @@
 using Moq;
 using news_scrapper.domain.DBModels;
 using news_scrapper.domain.Exceptions;
+using news_scrapper.domain.Models.Categories;
 using news_scrapper.domain.Models.WebsiteDetails;
 using news_scrapper.infrastructure.unit_tests.Builders;
 using news_scrapper.resources;
 using System;
+using System.Linq;
+using System.Linq.Expressions;
 using Xunit;
 
 namespace news_scrapper.infrastructure.unit_tests.Tests.WebsiteDetailsServiceTests
@@ -82,6 +85,74 @@ namespace news_scrapper.infrastructure.unit_tests.Tests.WebsiteDetailsServiceTes
             website.NewsNodeTag = null;
 
             _sut.Invoking(n => n.Add(website)).Should().Throw<InvalidWebsiteDetailsException>().WithMessage(errorMessage);
+        }
+
+        [Fact]
+        public void should_throw_exception_when_trying_to_add_website_with_duplicated_category()
+        {
+            CategoryWebsiteDetails[] categories = new CategoryWebsiteDetails[]
+            {
+                new CategoryWebsiteDetails() { Id = 1, Name = "something 1"},
+                new CategoryWebsiteDetails() { Id = 1, Name = "duplicated ID"}
+            };
+
+            WebsiteDetails websiteDetails = new WebsiteDetailsBuilder().WithCategories(categories).Build();
+            
+            _sut.Invoking(n=>n.Add(websiteDetails))
+                .Should()
+                .Throw<InvalidWebsiteDetailsException>()
+                .WithMessage(ApiResponses.WebsiteDetailsCategoriesCannotBeDuplicated);
+        }
+
+        [Fact]
+        public void should_add_website_details_without_categories_when_none_chosen()
+        {
+            WebsiteDetails websiteDetails = new WebsiteDetailsBuilder().WithCategories(0).Build();
+            var mappedWebsiteDetails = websiteDetails.Map();
+
+            WebsiteDetailsDb addingWebsiteCategory = null;
+            Action<WebsiteDetailsDb> addWebsiteCategory = (cat) => { addingWebsiteCategory = cat; };
+
+            _websitesRepository.Setup(n => n.Add(It.IsAny<WebsiteDetailsDb>()))
+                .Callback(addWebsiteCategory);
+            _mapper.Setup(mapper => mapper.Map<WebsiteDetailsDb>(websiteDetails)).Returns(mappedWebsiteDetails);
+
+            _sut.Add(websiteDetails);
+
+            addingWebsiteCategory.Categories
+                .Should()
+                .BeEmpty();
+        }
+
+        [Fact]
+        public void should_get_categories_passed_through_json_by_ids_from_db()
+        {
+            CategoryWebsiteDetails[] categories = new CategoryWebsiteDetails[]
+            {
+                new CategoryWebsiteDetails() { Id = 1, Name = "something 1"},
+                new CategoryWebsiteDetails() { Id = 2, Name = "something 2"}
+            };
+
+            //List<int> expectedCategoriesIds = new() { 1, 2 };
+
+            WebsiteDetails websiteDetails = new WebsiteDetailsBuilder().WithCategories(categories).Build();
+            var mappedWebsiteDetails = websiteDetails.Map();
+
+            //Expression<Func<CategoryDb, bool>> categoriesFilter = null;
+            //Action<Expression<Func<CategoryDb, bool>>, Func<IQueryable<CategoryDb>, IOrderedQueryable<CategoryDb>>, string> getCategories
+            //    = (filter, order, includeProps) => { categoriesFilter = filter; };
+
+            _mapper.Setup(mapper => mapper.Map<WebsiteDetailsDb>(websiteDetails)).Returns(mappedWebsiteDetails);
+            //_categoriesRepository.Setup(n => n.Get(It.IsAny<Expression<Func<CategoryDb, bool>>>(),
+            //    It.IsAny<Func<IQueryable<CategoryDb>, IOrderedQueryable<CategoryDb>>>(),
+            //    It.IsAny<string>())).Callback(getCategories);
+
+            _sut.Add(websiteDetails);
+
+            _categoriesRepository.Verify(n => n.Get(//n => categoriesIds.Contains(n.Id),
+                It.IsAny<Expression<Func<CategoryDb, bool>>>(),
+                It.IsAny<Func<IQueryable<CategoryDb>, IOrderedQueryable<CategoryDb>>>(),
+                It.IsAny<string>()), Times.Once);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using news_scrapper.domain.Models.Categories;
+using System.Collections.Generic;
 
 namespace news_scrapper.domain.Models.WebsiteDetails
 {

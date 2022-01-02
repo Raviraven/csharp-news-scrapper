@@ -1,4 +1,5 @@
 ﻿using news_scrapper.domain.DBModels;
+using news_scrapper.domain.Models.Categories;
 using news_scrapper.domain.Models.WebsiteDetails;
 using System;
 using System.Collections.Generic;
@@ -74,10 +75,26 @@ namespace news_scrapper.infrastructure.unit_tests
                 DescriptionNodeTag = website.DescriptionNodeTag,
                 DescriptionNodeClass = website.DescriptionNodeClass,
                 ImgNodeClass = website.ImgNodeClass,
-                Category = website.Category
+                Category = website.Category,
+                Categories = mapCategories(website.Categories)
             };
         }
 
+        private static ICollection<CategoryDb> mapCategories(CategoryWebsiteDetails[] categories)
+        {
+            List<CategoryDb> result = new();
+
+            foreach (var category in categories)
+            {
+                result.Add(new()
+                {
+                    Id = category.Id,
+                    Name = category.Name
+                });
+            }
+
+            return result;
+        }
 
         public static List<WebsiteDetailsDb> Map(this List<WebsiteDetails> websites)
         {

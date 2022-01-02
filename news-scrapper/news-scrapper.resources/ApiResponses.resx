@@ -181,6 +181,9 @@
   <data name="WebsiteDetailsCannotBeNull" xml:space="preserve">
     <value>Website details cannot be null.</value>
   </data>
+  <data name="WebsiteDetailsCategoriesCannotBeDuplicated" xml:space="preserve">
+    <value>Website details categories cannot be duplicated.</value>
+  </data>
   <data name="WebsiteDetailsNewsNodeCannotBeNullOrEmpty" xml:space="preserve">
     <value>Website details news node cannot be null or empty.</value>
   </data>

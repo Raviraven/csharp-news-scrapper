@@ -14,7 +14,7 @@ namespace news_scrapper.infrastructure.MapperProfiles
             CreateMap<CategoryEdit, Category>().ReverseMap();
             CreateMap<CategoryEdit, CategoryDb>().ReverseMap();
 
-            CreateMap<CategoryDb, CategoryWebsiteDetails>();
+            CreateMap<CategoryDb, CategoryWebsiteDetails>().ReverseMap();
         }
     }
 }

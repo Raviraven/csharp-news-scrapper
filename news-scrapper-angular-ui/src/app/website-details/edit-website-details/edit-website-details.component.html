@@ -169,6 +169,64 @@
         />
       </div>
 
+      <div class="categories-card card">
+        <div class="form-group">
+          <label for="">Categories</label>
+          <div class="categories-dropdown-container">
+            <select
+              name="test-name"
+              [(ngModel)]="selectedCategory"
+              class="form-control form-select"
+            >
+              <option></option>
+              <option
+                *ngFor="let item of availableCategories"
+                [ngValue]="item"
+                value="{{ item.id }}"
+              >
+                <!-- *ngIf="item.visible == true" -->
+                {{ item.name }}
+              </option>
+            </select>
+            <button
+              type="button"
+              class="btn btn-secondary col-md-2 categories-dropdown-button"
+              (click)="onCategoryAdd()"
+            >
+              Add
+            </button>
+          </div>
+        </div>
+  
+        <div class="form-group" *ngIf="chosenCategories.length > 0">
+          <table class="table-secondary">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of chosenCategories">
+                <td>{{ item.id }}</td>
+                <td>{{ item.name }}</td>
+                <td>
+                  <button
+                    class=""
+                    (click)="onCategoryRemove(item.id)"
+                    type="button"
+                  >
+                    remove
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  
+
       <div class="form-group">
         <button
           class="btn btn-primary btn-block btn-lg"

@@ -5,6 +5,7 @@ namespace news_scrapper.application.Data
 {
     public interface ICategoriesService
     {
+        List<Category> GetWithWebsites();
         List<Category> Get();
         Category Get(int id);
         Category Get(string name);

@@ -232,6 +232,15 @@ namespace news_scrapper.resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Website details categories cannot be duplicated..
+        /// </summary>
+        public static string WebsiteDetailsCategoriesCannotBeDuplicated {
+            get {
+                return ResourceManager.GetString("WebsiteDetailsCategoriesCannotBeDuplicated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Website details news node cannot be null or empty..
         /// </summary>
         public static string WebsiteDetailsNewsNodeCannotBeNullOrEmpty {

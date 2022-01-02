@@ -29,6 +29,17 @@ namespace news_scrapper.api.Controllers
             return categories;
         }
 
+        [HttpGet("WithWebsiteDetails")]
+        public ActionResult<List<Category>> GetAllWithWebsiteDetails()
+        {
+            var categories = _categoriesService.GetWithWebsites();
+
+            if (categories is null || categories.Count == 0)
+                throw new KeyNotFoundException();
+
+            return categories;
+        }
+
         [HttpGet("{id}")]
         public ActionResult<Category> GetById(int id)
         {
