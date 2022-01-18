@@ -7,9 +7,14 @@
     </ul>
   </div>
 
+  <div class="row website-details-add">
+    <div>
+      <a class="" [routerLink]="['/website-details/add']">Add website details</a>
+    </div>
+  </div>
+
   <p *ngIf="websitesDetails.length == 0">
-    There are no websites details in DB. You can
-    <a [routerLink]="['/website-details/add']">add one.</a>
+    There are no websites details in DB. You can add one.
   </p>
 
   <table
