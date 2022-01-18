@@ -3,6 +3,7 @@ services:
   db:
     image: "postgres:13.4-alpine3.14"
     container_name: news-scrapper-db
+    restart: unless-stopped
     volumes:
       - postgres-data:/postgres-data/
       - ./postgres-data:/mapped-locally/
@@ -18,6 +19,7 @@ services:
   net-core:
     build: ./news-scrapper
     container_name: news-scrapper-backend
+    restart: unless-stopped
     environment:
       - ASPNETCORE_ENVIRONMENT=Development-Docker
       - ConnectionStrings__DefaultConnection=Server=db;Port=5432;Database=news-scrapper-database;User Id=news-scrapper-user;Password=test-password;
@@ -32,6 +34,7 @@ services:
   angular:
     build: ./news-scrapper-angular-ui
     container_name: news-scrapper-ui
+    restart: unless-stopped
     depends_on:
       - net-core
     ports:
