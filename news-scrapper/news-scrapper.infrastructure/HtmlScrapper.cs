@@ -148,6 +148,11 @@ namespace news_scrapper.infrastructure
             if (siteUrl is null)
                 return url;
 
+            var urlParts = url.Split('/');
+
+            if (urlParts[0].Contains("http"))
+                return url;
+
             if (!url.Contains(siteUrl))
                 return concatenateUrls(url, siteUrl);
 

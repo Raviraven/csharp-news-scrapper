@@ -379,6 +379,42 @@ namespace news_scrapper.infrastructure.unit_tests.Tests.HtmlScrapperTests
             errors.Should().BeEmpty();
         }
 
+        [Fact]
+        public void should_return_url_from_node_when_incldue_http()
+        {
+            string newsTitle = "just the test news title";
+            string websiteUrl = "https://test.test/another-subsite";
+            string url = "https://just.some/link/to/another-site/";
+            string newsUrl = "/news-url";
+            string description = "test news description";
+            string imageUrl = "/image urll";
+            DateTime mockedNow = new(2980, 10, 10);
+            string mainNodeId = "test-news-id";
+
+            WebsiteDetails details = new WebsiteDetailsBuilder().WithUrl(websiteUrl).WithMainNodeId(mainNodeId).Build();
+            string rawHtml = generateRawHtml(details, mainNodeId, newsTitle, $"{url}{newsUrl}", description, $"{url}{imageUrl}");
+
+            List<Article> expectedArticles = new()
+            {
+                new()
+                {
+                    Title = $"{newsTitle}",
+                    Url = $"{url}{newsUrl}",
+                    Description = $"{description}",
+                    ImageUrl = $"{url}{imageUrl}",
+                    DateScrapped = mockedNow,
+                    WebsiteDetailsId = details.Id
+                }
+            };
+
+            _dateTimeProvider.Setup(n => n.Now).Returns(mockedNow);
+
+            (var articles, var errors) = _sut.Scrap(details, rawHtml);
+
+            articles.Should().BeEquivalentTo(expectedArticles);
+            errors.Should().BeEmpty();
+        }
+
 
         private static string generateRawHtml(WebsiteDetails websiteDetail, string mainNodeId,
             string newsTitle, string newsUrl, string description, string imageUrl)
