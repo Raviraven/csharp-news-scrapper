@@ -75,7 +75,6 @@
           name="newsNodeClass"
           #newsNodeClass="ngModel"
           [(ngModel)]="model.newsNodeClass"
-          required
           minlength="1"
           [class.invalid]="newsNodeClass.invalid && newsNodeClass.touched"
         />
@@ -107,7 +106,6 @@
           name="titleNodeClass"
           #titleNodeClass="ngModel"
           [(ngModel)]="model.titleNodeClass"
-          required
           minlength="1"
           [class.invalid]="titleNodeClass.invalid && titleNodeClass.touched"
         />
@@ -125,7 +123,6 @@
           name="descriptionNodeTag"
           #descriptionNodeTag="ngModel"
           [(ngModel)]="model.descriptionNodeTag"
-          required
           minlength="1"
           [class.invalid]="
             descriptionNodeTag.invalid && descriptionNodeTag.touched
@@ -145,7 +142,6 @@
           name="descriptionNodeClass"
           #descriptionNodeClass="ngModel"
           [(ngModel)]="model.descriptionNodeClass"
-          required
           minlength="1"
           [class.invalid]="
             descriptionNodeClass.invalid && descriptionNodeClass.touched
@@ -163,7 +159,6 @@
           name="imgNodeClass"
           #imgNodeClass="ngModel"
           [(ngModel)]="model.imgNodeClass"
-          required
           minlength="1"
           [class.invalid]="imgNodeClass.invalid && imgNodeClass.touched"
         />
