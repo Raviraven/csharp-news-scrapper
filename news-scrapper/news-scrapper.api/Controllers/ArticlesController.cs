@@ -11,7 +11,7 @@ namespace news_scrapper.api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class ArticlesController : ControllerBase
     {
         private readonly ILogger<ArticlesController> _logger;

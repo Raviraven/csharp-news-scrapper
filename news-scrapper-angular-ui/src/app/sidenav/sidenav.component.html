@@ -20,6 +20,14 @@
       *ngIf="usersService.Token.length <= 0"
     >
       <li class="navigation__list--item">
+        <a [routerLink]="['/']" class="navigation__list--link">Home</a>
+      </li>
+      <li class="navigation__list--item">
+        <a [routerLink]="['/articles-new/']" class="navigation__list--link"
+          >Newly scrapped articles</a
+        >
+      </li>
+      <li class="navigation__list--item">
         <a [routerLink]="['/login']" class="navigation__list--link">Login</a>
       </li>
     </ul>
@@ -33,22 +41,16 @@
         <a [routerLink]="['/']" class="navigation__list--link">Home</a>
       </li>
       <li class="navigation__list--item">
-        <a [routerLink]="['/website-details']" class="navigation__list--link"
-          >Website details list</a
-        >
-      </li>
-      <!-- <li class="navigation__list--item">
-        <a
-          [routerLink]="['/website-details/add']"
-          class="navigation__list--link"
-          >Add website details</a
-        >
-      </li> -->
-      <li class="navigation__list--item">
         <a [routerLink]="['/articles-new/']" class="navigation__list--link"
           >Newly scrapped articles</a
         >
       </li>
+      <li class="navigation__list--item">
+        <a [routerLink]="['/website-details']" class="navigation__list--link"
+          >Website details list</a
+        >
+      </li>
+
       <li class="navigation__list--item">
         <a [routerLink]="['/account/']" class="navigation__list--link"
           >Account</a
