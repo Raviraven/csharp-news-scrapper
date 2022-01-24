@@ -3,9 +3,6 @@ FROM node:16-alpine3.11 as build
 WORKDIR /usr/local/app
 COPY . /usr/local/app/
 
-#not nice solution...to change in the future
-RUN npm install -g npm@8.3.1
-
 RUN npm install 
 RUN npm run build
 

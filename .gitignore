@@ -18,3 +18,4 @@
 /news-scrapper/news-scrapper.resources/bin
 news-scrapper-angular-ui/node_modules/
 news-scrapper/news-scrapper.api/web.config
+news-scrapper-angular-ui/.angular
