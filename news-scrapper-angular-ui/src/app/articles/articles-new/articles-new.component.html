@@ -10,6 +10,13 @@
 
 <div class="row new-articles__container" *ngIf="articles.length > 0">
   <article class="new-article" *ngFor="let item of articlesPerPage">
+    <div class="new-article__image">
+      <img
+        alt="zdjęcie artykułu - {{ item.title }}"
+        class="new-article__image--thumbnail"
+        src="{{ item.imageUrl }}"
+      />
+    </div>
     <div class="new-article__texts">
       <p class="new-article__texts--header">
         <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{
@@ -17,13 +24,6 @@
         }}</a>
       </p>
       <p class="new-article__texts--description">{{ item.description }}</p>
-    </div>
-    <div class="new-article__image">
-      <img
-        alt="zdjęcie artykułu - {{ item.title }}"
-        class="new-article__image--thumbnail"
-        src="{{ item.imageUrl }}"
-      />
     </div>
   </article>
 </div>

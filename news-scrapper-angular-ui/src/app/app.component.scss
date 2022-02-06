@@ -3,6 +3,7 @@
 .wrapper {
   display: grid;
   grid-template-columns: 12rem 1fr;
+  grid-template-rows: 1fr 0.75rem;
 
   @media screen and (max-width: $tablet) {
     display: block;

@@ -1,13 +1,29 @@
 @import "../_variables.scss";
 
+.footer {
+  grid-column: 1/span 2;
+  grid-row: 2;
+  text-align: center;
+  font-size: .72rem;
+  margin-bottom: 1rem;
+}
+
+.gh__link{
+  text-decoration: none;
+  color: #212529;
+}
+
 .header {
   border-bottom: 1px solid #e2e8f0;
+  grid-column: 1;
+  grid-row: 1;
 }
 
 .main-content {
   padding: 1rem;
   grid-column: 2;
-  height: 100vh;
+  grid-row: 1;
+  // height: 100vh;
 }
 
 .navigation {

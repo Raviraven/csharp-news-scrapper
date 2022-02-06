@@ -3,7 +3,7 @@
     [ngClass]="{ disabled: pager.currentPage === 1 }"
     class="page-item first-item"
   >
-    <a href="#main-content" (click)="setPage(1)" class="page-link">First</a>
+    <a href="#main-content" (click)="setPage(1)" class="page-link">|<</a>
   </li>
   <li
     [ngClass]="{ disabled: pager.currentPage === 1 }"
@@ -13,7 +13,7 @@
       href="#main-content"
       (click)="setPage(pager.currentPage - 1)"
       class="page-link"
-      >Previous</a
+      ><</a
     >
   </li>
   <li
@@ -33,7 +33,7 @@
       href="#main-content"
       (click)="setPage(pager.currentPage + 1)"
       class="page-link"
-      >Next</a
+      >></a
     >
   </li>
   <li
@@ -44,7 +44,7 @@
       href="#main-content"
       (click)="setPage(pager.totalPages)"
       class="page-link"
-      >Last</a
+      >>|</a
     >
   </li>
 </ul>
