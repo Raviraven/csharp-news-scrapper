@@ -1,6 +1,6 @@
 name: dependabot auto-approve
 on: pull_request_target
-permission:
+permissions:
   pull-requests: write
   contents: write
 jobs:
@@ -15,7 +15,7 @@ jobs:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
       - name: Approve a PR
         run: gh pr review --approve "$PR_URL"
-        if: ${{contains(['version-update:semver-patch', 'version-update:semver-minor'], steps.dependabot-metadata.outputs.update-type) && steps.dependabot-metadata.outputs.dependency-type == 'direct:development'}}
+        if: ${{contains(fromJson('["version-update:semver-patch", "version-update:semver-minor"]'), steps.dependabot-metadata.outputs.update-type) && steps.dependabot-metadata.outputs.dependency-type == 'direct:development'}}
         env:
           PR_URL: ${{github.event.pull_request.html_url}}
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
