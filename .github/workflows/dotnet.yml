@@ -1,4 +1,4 @@
-name: .NET
+name: .NET unit tests
 
 on:
   push:
@@ -25,3 +25,4 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+      working-directory: ./news-scrapper/news-scrapper.infrastructure.unit-tests
