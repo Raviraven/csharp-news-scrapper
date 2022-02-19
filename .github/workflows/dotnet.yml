@@ -2,12 +2,16 @@ name: .NET
 
 on:
   push:
-  pull_request:
+  pull_request_target:
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./news-scrapper
 
     steps:
     - uses: actions/checkout@v2
@@ -17,10 +21,7 @@ jobs:
         dotnet-version: 5.0.x
     - name: Restore dependencies
       run: dotnet restore
-      working-directory: ./news-scrapper
     - name: Build
       run: dotnet build --no-restore
-      working-directory: ./news-scrapper
     - name: Test
       run: dotnet test --no-build --verbosity normal
-      working-directory: ./news-scrapper
