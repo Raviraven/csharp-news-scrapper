@@ -1,5 +1,5 @@
-name: Auto-update
-on: push
+name: auto-update
+on: [pull_request_target]
 
 jobs:
   Auto:
