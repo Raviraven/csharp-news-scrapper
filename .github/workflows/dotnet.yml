@@ -17,8 +17,7 @@ jobs:
         dotnet-version: 5.0.x
     - name: Restore dependencies
       run: dotnet restore
-      with:
-        path: ./csharp-news-scrapper /csharp-news-scrapper
+      working-directory: ./csharp-news-scrapper /csharp-news-scrapper
     - name: Build
       run: dotnet build --no-restore
     - name: Test
