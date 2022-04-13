@@ -3,14 +3,14 @@
     [ngClass]="{ disabled: pager.currentPage === 1 }"
     class="page-item first-item"
   >
-    <a href="#main-content" (click)="setPage(1)" class="page-link">|<</a>
+    <a href="{{ scrollToTopUrl }}" (click)="setPage(1)" class="page-link">|<</a>
   </li>
   <li
     [ngClass]="{ disabled: pager.currentPage === 1 }"
     class="page-item previous-item"
   >
     <a
-      href="#main-content"
+      href="{{ scrollToTopUrl }}"
       (click)="setPage(pager.currentPage - 1)"
       class="page-link"
       ><</a
@@ -21,7 +21,7 @@
     [ngClass]="{ active: pager.currentPage === page }"
     class="page-item number-item"
   >
-    <a href="#main-content" (click)="setPage(page)" class="page-link">{{
+    <a href="{{ scrollToTopUrl }}" (click)="setPage(page)" class="page-link">{{
       page
     }}</a>
   </li>
@@ -30,7 +30,7 @@
     class="page-item next-item"
   >
     <a
-      href="#main-content"
+      href="{{ scrollToTopUrl }}"
       (click)="setPage(pager.currentPage + 1)"
       class="page-link"
       >></a
@@ -41,7 +41,7 @@
     class="page-item last-item"
   >
     <a
-      href="#main-content"
+      href="{{ scrollToTopUrl }}"
       (click)="setPage(pager.totalPages)"
       class="page-link"
       >>|</a
