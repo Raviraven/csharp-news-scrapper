@@ -18,6 +18,7 @@ export class ArticlesNewComponent implements OnInit {
   articles: Article[] = [];
   articlesPerPage: Article[] = [];
   errors: string[] = [];
+  public dataLoaded: boolean = false;
 
   onChangePage(articlesPerPage: Article[]) {
     this.articlesPerPage = articlesPerPage;
@@ -37,6 +38,8 @@ export class ArticlesNewComponent implements OnInit {
           this.errors.push((err as HttpErrorResponse).error);
         }
       )
-      .finally(() => {});
+      .finally(() => {
+        this.dataLoaded = true;
+      });
   }
 }

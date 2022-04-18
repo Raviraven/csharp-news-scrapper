@@ -11,6 +11,9 @@
 <div class="row" *ngIf="dataLoaded">
   <button class="btn btn-secondary" (click)="scrapArticles()">Scrap</button>
 </div>
+
+<app-loading [dataLoaded]="dataLoaded"> </app-loading>
+
 <div class="row articles__container" *ngIf="articles.length > 0">
   <article class="article" *ngFor="let item of articlesOnPage">
     <p class="article__header">
