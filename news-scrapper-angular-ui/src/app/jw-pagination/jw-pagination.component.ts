@@ -16,6 +16,7 @@ export class JwPaginationComponent implements OnInit, OnChanges {
   @Input() maxPages = 6;
 
   pager: any = {};
+  scrollToTopUrl: string = `${window.location.href}#main-content`;
 
   ngOnInit() {
       // set page if items array isn't empty
