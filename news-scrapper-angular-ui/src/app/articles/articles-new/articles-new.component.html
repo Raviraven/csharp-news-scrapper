@@ -8,6 +8,8 @@
   </div>
 </div>
 
+<app-loading [dataLoaded]="dataLoaded"> </app-loading>
+
 <div class="row new-articles__container" *ngIf="articles.length > 0">
   <article class="new-article" *ngFor="let item of articlesPerPage">
     <div class="new-article__image">

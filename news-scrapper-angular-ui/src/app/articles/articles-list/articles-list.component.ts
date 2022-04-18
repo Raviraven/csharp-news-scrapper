@@ -18,7 +18,7 @@ export class ArticlesListComponent implements OnInit {
   articles: Article[] = [];
   articlesOnPage: Article[] = [];
 
-  dataLoaded: boolean = false;
+  public dataLoaded: boolean = false;
   errors: string[] = [];
 
   onChangePage(articlesOnPage: Article[]) {
@@ -47,6 +47,7 @@ export class ArticlesListComponent implements OnInit {
   }
 
   scrapArticles() {
+    this.dataLoaded = false;
     this.service
       .scrapArticles()
       .toPromise()

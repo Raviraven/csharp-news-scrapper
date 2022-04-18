@@ -22,6 +22,7 @@ import { UserManagementComponent } from './user-management/user-management.compo
 import { AddCategoryComponent } from './categories/add-category/add-category.component';
 import { CategoriesComponent } from './categories/categories/categories.component';
 import { EditCategoryComponent } from './categories/edit-category/edit-category.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { EditCategoryComponent } from './categories/edit-category/edit-category.
     UserManagementComponent,
     AddCategoryComponent,
     CategoriesComponent,
-    EditCategoryComponent
+    EditCategoryComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
