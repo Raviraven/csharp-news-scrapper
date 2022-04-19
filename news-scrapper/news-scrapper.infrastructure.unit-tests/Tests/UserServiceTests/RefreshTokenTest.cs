@@ -225,23 +225,25 @@ namespace news_scrapper.infrastructure.unit_tests.Tests.UserServiceTests
         [Fact]
         public void should_remove_old_refresh_tokens()
         {
-            List<RefreshToken> tokens = generateFakeReplacedTokensChain(2);
+            List<RefreshToken> tokens = generateFakeReplacedTokensChain(2); // new RefreshTokenBuilder().Build(2);
             User user = new UserBuilder().WithRefreshTokens(tokens).Build();
             UserDb userFromDb = user.Map();
-            var usersFromDb = new List<UserDb> { userFromDb };
-            DateTime now = DateTime.UtcNow.AddDays(30);
+            DateTime now = new DateTime(2022, 05, 05);
             string reason = ApiResponses.ReplacedByNewToken;
+            var usersFromDb = new List<UserDb> { userFromDb };
 
-            tokens[0].Created = now.Subtract(TimeSpan.FromDays(50));
+            tokens[0].Created = new DateTime(2022, 01, 01);
+            tokens[0].Revoked = new DateTime(2022, 01, 02);
+            tokens[1].Created = new DateTime(2022, 05, 05);
 
-            var newRefreshToken = new RefreshTokenBuilder().Build();
+            var newRefreshToken = new RefreshTokenBuilder().WithCreated(new DateTime(2022, 05, 10)).Build();
             var lastTokenRevoked = getLastTokenRevoked(tokens, now, reason, newRefreshToken.Token);
 
             var expectedTokens = new List<RefreshToken> { lastTokenRevoked, newRefreshToken };
 
             User result = null;
             Action<User, UserDb> mapFinalUser = (a, b) => { result = a; };
-
+            
             _users.Setup(n => n.Get(It.IsAny<Expression<Func<UserDb, bool>>>(), null, "")).Returns(usersFromDb);
             _mapper.Setup(n => n.Map<User>(userFromDb)).Returns(user);
             _dateTimeProvider.Setup(n => n.Now).Returns(now);
