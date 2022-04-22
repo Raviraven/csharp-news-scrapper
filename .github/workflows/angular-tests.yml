@@ -8,7 +8,7 @@ on:
   pull_request:
 
 jobs:
-  build:
+  run_angular_tests:
 
     runs-on: ubuntu-latest
 
