@@ -93,8 +93,7 @@ namespace news_scrapper.infrastructure.Data
 
             var newestDate = orderedArticles.First().DateScrapped;
             var newestArticles = orderedArticles
-                .Where(n => n.DateScrapped.ToShortDateString() == newestDate.ToShortDateString()
-                    && n.DateScrapped.ToShortTimeString() == newestDate.ToShortTimeString())
+                .Where(n => n.DateScrapped.ToShortDateString() == newestDate.ToShortDateString())
                 .ToList();
 
             return _mapper.Map<List<Article>>(newestArticles);
