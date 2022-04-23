@@ -16,7 +16,7 @@ namespace news_scrapper.infrastructure.unit_tests.Tests.AuthorizationTests
         public void should_generate_jwt_token()
         {
             var user = new UserBuilder().Build();
-            DateTime now = DateTime.UtcNow.AddMonths(4);
+            DateTime now = DateTime.Now.AddMonths(4);
             string expectedResult = generateToken(user, now, SECRET_KEY);
 
             _dateTimeProvider.Setup(n => n.Now).Returns(now);
