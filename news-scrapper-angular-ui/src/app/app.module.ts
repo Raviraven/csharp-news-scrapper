@@ -23,6 +23,7 @@ import { AddCategoryComponent } from './categories/add-category/add-category.com
 import { CategoriesComponent } from './categories/categories/categories.component';
 import { EditCategoryComponent } from './categories/edit-category/edit-category.component';
 import { LoadingComponent } from './loading/loading.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { LoadingComponent } from './loading/loading.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
