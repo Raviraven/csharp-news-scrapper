@@ -27,6 +27,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogWindowComponent } from './components/dialog-window/dialog-window.component';
 import { DialogWindowContentComponent } from './components/dialog-window/dialog-window-content/dialog-window-content.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MaterialModule } from './components/material.module';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     HttpClientModule,
     BrowserAnimationsModule,
     MatDialogModule,
+    MaterialModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

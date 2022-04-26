@@ -9,7 +9,9 @@
 
   <div class="row website-details-add">
     <div>
-      <a class="" [routerLink]="['/website-details/add']">Add website details</a>
+      <a class="" [routerLink]="['/website-details/add']"
+        >Add website details</a
+      >
     </div>
   </div>
 
@@ -52,13 +54,23 @@
         <td>{{ item.imgNodeClass }}</td>
         <td *ngIf="item.categories != null && item.categories.length > 0">
           <div *ngFor="let category of item.categories">
-            {{ category.id }} - {{ category.name }} <hr/>
+            {{ category.id }} - {{ category.name }}
+            <hr />
           </div>
         </td>
-        <td *ngIf="item.categories == null || item.categories.length <= 0">-</td>
+        <td *ngIf="item.categories == null || item.categories.length <= 0">
+          -
+        </td>
         <td>
-          <button class="btn btn-danger" (click)="onRemove(item.id)">x</button>
-          <a [routerLink]="['/website-details/edit', item.id]" class="btn btn-info">e</a>
+          <app-dialog-window
+            [onSuccessAction]="onRemove"
+            [id]="item.id"
+          ></app-dialog-window>
+          <a
+            [routerLink]="['/website-details/edit', item.id]"
+            class="btn btn-info"
+            >e</a
+          >
         </td>
         <!-- <td>{{ item.category }}</td> -->
       </tr>
