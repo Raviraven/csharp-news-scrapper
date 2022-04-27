@@ -63,14 +63,15 @@
         </td>
         <td>
           <app-dialog-window
-            [onSuccessAction]="onRemove"
-            [id]="item.id"
+            [dialogContentData]="{ id: item.id, objectName: item.url }"
+            (removeItemEvent)="onRemove($event)"
           ></app-dialog-window>
-          <a
+          <button
             [routerLink]="['/website-details/edit', item.id]"
-            class="btn btn-info"
-            >e</a
+            mat-flat-button
           >
+            <mat-icon>edit</mat-icon>
+          </button>
         </td>
         <!-- <td>{{ item.category }}</td> -->
       </tr>

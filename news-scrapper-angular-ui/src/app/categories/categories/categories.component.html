@@ -45,9 +45,12 @@
         <td *ngIf="item.websites.length <= 0">-</td>
 
         <td>
-          <button class="btn btn-danger" (click)="onRemove(item.id)">x</button>
-          <a [routerLink]="['/categories/edit', item.id]" class="btn btn-info"
-            >e</a
+          <app-dialog-window
+            [dialogContentData]="{ id: item.id, objectName: item.name }"
+            (removeItemEvent)="onRemove($event)"
+          ></app-dialog-window>
+          <a [routerLink]="['/categories/edit', item.id]" mat-flat-button>
+            <mat-icon>edit</mat-icon></a
           >
         </td>
       </tr>

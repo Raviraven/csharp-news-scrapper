@@ -24,8 +24,8 @@ import { CategoriesComponent } from './categories/categories/categories.componen
 import { EditCategoryComponent } from './categories/edit-category/edit-category.component';
 import { LoadingComponent } from './loading/loading.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DialogWindowComponent } from './components/dialog-window/dialog-window.component';
-import { DialogWindowContentComponent } from './components/dialog-window/dialog-window-content/dialog-window-content.component';
+import { DialogWindowComponent } from './components/delete-dialog-window/dialog-window.component';
+import { DialogWindowContentComponent } from './components/delete-dialog-window/dialog-window-content/dialog-window-content.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MaterialModule } from './components/material.module';
 

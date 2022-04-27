@@ -1,10 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogWindowContentComponent } from './dialog-window-content/dialog-window-content.component';
 
 export interface DialogContentData {
   id: number;
-  name: string;
+  objectName: string;
 }
 
 @Component({
@@ -13,8 +13,12 @@ export interface DialogContentData {
   styleUrls: ['./dialog-window.component.scss'],
 })
 export class DialogWindowComponent implements OnInit {
-  @Input() onSuccessAction: (id: number) => void = (id) => {};
-  @Input() id: number = 0;
+  @Input() dialogContentData: DialogContentData = {
+    id: 0,
+    objectName: '',
+  };
+  @Output() removeItemEvent = new EventEmitter<number>();
+
   constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {}
@@ -22,13 +26,13 @@ export class DialogWindowComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(DialogWindowContentComponent, {
       data: {
-        id: this.id,
+        ...this.dialogContentData,
       },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result === true && this.onSuccessAction) {
-        this.onSuccessAction(this.id);
+      if (result === true) {
+        this.removeItemEvent.emit(this.dialogContentData.id);
       }
     });
   }
