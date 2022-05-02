@@ -18,6 +18,7 @@ export class ArticlesNewComponent implements OnInit {
   articles: Article[] = [];
   articlesPerPage: Article[] = [];
   errors: string[] = [];
+  public LastScrapDate: string | undefined = undefined;
   public dataLoaded: boolean = false;
 
   onChangePage(articlesPerPage: Article[]) {
@@ -40,6 +41,14 @@ export class ArticlesNewComponent implements OnInit {
       )
       .finally(() => {
         this.dataLoaded = true;
+        this.setDate();
       });
+  }
+
+  setDate() {
+    if (this.articles.length > 0) {
+      const date: Date = new Date(this.articles[0].dateScrapped);
+      this.LastScrapDate = date.toLocaleDateString();
+    }
   }
 }
