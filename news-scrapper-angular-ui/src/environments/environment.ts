@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost/news-scrapper.api/',
+  apiUrl: 'http://localhost/news-scrapper.api/',
 };
 
 /*
