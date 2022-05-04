@@ -14,7 +14,7 @@
 
 <app-loading [dataLoaded]="dataLoaded"> </app-loading>
 
-<div class="row articles__container" *ngIf="articles.length > 0">
+<div class="row articles__container" *ngIf="articles.length > 0 && dataLoaded">
   <article class="article" *ngFor="let item of articlesOnPage">
     <p class="article__header">
       <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{
