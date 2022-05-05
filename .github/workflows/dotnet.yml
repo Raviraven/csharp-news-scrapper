@@ -2,6 +2,7 @@ name: .NET unit tests
 
 on:
   pull_request_target:
+  push:
 
 jobs:
   run_net_tests:
