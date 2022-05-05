@@ -5,6 +5,7 @@ name: angular tests
 
 on:
   pull_request:
+  push:
 
 jobs:
   run_angular_tests:
