@@ -1,14 +1,10 @@
-.example-h2 {
-  margin: 10px;
-}
-
-.example-section {
+.spinner-container {
   display: flex;
   align-content: center;
   align-items: center;
-  height: 60px;
+  justify-content: center;
 }
 
-.example-margin {
-  margin: 0 10px;
+.loading-spinner {
+  margin: 1rem 1rem;
 }
