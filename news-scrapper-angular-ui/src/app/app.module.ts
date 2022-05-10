@@ -28,6 +28,8 @@ import { DialogWindowComponent } from './components/delete-dialog-window/dialog-
 import { DialogWindowContentComponent } from './components/delete-dialog-window/dialog-window-content/dialog-window-content.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MaterialModule } from './components/material.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -59,6 +61,12 @@ import { MaterialModule } from './components/material.module';
     BrowserAnimationsModule,
     MatDialogModule,
     MaterialModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
