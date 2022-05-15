@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using news_scrapper.api.Attributes;
 using news_scrapper.application.Interfaces;
 using news_scrapper.domain.Exceptions;
+using news_scrapper.domain.Models;
 using news_scrapper.domain.Models.WebsiteDetails;
 using news_scrapper.domain.ResponseViewModels;
 using System.Collections.Generic;
@@ -26,7 +27,8 @@ namespace news_scrapper.api.Controllers
         [HttpGet]
         public ActionResult<List<WebsiteDetails>> GetAll()
         {
-            var result =  _websiteDetailsService.GetAll();
+            var userId = (HttpContext.Items["User"] as User).Id;
+            var result = _websiteDetailsService.GetAll(userId); //_websiteDetailsService.GetAll();
 
             if (result.Count == 0)
                 throw new KeyNotFoundException();

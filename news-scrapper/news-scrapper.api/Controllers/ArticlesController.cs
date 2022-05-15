@@ -33,11 +33,12 @@ namespace news_scrapper.api.Controllers
         [HttpGet]
         public ActionResult<List<Article>> Get([FromQuery] int page, [FromQuery] int count)
         {
+            var user = HttpContext.Items["User"] as User;
             List<Article> result;
 
             if (page == 0 && count == 0)
             {
-                result = _articlesService.Get();
+                result = _articlesService.Get(user.Id);
             }
             else
             {
