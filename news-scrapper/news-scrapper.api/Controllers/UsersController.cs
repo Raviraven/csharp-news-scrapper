@@ -4,6 +4,7 @@ using news_scrapper.api.Attributes;
 using news_scrapper.application.Data;
 using news_scrapper.application.Interfaces;
 using news_scrapper.domain.Models.UsersAuth;
+using System;
 
 namespace news_scrapper.api.Controllers
 {
@@ -28,7 +29,8 @@ namespace news_scrapper.api.Controllers
         public IActionResult Authenticate(AuthenticateRequest model)
         {
             var response = _userService.Authenticate(model, ipAddress());
-            setTokenCookie(response.RefreshToken);
+            response.ExpiresIn = 7;
+            setTokenCookie(response.RefreshToken, _dateTimeProvider.Now.AddDays(7));
             return Ok(response);
         }
 
@@ -38,7 +40,7 @@ namespace news_scrapper.api.Controllers
         {
             var refreshToken = Request.Cookies[REFRESH_TOKEN_COOKIE_NAME];
             var response = _userService.RefreshToken(refreshToken, ipAddress());
-            setTokenCookie(response.RefreshToken);
+            setTokenCookie(response.RefreshToken, _dateTimeProvider.Now.AddDays(7));
             return Ok(response);
         }
 
@@ -76,12 +78,12 @@ namespace news_scrapper.api.Controllers
         }
 
 
-        private void setTokenCookie(string token)
+        private void setTokenCookie(string token, DateTime expiresIn)
         {
             var cookieOptions = new CookieOptions 
             { 
                 HttpOnly = true,
-                Expires = _dateTimeProvider.Now.AddDays(7)
+                Expires = expiresIn
             };
             Response.Cookies.Append(REFRESH_TOKEN_COOKIE_NAME, token, cookieOptions);
         }

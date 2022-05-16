@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
     this.clearErrors();
     this.service.postLoginDetails().subscribe(
       (res) => {
+        this.service.setSession(res);
         this.service.Token = res.jwtToken;
         this.service.Id = res.id;
         this.authErrorHandlerService.ClearErrors();

@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Text.Json.Serialization;
 
 namespace news_scrapper.domain.Models.UsersAuth
 {
@@ -9,6 +10,7 @@ namespace news_scrapper.domain.Models.UsersAuth
         public string LastName { get; set; }
         public string Username { get; set; }
         public string JwtToken { get; set; }
+        public int ExpiresIn { get; set; }
 
         [JsonIgnore] // refresh token is returned in http only cookie
         public string RefreshToken { get; set; }

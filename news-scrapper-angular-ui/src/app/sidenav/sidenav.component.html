@@ -17,7 +17,7 @@
     <ul
       class="navigation__list"
       [class.active]="NavigationActive"
-      *ngIf="usersService.Token.length <= 0"
+      *ngIf="!usersService.isLoggedIn()"
     >
       <li class="navigation__list--item">
         <a [routerLink]="['/']" class="navigation__list--link">Home</a>
@@ -35,14 +35,14 @@
     <ul
       class="navigation__list"
       [class.active]="NavigationActive"
-      *ngIf="usersService.Token.length > 0"
+      *ngIf="usersService.isLoggedIn()"
     >
       <li class="navigation__list--item">
         <a [routerLink]="['/']" class="navigation__list--link">Home</a>
       </li>
       <li class="navigation__list--item">
         <a [routerLink]="['/articles-new/']" class="navigation__list--link"
-          >Newly scrapped articles</a
+          >Last scrapped</a
         >
       </li>
       <li class="navigation__list--item">

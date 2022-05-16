@@ -54,8 +54,7 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private handleError(error: HttpErrorResponse) {
-    if(error.status > 401 && error.status < 500)
-      return;
+    if (error.status > 401 && error.status < 500) return;
 
     this.authErrorHandlerService.ClearErrors();
     this.authErrorHandlerService.AddError(
