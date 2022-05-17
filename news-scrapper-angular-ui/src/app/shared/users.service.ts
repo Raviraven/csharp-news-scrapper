@@ -29,8 +29,6 @@ export class UsersService {
   }
 
   isLoggedIn() {
-    console.log('isLoggedIn');
-    console.log(moment().isBefore(this.getExpiration()));
     return moment().isBefore(this.getExpiration());
   }
 
@@ -60,7 +58,6 @@ export class UsersService {
   }
 
   public setSession(authResult: AuthenticateResponse) {
-    console.log(moment());
     const expiresAt = moment().add(authResult.expiresInDays, 'days');
 
     localStorage.setItem(TOKEN_LOCAL_STORAGE_KEY, authResult.jwtToken);

@@ -36,7 +36,7 @@ export class ArticlesListComponent implements OnInit {
           this.articles = res;
         },
         (err) => {
-          console.log(err);
+          console.error(err);
           //this.errors.push(err.error.message);
           this.errors.push((err as HttpErrorResponse).error);
         }
@@ -56,7 +56,9 @@ export class ArticlesListComponent implements OnInit {
           if (res.length > 1) {
             this.errors = res;
           } else {
-            console.log(res);
+            console.log(
+              `articles-list component.scrapArticles response: ${res}`
+            );
           }
         },
         (err) => {

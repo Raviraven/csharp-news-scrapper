@@ -30,6 +30,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MaterialModule } from './components/material.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { environment } from '../environments/environment';
     LoadingComponent,
     DialogWindowComponent,
     DialogWindowContentComponent,
+    LogoutComponent,
   ],
   imports: [
     BrowserModule,

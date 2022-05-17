@@ -1,0 +1,7 @@
+@import "../_variables.scss";
+
+.page-link {
+  @media screen and (max-width: $tablet) {
+    padding: 0.5rem;
+  }
+}

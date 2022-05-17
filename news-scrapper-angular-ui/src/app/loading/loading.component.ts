@@ -12,9 +12,7 @@ export class LoadingComponent implements OnInit {
   public color: ThemePalette = 'primary';
   public mode: ProgressSpinnerMode = 'indeterminate';
 
-  constructor() {
-    console.log(this.dataLoaded);
-  }
+  constructor() {}
 
   ngOnInit(): void {}
 }
