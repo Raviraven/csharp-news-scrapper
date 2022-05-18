@@ -5,9 +5,15 @@ import { AuthenticateResponse } from './authenticate-response.model';
 import { environment } from 'src/environments/environment';
 import { User } from './user.model';
 import * as moment from 'moment';
+import { Observable, of } from 'rxjs';
 
 const TOKEN_LOCAL_STORAGE_KEY: string = 'token';
 const EXPIRATION_LOCAL_STORAGE_KEY: string = 'expires_at';
+
+export interface LoginResponse {
+  success: boolean;
+  error: string;
+}
 @Injectable({
   providedIn: 'root',
 })
@@ -18,14 +24,31 @@ export class UsersService {
 
   formData: AuthenticateRequest = new AuthenticateRequest();
 
-  Token: string = '';
-  Id: number = 0;
+  private token: string = '';
+  private id: number = 0;
 
-  postLoginDetails() {
-    return this.http.post<AuthenticateResponse>(
-      this.baseUrl + 'authenticate',
-      this.formData
-    );
+  postLoginDetails(): Observable<LoginResponse> {
+    let result: LoginResponse = {
+      success: false,
+      error: '',
+    };
+
+    this.http
+      .post<AuthenticateResponse>(this.baseUrl + 'authenticate', this.formData)
+      .subscribe(
+        (res) => {
+          this.setSession(res);
+          this.token = res.jwtToken;
+          this.id = res.id;
+
+          result.success = true;
+        },
+        (err) => {
+          result.success = false;
+          result.error = err.error.message;
+        }
+      );
+    return of(result);
   }
 
   isLoggedIn() {
@@ -38,7 +61,7 @@ export class UsersService {
   }
 
   GetCurrentUserDetails() {
-    return this.http.get<User>(this.baseUrl + this.Id);
+    return this.http.get<User>(this.baseUrl + this.id);
   }
 
   getUsers() {
@@ -49,6 +72,10 @@ export class UsersService {
     const expiration = localStorage.getItem(EXPIRATION_LOCAL_STORAGE_KEY);
     const expiresAt = JSON.parse(expiration ?? '{}');
     return moment(expiresAt);
+  }
+
+  getToken(): string {
+    return this.token;
   }
 
   RevokeToken(token: string) {
