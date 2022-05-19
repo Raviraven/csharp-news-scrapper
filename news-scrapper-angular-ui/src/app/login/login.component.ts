@@ -24,14 +24,16 @@ export class LoginComponent implements OnInit {
     this.errors = [];
   }
 
-  onSubmit(form: NgForm) {
+  async onSubmit(form: NgForm) {
     this.clearErrors();
-    this.service.postLoginDetails().subscribe(
+    var loginResponse = await this.service.postLoginDetails().subscribe(
       (res) => {
-        this.service.Token = res.jwtToken;
-        this.service.Id = res.id;
-        this.authErrorHandlerService.ClearErrors();
-        this.router.navigate(['']);
+        if (res.error) {
+          this.errors.push(res.error);
+        } else {
+          this.authErrorHandlerService.ClearErrors();
+          this.router.navigate(['']);
+        }
       },
       (err) => {
         this.errors.push(err.error.message);

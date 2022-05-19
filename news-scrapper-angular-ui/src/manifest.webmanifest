@@ -1,7 +1,7 @@
 {
   "name": "news-scrapper-angular-ui",
   "short_name": "news-scrapper-angular-ui",
-  "theme_color": "#1976d2",
+  "theme_color": "#343c45",
   "background_color": "#fafafa",
   "display": "standalone",
   "scope": "./",

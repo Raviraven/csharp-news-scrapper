@@ -6,6 +6,7 @@ import { AddCategoryComponent } from './categories/add-category/add-category.com
 import { CategoriesComponent } from './categories/categories/categories.component';
 import { EditCategoryComponent } from './categories/edit-category/edit-category.component';
 import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { AddWebsiteDetailsComponent } from './website-details/add-website-details/add-website-details.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   // { path: '', redirectTo: '/articles', pathMatch: 'full' },
   { path: '', component: ArticlesListComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'logout', component: LogoutComponent },
   { path: 'website-details', component: WebsiteDetailsListComponent },
   { path: 'website-details/add', component: AddWebsiteDetailsComponent },
   { path: 'website-details/edit/:id', component: EditWebsiteDetailsComponent },
