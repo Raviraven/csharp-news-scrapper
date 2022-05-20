@@ -34,7 +34,7 @@ jobs:
         verbosity: 'Info'
 
     - name: Upload coverage report artifact
-      uses: actions/upload-artifact@2.2.3
+      uses: actions/upload-artifact@v3
       with:
         name: CoverageReport
         path: coveragereport
