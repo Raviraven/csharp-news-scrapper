@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage line-rate="0.30782533506268916" branch-rate="0.7887323943661971" lines-covered="712" lines-valid="2313" branches-covered="112" branches-valid="142" complexity="385" version="0" timestamp="1653088890">
+<coverage line-rate="0.32079550367488113" branch-rate="0.7887323943661971" lines-covered="742" lines-valid="2313" branches-covered="112" branches-valid="142" complexity="385" version="0" timestamp="1653090036">
   <sources>
     <source>/home/runner/work/csharp-news-scrapper/csharp-news-scrapper/news-scrapper/</source>
   </sources>
   <packages>
-    <package name="news-scrapper.domain" line-rate="0.5529411764705883" branch-rate="1" complexity="115">
+    <package name="news-scrapper.domain" line-rate="0.7176470588235294" branch-rate="1" complexity="115">
       <classes>
         <class name="news_scrapper.domain.AppSettings" filename="/home/runner/work/csharp-news-scrapper/csharp-news-scrapper/news-scrapper/news-scrapper.domain/AppSettings.cs" line-rate="1" branch-rate="1" complexity="2">
           <methods>
@@ -25,7 +25,7 @@
             <line number="9" hits="44" branch="false" />
           </lines>
         </class>
-        <class name="news_scrapper.domain.DBModels.ArticleDb" filename="/home/runner/work/csharp-news-scrapper/csharp-news-scrapper/news-scrapper/news-scrapper.domain/DBModels/ArticleDb.cs" line-rate="0.875" branch-rate="1" complexity="8">
+        <class name="news_scrapper.domain.DBModels.ArticleDb" filename="/home/runner/work/csharp-news-scrapper/csharp-news-scrapper/news-scrapper/news-scrapper.domain/DBModels/ArticleDb.cs" line-rate="1" branch-rate="1" complexity="8">
           <methods>
             <method name="get_Id" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
@@ -62,9 +62,9 @@
                 <line number="21" hits="193" branch="false" />
               </lines>
             </method>
-            <method name="get_WebsiteDetails" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_WebsiteDetails" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="24" hits="0" branch="false" />
+                <line number="24" hits="20" branch="false" />
               </lines>
             </method>
           </methods>
@@ -76,7 +76,7 @@
             <line number="18" hits="129" branch="false" />
             <line number="19" hits="129" branch="false" />
             <line number="21" hits="193" branch="false" />
-            <line number="24" hits="0" branch="false" />
+            <line number="24" hits="20" branch="false" />
           </lines>
         </class>
         <class name="news_scrapper.domain.DBModels.CategoryDb" filename="/home/runner/work/csharp-news-scrapper/csharp-news-scrapper/news-scrapper/news-scrapper.domain/DBModels/CategoryDb.cs" line-rate="1" branch-rate="1" complexity="3">
@@ -103,86 +103,86 @@
             <line number="11" hits="13" branch="false" />
           </lines>
         </class>
-        <class name="news_scrapper.domain.DBModels.RefreshTokenDb" filename="/home/runner/work/csharp-news-scrapper/csharp-news-scrapper/news-scrapper/news-scrapper.domain/DBModels/RefreshTokenDb.cs" line-rate="0" branch-rate="1" complexity="9">
+        <class name="news_scrapper.domain.DBModels.RefreshTokenDb" filename="/home/runner/work/csharp-news-scrapper/csharp-news-scrapper/news-scrapper/news-scrapper.domain/DBModels/RefreshTokenDb.cs" line-rate="1" branch-rate="1" complexity="9">
           <methods>
-            <method name="get_Id" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_Id" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="13" hits="0" branch="false" />
+                <line number="13" hits="30" branch="false" />
               </lines>
             </method>
-            <method name="get_Token" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_Token" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="14" hits="0" branch="false" />
+                <line number="14" hits="30" branch="false" />
               </lines>
             </method>
-            <method name="get_Expires" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_Expires" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="15" hits="0" branch="false" />
+                <line number="15" hits="30" branch="false" />
               </lines>
             </method>
-            <method name="get_Created" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_Created" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="16" hits="0" branch="false" />
+                <line number="16" hits="30" branch="false" />
               </lines>
             </method>
-            <method name="get_CreatedByIp" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_CreatedByIp" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="17" hits="0" branch="false" />
+                <line number="17" hits="30" branch="false" />
               </lines>
             </method>
-            <method name="get_Revoked" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_Revoked" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="18" hits="0" branch="false" />
+                <line number="18" hits="30" branch="false" />
               </lines>
             </method>
-            <method name="get_RevokedByIp" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_RevokedByIp" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="19" hits="0" branch="false" />
+                <line number="19" hits="30" branch="false" />
               </lines>
             </method>
-            <method name="get_ReplacedByToken" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_ReplacedByToken" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="20" hits="0" branch="false" />
+                <line number="20" hits="30" branch="false" />
               </lines>
             </method>
-            <method name="get_ReasonRevoked" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_ReasonRevoked" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="21" hits="0" branch="false" />
+                <line number="21" hits="30" branch="false" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="13" hits="0" branch="false" />
-            <line number="14" hits="0" branch="false" />
-            <line number="15" hits="0" branch="false" />
-            <line number="16" hits="0" branch="false" />
-            <line number="17" hits="0" branch="false" />
-            <line number="18" hits="0" branch="false" />
-            <line number="19" hits="0" branch="false" />
-            <line number="20" hits="0" branch="false" />
-            <line number="21" hits="0" branch="false" />
+            <line number="13" hits="30" branch="false" />
+            <line number="14" hits="30" branch="false" />
+            <line number="15" hits="30" branch="false" />
+            <line number="16" hits="30" branch="false" />
+            <line number="17" hits="30" branch="false" />
+            <line number="18" hits="30" branch="false" />
+            <line number="19" hits="30" branch="false" />
+            <line number="20" hits="30" branch="false" />
+            <line number="21" hits="30" branch="false" />
           </lines>
         </class>
-        <class name="news_scrapper.domain.DBModels.UserDb" filename="/home/runner/work/csharp-news-scrapper/csharp-news-scrapper/news-scrapper/news-scrapper.domain/DBModels/UserDb.cs" line-rate="0.16666666666666666" branch-rate="1" complexity="6">
+        <class name="news_scrapper.domain.DBModels.UserDb" filename="/home/runner/work/csharp-news-scrapper/csharp-news-scrapper/news-scrapper/news-scrapper.domain/DBModels/UserDb.cs" line-rate="1" branch-rate="1" complexity="6">
           <methods>
-            <method name="get_Id" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_Id" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="13" hits="0" branch="false" />
+                <line number="13" hits="33" branch="false" />
               </lines>
             </method>
-            <method name="get_FirstName" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_FirstName" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="14" hits="0" branch="false" />
+                <line number="14" hits="33" branch="false" />
               </lines>
             </method>
-            <method name="get_LastName" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_LastName" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="15" hits="0" branch="false" />
+                <line number="15" hits="33" branch="false" />
               </lines>
             </method>
-            <method name="get_Username" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_Username" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="16" hits="0" branch="false" />
+                <line number="16" hits="33" branch="false" />
               </lines>
             </method>
             <method name="get_PasswordHash" signature="()" line-rate="1" branch-rate="1" complexity="1">
@@ -190,22 +190,22 @@
                 <line number="19" hits="38" branch="false" />
               </lines>
             </method>
-            <method name="get_RefreshTokens" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_RefreshTokens" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="22" hits="0" branch="false" />
+                <line number="22" hits="33" branch="false" />
               </lines>
             </method>
           </methods>
           <lines>
-            <line number="13" hits="0" branch="false" />
-            <line number="14" hits="0" branch="false" />
-            <line number="15" hits="0" branch="false" />
-            <line number="16" hits="0" branch="false" />
+            <line number="13" hits="33" branch="false" />
+            <line number="14" hits="33" branch="false" />
+            <line number="15" hits="33" branch="false" />
+            <line number="16" hits="33" branch="false" />
             <line number="19" hits="38" branch="false" />
-            <line number="22" hits="0" branch="false" />
+            <line number="22" hits="33" branch="false" />
           </lines>
         </class>
-        <class name="news_scrapper.domain.DBModels.WebsiteDetailsDb" filename="/home/runner/work/csharp-news-scrapper/csharp-news-scrapper/news-scrapper/news-scrapper.domain/DBModels/WebsiteDetailsDb.cs" line-rate="0.9230769230769231" branch-rate="1" complexity="13">
+        <class name="news_scrapper.domain.DBModels.WebsiteDetailsDb" filename="/home/runner/work/csharp-news-scrapper/csharp-news-scrapper/news-scrapper/news-scrapper.domain/DBModels/WebsiteDetailsDb.cs" line-rate="1" branch-rate="1" complexity="13">
           <methods>
             <method name="get_id" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
@@ -262,9 +262,9 @@
                 <line number="19" hits="39" branch="false" />
               </lines>
             </method>
-            <method name="get_Articles" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_Articles" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="21" hits="0" branch="false" />
+                <line number="21" hits="4" branch="false" />
               </lines>
             </method>
             <method name="get_Categories" signature="()" line-rate="1" branch-rate="1" complexity="1">
@@ -285,7 +285,7 @@
             <line number="17" hits="39" branch="false" />
             <line number="18" hits="39" branch="false" />
             <line number="19" hits="39" branch="false" />
-            <line number="21" hits="0" branch="false" />
+            <line number="21" hits="4" branch="false" />
             <line number="22" hits="40" branch="false" />
           </lines>
         </class>
@@ -389,7 +389,7 @@
             <line number="15" hits="306" branch="false" />
           </lines>
         </class>
-        <class name="news_scrapper.domain.Models.Categories.Category" filename="/home/runner/work/csharp-news-scrapper/csharp-news-scrapper/news-scrapper/news-scrapper.domain/Models/Categories/Category.cs" line-rate="0.6666666666666666" branch-rate="1" complexity="3">
+        <class name="news_scrapper.domain.Models.Categories.Category" filename="/home/runner/work/csharp-news-scrapper/csharp-news-scrapper/news-scrapper/news-scrapper.domain/Models/Categories/Category.cs" line-rate="1" branch-rate="1" complexity="3">
           <methods>
             <method name="get_Id" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
@@ -401,23 +401,23 @@
                 <line number="9" hits="14" branch="false" />
               </lines>
             </method>
-            <method name="get_Websites" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_Websites" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="10" hits="0" branch="false" />
+                <line number="10" hits="6" branch="false" />
               </lines>
             </method>
           </methods>
           <lines>
             <line number="8" hits="14" branch="false" />
             <line number="9" hits="14" branch="false" />
-            <line number="10" hits="0" branch="false" />
+            <line number="10" hits="6" branch="false" />
           </lines>
         </class>
-        <class name="news_scrapper.domain.Models.Categories.CategoryAdd" filename="/home/runner/work/csharp-news-scrapper/csharp-news-scrapper/news-scrapper/news-scrapper.domain/Models/Categories/CategoryAdd.cs" line-rate="0.6666666666666666" branch-rate="1" complexity="3">
+        <class name="news_scrapper.domain.Models.Categories.CategoryAdd" filename="/home/runner/work/csharp-news-scrapper/csharp-news-scrapper/news-scrapper/news-scrapper.domain/Models/Categories/CategoryAdd.cs" line-rate="1" branch-rate="1" complexity="3">
           <methods>
-            <method name="get_Id" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_Id" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="8" hits="0" branch="false" />
+                <line number="8" hits="4" branch="false" />
               </lines>
             </method>
             <method name="get_Name" signature="()" line-rate="1" branch-rate="1" complexity="1">
@@ -432,7 +432,7 @@
             </method>
           </methods>
           <lines>
-            <line number="8" hits="0" branch="false" />
+            <line number="8" hits="4" branch="false" />
             <line number="10" hits="16" branch="false" />
             <line number="11" hits="6" branch="false" />
           </lines>
@@ -693,61 +693,61 @@
             <line number="11" hits="0" branch="false" />
           </lines>
         </class>
-        <class name="news_scrapper.domain.Models.WebsiteDetails.WebsiteDetails" filename="/home/runner/work/csharp-news-scrapper/csharp-news-scrapper/news-scrapper/news-scrapper.domain/Models/WebsiteDetails/WebsiteDetails.cs" line-rate="0.10638297872340426" branch-rate="1" complexity="13">
+        <class name="news_scrapper.domain.Models.WebsiteDetails.WebsiteDetails" filename="/home/runner/work/csharp-news-scrapper/csharp-news-scrapper/news-scrapper/news-scrapper.domain/Models/WebsiteDetails/WebsiteDetails.cs" line-rate="0.3191489361702128" branch-rate="1" complexity="13">
           <methods>
             <method name="get_Id" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
                 <line number="33" hits="117" branch="false" />
               </lines>
             </method>
-            <method name="get_Url" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_Url" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="34" hits="0" branch="false" />
+                <line number="34" hits="179" branch="false" />
               </lines>
             </method>
-            <method name="get_MainNodeXPathToNewsContainer" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_MainNodeXPathToNewsContainer" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="35" hits="0" branch="false" />
+                <line number="35" hits="169" branch="false" />
               </lines>
             </method>
-            <method name="get_NewsNodeTag" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_NewsNodeTag" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="36" hits="0" branch="false" />
+                <line number="36" hits="172" branch="false" />
               </lines>
             </method>
-            <method name="get_NewsNodeClass" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_NewsNodeClass" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="37" hits="0" branch="false" />
+                <line number="37" hits="157" branch="false" />
               </lines>
             </method>
-            <method name="get_TitleNodeTag" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_TitleNodeTag" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="38" hits="0" branch="false" />
+                <line number="38" hits="154" branch="false" />
               </lines>
             </method>
-            <method name="get_TitleNodeClass" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_TitleNodeClass" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="39" hits="0" branch="false" />
+                <line number="39" hits="154" branch="false" />
               </lines>
             </method>
-            <method name="get_DescriptionNodeTag" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_DescriptionNodeTag" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="40" hits="0" branch="false" />
+                <line number="40" hits="152" branch="false" />
               </lines>
             </method>
-            <method name="get_DescriptionNodeClass" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_DescriptionNodeClass" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="41" hits="0" branch="false" />
+                <line number="41" hits="152" branch="false" />
               </lines>
             </method>
-            <method name="get_ImgNodeClass" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_ImgNodeClass" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="42" hits="0" branch="false" />
+                <line number="42" hits="152" branch="false" />
               </lines>
             </method>
-            <method name="get_Category" signature="()" line-rate="0" branch-rate="1" complexity="1">
+            <method name="get_Category" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
-                <line number="43" hits="0" branch="false" />
+                <line number="43" hits="87" branch="false" />
               </lines>
             </method>
             <method name="get_Categories" signature="()" line-rate="1" branch-rate="1" complexity="1">
@@ -828,16 +828,16 @@
             <line number="30" hits="0" branch="false" />
             <line number="31" hits="0" branch="false" />
             <line number="33" hits="117" branch="false" />
-            <line number="34" hits="0" branch="false" />
-            <line number="35" hits="0" branch="false" />
-            <line number="36" hits="0" branch="false" />
-            <line number="37" hits="0" branch="false" />
-            <line number="38" hits="0" branch="false" />
-            <line number="39" hits="0" branch="false" />
-            <line number="40" hits="0" branch="false" />
-            <line number="41" hits="0" branch="false" />
-            <line number="42" hits="0" branch="false" />
-            <line number="43" hits="0" branch="false" />
+            <line number="34" hits="179" branch="false" />
+            <line number="35" hits="169" branch="false" />
+            <line number="36" hits="172" branch="false" />
+            <line number="37" hits="157" branch="false" />
+            <line number="38" hits="154" branch="false" />
+            <line number="39" hits="154" branch="false" />
+            <line number="40" hits="152" branch="false" />
+            <line number="41" hits="152" branch="false" />
+            <line number="42" hits="152" branch="false" />
+            <line number="43" hits="87" branch="false" />
             <line number="45" hits="104" branch="false" />
             <line number="48" hits="0" branch="false" />
             <line number="49" hits="0" branch="false" />
@@ -937,7 +937,7 @@
         </class>
       </classes>
     </package>
-    <package name="news-scrapper.infrastructure" line-rate="0.2661486158329286" branch-rate="0.782608695652174" complexity="242">
+    <package name="news-scrapper.infrastructure" line-rate="0.26711996114618747" branch-rate="0.782608695652174" complexity="242">
       <classes>
         <class name="news_scrapper.infrastructure.Authorization.JwtUtils" filename="/home/runner/work/csharp-news-scrapper/csharp-news-scrapper/news-scrapper/news-scrapper.infrastructure/Authorization/JwtUtils.cs" line-rate="1" branch-rate="1" complexity="4">
           <methods>
@@ -1176,7 +1176,7 @@
                 <line number="92" hits="2" branch="false" />
                 <line number="94" hits="1" branch="false" />
                 <line number="95" hits="1" branch="false" />
-                <line number="96" hits="8" branch="false" />
+                <line number="96" hits="7" branch="false" />
                 <line number="97" hits="1" branch="false" />
                 <line number="99" hits="1" branch="false" />
                 <line number="100" hits="3" branch="false" />
@@ -1290,7 +1290,7 @@
             <line number="92" hits="2" branch="false" />
             <line number="94" hits="1" branch="false" />
             <line number="95" hits="1" branch="false" />
-            <line number="96" hits="8" branch="false" />
+            <line number="96" hits="7" branch="false" />
             <line number="97" hits="1" branch="false" />
             <line number="99" hits="1" branch="false" />
             <line number="100" hits="3" branch="false" />
@@ -1931,7 +1931,7 @@
             <line number="181" hits="10" branch="false" />
           </lines>
         </class>
-        <class name="news_scrapper.infrastructure.Data.WebsiteDetailsService" filename="/home/runner/work/csharp-news-scrapper/csharp-news-scrapper/news-scrapper/news-scrapper.infrastructure/Data/WebsiteDetailsService.cs" line-rate="0.9701492537313433" branch-rate="0.9444444444444444" complexity="4">
+        <class name="news_scrapper.infrastructure.Data.WebsiteDetailsService" filename="/home/runner/work/csharp-news-scrapper/csharp-news-scrapper/news-scrapper/news-scrapper.infrastructure/Data/WebsiteDetailsService.cs" line-rate="1" branch-rate="0.9444444444444444" complexity="4">
           <methods>
             <method name="get__websitesRepository" signature="()" line-rate="1" branch-rate="1" complexity="1">
               <lines>
@@ -1948,14 +1948,14 @@
                 <line number="17" hits="49" branch="false" />
               </lines>
             </method>
-            <method name="Add" signature="(news_scrapper.domain.Models.WebsiteDetails.WebsiteDetails)" line-rate="0.9230769230769231" branch-rate="0.75" complexity="NaN">
+            <method name="Add" signature="(news_scrapper.domain.Models.WebsiteDetails.WebsiteDetails)" line-rate="1" branch-rate="0.75" complexity="NaN">
               <lines>
                 <line number="28" hits="9" branch="false" />
                 <line number="29" hits="9" branch="false" />
                 <line number="31" hits="4" branch="false" />
                 <line number="33" hits="4" branch="true" condition-coverage="100% (2/2)" />
                 <line number="34" hits="4" branch="false" />
-                <line number="35" hits="0" branch="true" condition-coverage="50% (1/2)" />
+                <line number="35" hits="4" branch="true" condition-coverage="50% (1/2)" />
                 <line number="36" hits="4" branch="false" />
                 <line number="38" hits="4" branch="false" />
                 <line number="39" hits="4" branch="false" />
@@ -1990,7 +1990,7 @@
                 <line number="65" hits="2" branch="false" />
               </lines>
             </method>
-            <method name="Save" signature="(news_scrapper.domain.Models.WebsiteDetails.WebsiteDetails)" line-rate="0.9333333333333333" branch-rate="1" complexity="NaN">
+            <method name="Save" signature="(news_scrapper.domain.Models.WebsiteDetails.WebsiteDetails)" line-rate="1" branch-rate="1" complexity="NaN">
               <lines>
                 <line number="68" hits="10" branch="false" />
                 <line number="69" hits="10" branch="false" />
@@ -1999,7 +1999,7 @@
                 <line number="75" hits="5" branch="false" />
                 <line number="77" hits="5" branch="true" condition-coverage="100% (2/2)" />
                 <line number="78" hits="5" branch="false" />
-                <line number="79" hits="0" branch="false" />
+                <line number="79" hits="5" branch="false" />
                 <line number="80" hits="5" branch="false" />
                 <line number="82" hits="5" branch="false" />
                 <line number="83" hits="5" branch="false" />
@@ -2057,7 +2057,7 @@
             <line number="31" hits="4" branch="false" />
             <line number="33" hits="4" branch="true" condition-coverage="100% (2/2)" />
             <line number="34" hits="4" branch="false" />
-            <line number="35" hits="0" branch="true" condition-coverage="50% (1/2)" />
+            <line number="35" hits="4" branch="true" condition-coverage="50% (1/2)" />
             <line number="36" hits="4" branch="false" />
             <line number="38" hits="4" branch="false" />
             <line number="39" hits="4" branch="false" />
@@ -2085,7 +2085,7 @@
             <line number="75" hits="5" branch="false" />
             <line number="77" hits="5" branch="true" condition-coverage="100% (2/2)" />
             <line number="78" hits="5" branch="false" />
-            <line number="79" hits="0" branch="false" />
+            <line number="79" hits="5" branch="false" />
             <line number="80" hits="5" branch="false" />
             <line number="82" hits="5" branch="false" />
             <line number="83" hits="5" branch="false" />
