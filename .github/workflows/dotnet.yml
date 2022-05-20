@@ -32,13 +32,11 @@ jobs:
         reports: './news-scrapper.infrastructure.unit-tests/TestResults/**/coverage.cobertura.xml'
         targetdir: 'coveragereport'
         verbosity: 'Info'
-
     - name: Upload coverage report artifact
       uses: actions/upload-artifact@v3
       with:
         name: CoverageReport
         path: coveragereport
-
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
