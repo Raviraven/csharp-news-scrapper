@@ -1,0 +1,23 @@
+{
+  "profiles": {
+    "generate-code-coverage": {
+      "commandName": "Executable",
+      "executablePath": "dotnet",
+      "workingDirectory": "$(ProjectDir)",
+      "commandLineArgs": "test --collect:\"XPlat Code Coverage\""
+    },
+    "generate-report-nuget": {
+      "commandName": "Executable",
+      "executablePath": "dotnet",
+      "workingDirectory": "$(ProjectDir)",
+      "commandLineArgs": "$(UserProfile)\\.nuget\\packages\\reportgenerator\\5.1.9\\tools\\net5.0\\ReportGenerator.dll -reports:\"TestResults\\**\\coverage.cobertura.xml\" -targetdir:\"coveragereport\" -reporttypes:Html\""
+
+    },
+    "generate-report-global-tool": {
+      "commandName": "Executable",
+      "executablePath": "reportgenerator",
+      "workingDirectory": "$(ProjectDir)",
+      "commandLineArgs": "-reports:\"TestResults\\**\\coverage.cobertura.xml\" -targetdir:\"coveragereport\" -reporttypes:Html\""
+    }
+  }
+}

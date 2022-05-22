@@ -25,7 +25,7 @@ export class AuthInterceptor implements HttpInterceptor {
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    const authToken = this.auth.Token;
+    const authToken = this.auth.getToken();
 
     const authReq = req.clone({
       headers: req.headers.set('Authorization', authToken),
@@ -54,8 +54,7 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   private handleError(error: HttpErrorResponse) {
-    if(error.status > 401 && error.status < 500)
-      return;
+    if (error.status > 401 && error.status < 500) return;
 
     this.authErrorHandlerService.ClearErrors();
     this.authErrorHandlerService.AddError(

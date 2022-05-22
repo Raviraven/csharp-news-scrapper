@@ -14,8 +14,11 @@
 /news-scrapper/news-scrapper.infrastructure/bin
 /news-scrapper/news-scrapper.infrastructure.unit-tests/bin
 /news-scrapper/news-scrapper.infrastructure.unit-tests/obj
+/news-scrapper/news-scrapper.infrastructure.unit-tests/TestResults
+/news-scrapper/news-scrapper.infrastructure.unit-tests/coveragereport
 /news-scrapper/news-scrapper.resources/obj
 /news-scrapper/news-scrapper.resources/bin
 news-scrapper-angular-ui/node_modules/
 news-scrapper/news-scrapper.api/web.config
 news-scrapper-angular-ui/.angular
+node_modules/
