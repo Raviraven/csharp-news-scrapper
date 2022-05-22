@@ -75,6 +75,9 @@ export class UsersService {
   }
 
   getToken(): string {
+    if (!this.token || this.token.length < 0) {
+      this.token = localStorage.getItem(TOKEN_LOCAL_STORAGE_KEY) ?? '';
+    }
     return this.token;
   }
 
