@@ -42,7 +42,7 @@ namespace news_scrapper.api.Controllers
             }
             else
             {
-                result = _articlesService.Get(count, page);
+                result = _articlesService.Get(count, page, user.Id);
             }
 
             if (result == null)

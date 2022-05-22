@@ -52,9 +52,10 @@ namespace news_scrapper.infrastructure.Data
             return _mapper.Map<List<Article>>(articlesFromDb);
         }
 
-        public List<Article> Get(int articlesPerPage, int pageNo)
+        public List<Article> Get(int articlesPerPage, int pageNo, int userId)
         {
             var orderedArticles = _articlesUnitOfWork.Articles.Get(
+                filter: n => n.WebsiteDetails.User.Id == userId,
                 orderBy: n => n.OrderByDescending(n => n.DateScrapped).ThenBy(n => n.Id)
                 );
 
