@@ -58,6 +58,7 @@ export class UsersService {
   logout() {
     localStorage.removeItem(TOKEN_LOCAL_STORAGE_KEY);
     localStorage.removeItem(EXPIRATION_LOCAL_STORAGE_KEY);
+    this.token = '';
   }
 
   GetCurrentUserDetails() {
