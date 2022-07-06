@@ -25,7 +25,7 @@ namespace news_scrapper.api.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<WebsiteDetails>> GetAll()
+        public ActionResult<List<WebsiteDetails>> GetAllForUserId()
         {
             var userId = (HttpContext.Items["User"] as User).Id;
             var result = _websiteDetailsService.GetAll(userId); //_websiteDetailsService.GetAll();

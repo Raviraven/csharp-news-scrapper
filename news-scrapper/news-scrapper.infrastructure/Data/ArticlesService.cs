@@ -59,6 +59,9 @@ namespace news_scrapper.infrastructure.Data
                 orderBy: n => n.OrderByDescending(n => n.DateScrapped).ThenBy(n => n.Id)
                 );
 
+            if (!orderedArticles.Any())
+                return new List<Article>();
+
             if (orderedArticles is null || !orderedArticles.Any())
                 return null;
 

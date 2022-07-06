@@ -11,6 +11,6 @@ namespace news_scrapper.application.Data
         List<Article> Get(int articlesPerPage, int pageNo, int userId);
         Article GetById(int id);
         List<Article> GetNew();
-        Task<List<string>> Scrap();
+        Task<List<string>> Scrap(int userId);
     }
 }
