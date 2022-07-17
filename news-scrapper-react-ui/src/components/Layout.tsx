@@ -105,8 +105,10 @@ export const Layout = () => {
             </ListItem>
           </List>
         </Drawer>
-        <Outlet />
       </AppBar>
+      <Box sx={{ marginTop: "4rem", width: "100%" }}>
+        <Outlet />
+      </Box>
     </Box>
   );
 };
