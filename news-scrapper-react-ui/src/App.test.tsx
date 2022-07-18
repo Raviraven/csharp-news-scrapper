@@ -1,9 +1,36 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { App } from "./App";
 
-test("renders learn react link", () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe("App component", () => {
+  test("should render news scrapper app bar", async () => {
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
+    expect(screen.getByText("News Scrapper")).toBeInTheDocument();
+  });
+
+  test.each([
+    //    { initialPath: "/", componentContent: "" },
+    { initialPath: "/login", componentContent: "Login" },
+  ])(
+    "should render proper component in outlet due to route change",
+    async ({ initialPath, componentContent }) => {
+      render(
+        <MemoryRouter initialEntries={[initialPath]}>
+          <App />
+          {/* <Routes>
+            <Route path="/">
+              <Route index element={<span>index component</span>} />
+              <Route path="test" element={<span>test element</span>} />
+            </Route>
+          </Routes> */}
+        </MemoryRouter>
+      );
+
+      expect(await screen.findByText(componentContent)).toBeInTheDocument();
+    }
+  );
 });
