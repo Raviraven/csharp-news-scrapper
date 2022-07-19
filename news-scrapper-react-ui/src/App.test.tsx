@@ -13,8 +13,8 @@ describe("App component", () => {
   });
 
   test.each([
-    //    { initialPath: "/", componentContent: "" },
-    { initialPath: "/login", componentContent: "Login" },
+    { initialPath: "/", componentContent: "home page" },
+    { initialPath: "/login", componentContent: "Sign in" },
   ])(
     "should render proper component in outlet due to route change",
     async ({ initialPath, componentContent }) => {
