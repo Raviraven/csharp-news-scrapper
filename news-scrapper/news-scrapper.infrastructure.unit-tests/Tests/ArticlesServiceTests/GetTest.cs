@@ -69,7 +69,7 @@ namespace news_scrapper.infrastructure.unit_tests.Tests.ArticlesServiceTests
                 .Returns(articlesFromDb);
             _mapper.Setup(n => n.Map<List<Article>>(It.IsAny<List<ArticleDb>>())).Callback(mapArticles);
 
-            _sut.Get(5, 1);
+            _sut.Get(5, 1, -1);
 
             mappedArticles.Should().BeEquivalentTo(articlesFromDb);
         }
@@ -87,7 +87,7 @@ namespace news_scrapper.infrastructure.unit_tests.Tests.ArticlesServiceTests
                 .Returns(articlesFromDb);
             _mapper.Setup(n => n.Map<List<Article>>(It.IsAny<List<ArticleDb>>())).Callback(mapArticles);
 
-            _sut.Get(5, 2);
+            _sut.Get(5, 2, -1);
 
             mappedArticles.Should().BeEquivalentTo(filteredArticles);
         }
@@ -105,7 +105,7 @@ namespace news_scrapper.infrastructure.unit_tests.Tests.ArticlesServiceTests
                 .Returns(articlesFromDb);
             _mapper.Setup(n => n.Map<List<Article>>(It.IsAny<List<ArticleDb>>())).Callback(mapArticles);
 
-            _sut.Get(5, 3);
+            _sut.Get(5, 3, -1);
 
             mappedArticles.Should().BeEquivalentTo(filteredArticles);
         }
@@ -124,7 +124,7 @@ namespace news_scrapper.infrastructure.unit_tests.Tests.ArticlesServiceTests
             _articlesRepository.Setup(n => n.Get(null, It.IsAny<Func<IQueryable<ArticleDb>, IOrderedQueryable<ArticleDb>>>(), ""))
                 .Returns(articlesFromDb);
 
-            var result = _sut.Get(0, 0);
+            var result = _sut.Get(0, 0, -1);
 
             result.Should().BeNull();
         }
@@ -137,7 +137,7 @@ namespace news_scrapper.infrastructure.unit_tests.Tests.ArticlesServiceTests
             _articlesRepository.Setup(n => n.Get(null, It.IsAny<Func<IQueryable<ArticleDb>, IOrderedQueryable<ArticleDb>>>(), ""))
                .Returns(articlesFromDb);
 
-            var result = _sut.Get(5, 3);
+            var result = _sut.Get(5, 3, -1);
 
             result.Should().BeNull();
         }
@@ -154,7 +154,7 @@ namespace news_scrapper.infrastructure.unit_tests.Tests.ArticlesServiceTests
                .Returns(articlesFromDb);
             _mapper.Setup(n => n.Map<List<Article>>(It.IsAny<List<ArticleDb>>())).Callback(mapArticles);
 
-            _sut.Get(10, 1);
+            _sut.Get(10, 1, -1);
 
             mappedArticles.Should().BeEquivalentTo(articlesFromDb);
         }
