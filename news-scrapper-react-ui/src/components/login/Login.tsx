@@ -1,8 +1,22 @@
 import { Box, Button, Toolbar, Typography } from "@mui/material";
 import { Form, Formik } from "formik";
+import { UserLoginSchema, UserLogin } from "../../schemas/user-schema";
 import { TextField } from "../material/TextField";
+import { useNavigate } from "react-router-dom";
+import { useCallback } from "react";
+import { login } from "../../api/services/usersService";
 
 export const Login = () => {
+  const navigate = useNavigate();
+
+  const handleCancel = useCallback(() => {
+    navigate("/");
+  }, []);
+
+  const handleSubmit = useCallback(async (values: UserLogin) => {
+    await login(values);
+  }, []);
+
   return (
     <Box
       sx={{
@@ -15,21 +29,24 @@ export const Login = () => {
     >
       <Typography variant="h4">Sign in</Typography>
       <Box>
-        <Formik
+        <Formik<UserLogin>
           initialValues={{
-            name: "",
+            username: "",
             password: "",
           }}
-          onSubmit={() => {}}
+          validationSchema={UserLoginSchema}
+          onSubmit={handleSubmit}
         >
           <Form>
-            <TextField label="Name" name="name" />
+            <TextField label="Username" name="username" />
             <TextField label="Password" name="password" type="password" />
             <Toolbar
               variant="dense"
               sx={{ display: "flex", justifyContent: "center" }}
             >
-              <Button type="button">Cancel</Button>
+              <Button type="button" onClick={handleCancel}>
+                Cancel
+              </Button>
               <Button type="submit">Login</Button>
             </Toolbar>
           </Form>
