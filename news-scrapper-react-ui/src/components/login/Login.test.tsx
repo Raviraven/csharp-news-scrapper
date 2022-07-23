@@ -1,9 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import {
-  MemoryRouter,
-  Router,
-  unstable_HistoryRouter as HistoryRouter,
-} from "react-router-dom";
+import { MemoryRouter, Router } from "react-router-dom";
 import { Login } from "./Login";
 
 import { createMemoryHistory } from "history";
@@ -29,7 +25,7 @@ describe("Login component", () => {
       </MemoryRouter>
     );
 
-    await fireEvent.click(await screen.findByText("Login"));
+    fireEvent.click(await screen.findByText("Login"));
 
     expect(await screen.findByText("username is a required field"));
     expect(await screen.findByText("password is a required field"));
@@ -45,7 +41,7 @@ describe("Login component", () => {
       </Router>
     );
 
-    await fireEvent.click(await screen.findByText("Cancel"));
+    fireEvent.click(await screen.findByText("Cancel"));
 
     expect(history.location.pathname).toBe("/");
   });

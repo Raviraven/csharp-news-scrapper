@@ -11,7 +11,7 @@ export const Login = () => {
 
   const handleCancel = useCallback(() => {
     navigate("/");
-  }, []);
+  }, [navigate]);
 
   const handleSubmit = useCallback(async (values: UserLogin) => {
     await login(values);
@@ -34,6 +34,7 @@ export const Login = () => {
             username: "",
             password: "",
           }}
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           validationSchema={UserLoginSchema}
           onSubmit={handleSubmit}
         >

@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
-import { MemoryRouter, Route, Routes } from "react-router-dom";
+import { MemoryRouter } from "react-router-dom";
 import { App } from "./App";
 
 describe("App component", () => {
-  test("should render news scrapper app bar", async () => {
+  test("should render news scrapper app bar", () => {
     render(
       <MemoryRouter>
         <App />
