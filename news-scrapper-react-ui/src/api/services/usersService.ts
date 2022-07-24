@@ -5,11 +5,11 @@ import { AuthenticateResponse } from "../models/user";
 export const login = async (
   model: UserLogin
 ): Promise<AuthenticateResponse> => {
-  console.log("hello");
-  var result = await axios.post("/users/authenticate", model);
-  console.log(result);
-
-  localStorage.setItem("authToken", result.data.JwtToken);
+  const result = await axios.post<AuthenticateResponse>(
+    "/users/authenticate",
+    model
+  );
+  localStorage.setItem("authToken", result.data.jwtToken);
 
   return result.data;
 };

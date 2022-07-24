@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../setup";
 
 axios.interceptors.request.use((request) => {
   const token = localStorage.getItem("authToken");

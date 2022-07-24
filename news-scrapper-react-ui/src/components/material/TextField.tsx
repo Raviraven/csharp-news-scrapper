@@ -18,6 +18,7 @@ export const TextField = (props: MuiTextFieldProps) => {
     <MuiTextField
       error={error}
       name={field.name}
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       value={field.value}
       onChange={field.onChange}
       onBlur={field.onBlur}

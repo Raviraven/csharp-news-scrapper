@@ -5,9 +5,9 @@ export interface UserLoginToDelete {
 
 export interface AuthenticateResponse {
   id: number;
-  FirstName: string;
-  LastName: string;
-  Username: string;
-  JwtToken: string;
-  ExpiresInDays: number;
+  firstName: string;
+  lastName: string;
+  username: string;
+  jwtToken: string;
+  expiresInDays: number;
 }
