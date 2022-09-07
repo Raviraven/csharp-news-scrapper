@@ -58,6 +58,12 @@ namespace news_scrapper.infrastructure.Data
             return result;
         }
 
+        public List<WebsiteDetails> GetAll(int userId)
+        {
+            var result = _mapper.Map<List<WebsiteDetails>>(_websitesRepository.GetAll(userId));
+            return result;
+        }
+
         public WebsiteDetails Get(int id)
         {
             var result = _mapper.Map<WebsiteDetails>(_websitesRepository.GetWithCategories(id));

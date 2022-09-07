@@ -20,5 +20,6 @@ namespace news_scrapper.domain.DBModels
 
         public ICollection<ArticleDb> Articles { get; set; }
         public ICollection<CategoryDb> Categories { get; set; }
+        public UserDb User { get; set; }
     }
 }
