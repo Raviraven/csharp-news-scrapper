@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://test.ravrpg.online:4204/',
+  apiUrl: 'http://ravrpg.pl:4204/',
 };
