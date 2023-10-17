@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage line-rate="0.32079550367488113" branch-rate="0.7887323943661971" lines-covered="742" lines-valid="2313" branches-covered="112" branches-valid="142" complexity="385" version="0" timestamp="1697565175">
+<coverage line-rate="0.32079550367488113" branch-rate="0.7887323943661971" lines-covered="742" lines-valid="2313" branches-covered="112" branches-valid="142" complexity="385" version="0" timestamp="1697565375">
   <sources>
     <source>/home/runner/work/csharp-news-scrapper/csharp-news-scrapper/news-scrapper/</source>
   </sources>
