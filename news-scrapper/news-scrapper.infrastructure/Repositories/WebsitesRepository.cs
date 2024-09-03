@@ -54,6 +54,14 @@ namespace news_scrapper.infrastructure.Repositories
                 .ToList();
         }
 
+        public List<WebsiteDetailsDb> GetAll(int userId)
+        {
+            return sqlContext.WebsitesDetails
+                .Where(n=>n.User.Id == userId)
+                .Include(n => n.Categories)
+                .ToList();
+        }
+
         public WebsiteDetailsDb Save(WebsiteDetailsDb websiteDetails)
         {
             sqlContext.WebsitesDetails.Update(websiteDetails);

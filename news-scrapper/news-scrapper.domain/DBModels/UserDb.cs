@@ -20,5 +20,6 @@ namespace news_scrapper.domain.DBModels
 
         
         public List<RefreshTokenDb> RefreshTokens { get; set; }
+        public ICollection<WebsiteDetailsDb> WebsitesDetails { get; set; }
     }
 }
